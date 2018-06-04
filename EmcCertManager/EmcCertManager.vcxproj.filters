@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{D9D6E242-F8AF-46E4-B9FD-80ECBC20BA3E}</UniqueIdentifier>
+      <Extensions>qrc;*</Extensions>
+      <ParseFiles>false</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{98f576e4-9821-4059-9a4e-2c910e5d871e}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{cf01c71a-d979-47d9-9723-dfab7d517442}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_MainWindow.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCardsWidget.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Settings.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EmailValidator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EmailLineEdit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ValidatorToLabel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="IPv6LineEdit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="CertTableModel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="TableView.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="CertTableView.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ManageSslPage.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MainWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="ShellImitation.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenSslExecutable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="CertLogger.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenSslConfigWriter.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GeneratedFiles\ui_mainwindow.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardsWidget.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Settings.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="EmailLineEdit.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidatorToLabel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="IPv6LineEdit.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="CertTableModel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="TableView.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="CertTableView.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ManageSslPage.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ShellImitation.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenSslExecutable.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="CertLogger.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenSslConfigWriter.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="MainWindow.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MainWindow.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EmailValidator.h">
+      <Filter>src</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EmcCertManager.rc" />
+  </ItemGroup>
+</Project>
