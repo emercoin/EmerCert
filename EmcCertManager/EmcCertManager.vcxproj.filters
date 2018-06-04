@@ -41,9 +41,7 @@
     <ClCompile Include="MainWindow.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\qrc_MainWindow.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
+    
     <ClCompile Include="pch.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -77,12 +75,8 @@
     <ClCompile Include="ManageSslPage.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_MainWindow.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
+    
+    
     <ClCompile Include="ShellImitation.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -144,15 +138,15 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="MainWindow.h">
+    <QtMoc Include="MainWindow.h">
       <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="mainwindow.ui">
+    </QtMoc>
+    <QtUic Include="mainwindow.ui">
       <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="MainWindow.qrc">
+    </QtUic>
+    <QtRcc Include="MainWindow.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
+    </QtRcc>
     <CustomBuild Include="EmailValidator.h">
       <Filter>src</Filter>
     </CustomBuild>
