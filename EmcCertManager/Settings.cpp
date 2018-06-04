@@ -3,9 +3,8 @@
 #include "Settings.h"
 
 QDir Settings::certDir() {
-	//QDir dir = "D:\\g\\emcssl";
-	QDir dir = "C:\\Users\\neurocod\\AppData\\Roaming\\EmerCoin\\certificates";
-	bool ok = dir.mkpath(".");
+	QDir dir = qApp->applicationDirPath();
+	bool ok = dir.mkpath("certificates");
 	Q_ASSERT(ok && dir.exists());
 	return dir;
 }
