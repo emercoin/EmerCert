@@ -4,7 +4,7 @@
 #include "ManageSslPage.h"
 
 MainWindow::MainWindow(QWidget *parent): QSplitter(parent) {
-	setWindowTitle(tr("Emer Cert Manager"));
+	setWindowTitle(tr("EmerCert Manager"));
 	//add(new InfoCardsWidget);
 	add(new ManageSslPage);
 }

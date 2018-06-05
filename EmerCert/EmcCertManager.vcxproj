@@ -40,7 +40,16 @@
     <ConfigurationType>Application</ConfigurationType>
     <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" /><PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')"><QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild></PropertyGroup><Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')"><Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." /></Target><ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')"><Import Project="$(QtMsBuild)\qt.props" /></ImportGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(QtMsBuild)'=='' or !Exists('$(QtMsBuild)\qt.targets')">
+    <QtMsBuild>$(MSBuildProjectDirectory)\QtMsBuild</QtMsBuild>
+  </PropertyGroup>
+  <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
+    <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />
+  </Target>
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\qt.props" />
+  </ImportGroup>
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
@@ -82,7 +91,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -90,7 +100,32 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;Qt5Guid.lib;Qt5Widgetsd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <QtMoc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile><IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath><Define>UNICODE;_UNICODE;$(Platform);WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define><ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource></QtMoc><QtRcc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile><InitFuncName>%(Filename)</InitFuncName><Compression>default</Compression><NoCompression>true</NoCompression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription></QtRcc><QtUic><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription></QtUic></ItemDefinitionGroup>
+    <QtMoc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define>UNICODE;_UNICODE;$(Platform);WIN64;QT_DLL;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+    </QtMoc>
+    <QtRcc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+      <InitFuncName>%(Filename)</InitFuncName>
+      <Compression>default</Compression>
+      <NoCompression>true</NoCompression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+    </QtRcc>
+    <QtUic>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+    </QtUic>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <PreprocessorDefinitions>_UNICODE;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -102,7 +137,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -112,7 +148,32 @@
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
     </Link>
-  <QtMoc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile><IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath><Define>_UNICODE;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64</Define><ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource></QtMoc><QtRcc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile><InitFuncName>%(Filename)</InitFuncName><Compression>default</Compression><NoCompression>true</NoCompression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription></QtRcc><QtUic><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription></QtUic></ItemDefinitionGroup>
+    <QtMoc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define>_UNICODE;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64</Define>
+      <ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+    </QtMoc>
+    <QtRcc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+      <InitFuncName>%(Filename)</InitFuncName>
+      <Compression>default</Compression>
+      <NoCompression>true</NoCompression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+    </QtRcc>
+    <QtUic>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+    </QtUic>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;_UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -123,7 +184,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -131,7 +193,32 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-  <QtMoc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile><IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath><Define>UNICODE;_UNICODE;$(Platform);WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define><ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource></QtMoc><QtRcc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile><InitFuncName>%(Filename)</InitFuncName><Compression>default</Compression><NoCompression>true</NoCompression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription></QtRcc><QtUic><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription></QtUic></ItemDefinitionGroup>
+    <QtMoc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define>UNICODE;_UNICODE;$(Platform);WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_WIDGETS_LIB</Define>
+      <ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+    </QtMoc>
+    <QtRcc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+      <InitFuncName>%(Filename)</InitFuncName>
+      <Compression>default</Compression>
+      <NoCompression>true</NoCompression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+    </QtRcc>
+    <QtUic>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+    </QtUic>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>_UNICODE;NDEBUG;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_NO_DEBUG;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -143,7 +230,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile>$(IntDir)$(TargetName).pch</PrecompiledHeaderOutputFile>
-    <MultiProcessorCompilation>true</MultiProcessorCompilation></ClCompile>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
@@ -153,16 +241,38 @@
       <TargetMachine>MachineX64</TargetMachine>
       <AdditionalOptions> /SUBSYSTEM:WINDOWS</AdditionalOptions>
     </Link>
-  <QtMoc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile><IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath><Define>_UNICODE;NDEBUG;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_NO_DEBUG;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64</Define><ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude><ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription><DynamicSource>output</DynamicSource></QtMoc><QtRcc><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile><InitFuncName>%(Filename)</InitFuncName><Compression>default</Compression><NoCompression>true</NoCompression><ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription></QtRcc><QtUic><QTDIR>$(QTDIR)</QTDIR><InputFile>%(FullPath)</InputFile><OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile><ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription></QtUic></ItemDefinitionGroup>
+    <QtMoc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</OutputFile>
+      <IncludePath>.\GeneratedFiles\$(ConfigurationName);.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtWidgets</IncludePath>
+      <Define>_UNICODE;NDEBUG;QT_CORE_LIB;QT_DLL;QT_GUI_LIB;QT_NO_DEBUG;QT_WIDGETS_LIB;UNICODE;WIN32;WIN64</Define>
+      <ForceInclude>pch.h;../../%(Filename)%(Extension)</ForceInclude>
+      <ExecutionDescription>Moc'ing %(Identity)...</ExecutionDescription>
+      <DynamicSource>output</DynamicSource>
+    </QtMoc>
+    <QtRcc>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\qrc_%(Filename).cpp</OutputFile>
+      <InitFuncName>%(Filename)</InitFuncName>
+      <Compression>default</Compression>
+      <NoCompression>true</NoCompression>
+      <ExecutionDescription>Rcc'ing %(Identity)...</ExecutionDescription>
+    </QtRcc>
+    <QtUic>
+      <QTDIR>$(QTDIR)</QTDIR>
+      <InputFile>%(FullPath)</InputFile>
+      <OutputFile>.\GeneratedFiles\ui_%(Filename).h</OutputFile>
+      <ExecutionDescription>Uic'ing %(Identity)...</ExecutionDescription>
+    </QtUic>
+  </ItemDefinitionGroup>
   <ItemGroup>
-    
-    
     <ClCompile Include="ManageSslPage.cpp" />
     <ClCompile Include="CertTableModel.cpp" />
     <ClCompile Include="CertTableView.cpp" />
     <ClCompile Include="EmailLineEdit.cpp" />
     <ClCompile Include="EmailValidator.cpp" />
-    
     <ClCompile Include="InfoCardsWidget.cpp" />
     <ClCompile Include="IPv6LineEdit.cpp" />
     <ClCompile Include="main.cpp" />
@@ -219,73 +329,22 @@
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </Command>
     </CustomBuild>
-    <ClInclude Include="GeneratedFiles\ui_mainwindow.h" />
     <ClInclude Include="Settings.h" />
-    <QtMoc Include="MainWindow.h">
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    </QtMoc>
+    <ClInclude Include="MainWindow.h" />
     <ClInclude Include="InfoCardsWidget.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
-    <QtUic Include="mainwindow.ui">
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-    </QtUic>
-  </ItemGroup>
-  <ItemGroup>
     <QtRcc Include="MainWindow.qrc">
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
     </QtRcc>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="EmcCertManager.rc" />
+    <ResourceCompile Include="EmerCert.rc" />
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" /><ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')"><Import Project="$(QtMsBuild)\qt.targets" /></ImportGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
+    <Import Project="$(QtMsBuild)\qt.targets" />
+  </ImportGroup>
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
