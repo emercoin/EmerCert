@@ -3,8 +3,10 @@
 #include "Settings.h"
 
 QDir Settings::certDir() {
-	QDir dir = qApp->applicationDirPath();
-	bool ok = dir.mkpath("certificates");
+	QString str = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);;
+	str = QDir::toNativeSeparators(str);
+	QDir dir = str;
+	bool ok = dir.mkpath(".");
 	Q_ASSERT(ok && dir.exists());
 	return dir;
 }

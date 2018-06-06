@@ -2,14 +2,14 @@
 #include "MainWindow.h"
 #include "InfoCardsWidget.h"
 #include "ManageSslPage.h"
+#include "ManageDnsPage.h"
 
-MainWindow::MainWindow(QWidget *parent): QSplitter(parent) {
+MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	setWindowTitle(tr("EmerCert Manager"));
 	//add(new InfoCardsWidget);
 	add(new ManageSslPage);
+	add(new ManageDnsPage);
 }
 void MainWindow::add(QWidget *w) {
-	auto tab = new QTabWidget;
-	tab->addTab(w, w->windowTitle());
-	addWidget(tab);
+	addTab(w, w->windowTitle());
 }
