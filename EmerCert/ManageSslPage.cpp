@@ -35,13 +35,13 @@ ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 		_btnGenerate = new QPushButton(tr("Generate again"));
 		_btnGenerate->setToolTip(tr("Regenerate certificate (for same nickname and email) if it has been expired or has been compromised"));
 		_btnGenerate->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/refresh-24.png"));
-		connect(_btnGenerate, &QAbstractButton::clicked, this, &ManageSslPage::onCreate);
+		connect(_btnGenerate, &QAbstractButton::clicked, _view, &CertTableView::generateCertForSelectedRow);
 		lay2->addWidget(_btnGenerate);
 
 		_btnOpenFolder = new QPushButton(tr("Open folder"));
 		_btnOpenFolder->setToolTip(tr("Reveal certificate file in folder"));
 		_btnOpenFolder->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-open-32.png"));
-		connect(_btnOpenFolder, &QAbstractButton::clicked, this, &ManageSslPage::onDelete);
+		connect(_btnOpenFolder, &QAbstractButton::clicked, _view, &CertTableView::showInExplorer);
 		lay2->addWidget(_btnOpenFolder);
 
 		lay2->addStretch();

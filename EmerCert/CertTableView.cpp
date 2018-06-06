@@ -3,6 +3,7 @@
 #include "CertTableView.h"
 #include "CertTableModel.h"
 #include "ShellImitation.h"
+#include "Settings.h"
 
 CertTableView::CertTableView() {
 	horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
@@ -142,17 +143,21 @@ int CertTableView::rowFromAction(QAction*a) {
 	return -1;
 }
 void CertTableView::showInExplorer() {
-	auto b = qobject_cast<QAction*>(sender());
-	Q_ASSERT(b);
-	if(!b)
-		return;
-	int nRow = rowFromAction(b);
-	if(nRow<0 || nRow >= _model->rowCount())
-		return;
-	const auto & row = _model->_rows[nRow];
-	QString path = row._certFile;
-	if(path.isEmpty() || !QFile::exists(path))
-		path = row._templateFile;
+	int nRow = -1;
+	if(auto action = qobject_cast<QAction*>(sender())) {
+		nRow = rowFromAction(action);
+	} else {
+		nRow = selectedRow();
+	}
+	QString path;
+	if(nRow>=0 && nRow < _model->rowCount()) {
+		const auto & row = _model->_rows[nRow];
+		path = row._certFile;
+		if(path.isEmpty() || !QFile::exists(path))
+			path = row._templateFile;
+	}
+	if(path.isEmpty())
+		path = Settings::certDir().absolutePath();
 	showInGraphicalShell(this, path);
 }
 void CertTableView::generateCertByButton() {
@@ -168,7 +173,7 @@ void CertTableView::generateCertByButton() {
 	generateCertForSelectedRow();
 }
 int CertTableView::selectedRow()const {
-	auto rows = selectionModel()->selectedRows();
+	auto rows = selectionModel()->selectedIndexes();
 	if(!rows.isEmpty())
 		return rows[0].row();
 	return -1;
