@@ -39,7 +39,8 @@ struct OpenSslExecutable::SpecifyPathDialog: public QDialog {
 		
 		auto label = new QLabel(
 				tr("No OpenSSL executable found, certificate creation will not work.<br/>\n"
-				"Please download OpenSSL from <a href=\"https://wiki.openssl.org/index.php/Binaries\">www.openssl.org</a> and place it in folder specified above.")
+				"Please download OpenSSL from <a href=\"https://wiki.openssl.org/index.php/Binaries\">www.openssl.org</a>"
+					" and place it in folder specified below:<br>%1")
 			.arg(qApp->applicationDirPath()));
 		label->setOpenExternalLinks(true);
 		lay->addRow(label);
