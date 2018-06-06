@@ -22,11 +22,11 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=G:\EMC\EmerCert\LICENSE.txt
-InfoBeforeFile=G:\EMC\EmerCert\installer\intro.txt
-OutputDir=G:\EMC\EmerCert\Win32
+LicenseFile="..\LICENSE.txt"
+InfoBeforeFile="intro.txt"
+OutputDir="..\Win32"
 OutputBaseFilename=EmerCert {#MyAppVersion} setup
-SetupIconFile=G:\EMC\EmerCert\EmerCert\EmcCert.ico
+SetupIconFile="..\EmerCert\EmcCert.ico"
 Compression=lzma
 SolidCompression=yes
 
@@ -64,7 +64,7 @@ Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "G:\EMC\EmerCert\Win32\Release\EmerCert.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\EmerCert.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "..\Win32\Release\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
