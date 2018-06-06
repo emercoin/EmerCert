@@ -2,6 +2,13 @@
 #include "pch.h"
 #include "CertLogger.h"
 
+CertLogger::CertLogger() {
+	auto timer = new QTimer(this);
+	connect(timer, &QTimer::timeout, this, [this]() {
+		_file.flush();
+	});
+	timer->start(1000);
+}
 void CertLogger::append(const QString & s) {
 	QTextBrowser::append(s);
 	if(!_file.isOpen() && !_file.fileName().isEmpty()) {

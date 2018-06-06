@@ -10,12 +10,19 @@ CertTableView::CertTableView() {
 	setModel(_model);
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	setSelectionMode(QAbstractItemView::SingleSelection);
+	connect(selectionModel(), &QItemSelectionModel::selectionChanged, this, &CertTableView::reloadLog);
+	
 	recreateButtons();
 	connect(_model, &Model::modelReset, this, &CertTableView::recreateButtons);
 	connect(this, &CertTableView::doubleClicked, this, &CertTableView::installSelectedIntoSystem);
 }
 CertTableView::Model* CertTableView::model()const {
 	return _model;
+}
+void CertTableView::reloadLog() {
+	QString path = selectedLogPath();
+	if(ShellImitation::s_logger)
+		ShellImitation::s_logger->setFile(path);
 }
 void CertTableView::recreateButtons() {
 	for(int row = 0; row < _model->rowCount(); ++row) {

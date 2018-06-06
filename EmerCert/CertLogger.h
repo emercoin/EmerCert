@@ -3,6 +3,7 @@
 
 class CertLogger: public QTextBrowser {
 	public:
+		CertLogger();
 		void append(const QString & s);
 		void setFile(const QString & path);//read from and log to
 		void clear();

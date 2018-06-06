@@ -57,14 +57,9 @@ ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 	_logger = new CertLogger();
 	splitter->addWidget(_logger);
 	ShellImitation::s_logger = _logger;
-	connect(_view->selectionModel(), &QItemSelectionModel::selectionChanged, this, &ManageSslPage::reloadLog);
 
 	OpenSslConfigWriter::checkAndWrite();
 	QTimer::singleShot(1, &OpenSslExecutable::isFoundOrMessageBox);
-}
-void ManageSslPage::reloadLog() {
-	QString path = _view->selectedLogPath();
-	_logger->setFile(path);
 }
 void ManageSslPage::enableButtons() {
 	bool selected = _view->selectionModel()->hasSelection();
@@ -174,5 +169,8 @@ void ManageSslPage::onCreate() {
 }
 void ManageSslPage::onDelete() {
 	auto rows = _view->selectionModel()->selectedRows();
+	if(rows.isEmpty())
+		return;
+	_logger->clear();
 	_view->model()->removeRows(rows);
 }

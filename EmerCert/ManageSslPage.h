@@ -10,7 +10,6 @@ class ManageSslPage: public QWidget {
 		void onDelete();
 		void onCreate();
 		void enableButtons();
-		void reloadLog();
 		static QString randName();
 
 		QAbstractButton* _btnDelete = 0;

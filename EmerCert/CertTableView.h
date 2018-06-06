@@ -14,6 +14,7 @@ class CertTableView: public TableView {
 	protected:
 		CertTableModel* _model = 0;
 		struct Dialog;
+		void reloadLog();
 		void recreateButtons();
 		void generateCertByButton();
 		void showInExplorer();

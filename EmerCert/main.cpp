@@ -8,6 +8,6 @@ int main(int argc, char *argv[]) {
 	QCoreApplication::setOrganizationName("emercoin");
 	QCoreApplication::setOrganizationDomain("emercoin.com");
 	MainWindow w;
-	w.showMaximized();
+	w.showNormal();
 	return a.exec();
 }
