@@ -33,6 +33,32 @@ SolidCompression=yes
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
+Name: "armenian"; MessagesFile: "compiler:Languages\Armenian.islu"
+Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortuguese.isl"
+Name: "catalan"; MessagesFile: "compiler:Languages\Catalan.isl"
+Name: "corsican"; MessagesFile: "compiler:Languages\Corsican.isl"
+Name: "czech"; MessagesFile: "compiler:Languages\Czech.isl"
+Name: "danish"; MessagesFile: "compiler:Languages\Danish.isl"
+Name: "dutch"; MessagesFile: "compiler:Languages\Dutch.isl"
+Name: "finnish"; MessagesFile: "compiler:Languages\Finnish.isl"
+Name: "french"; MessagesFile: "compiler:Languages\French.isl"
+Name: "german"; MessagesFile: "compiler:Languages\German.isl"
+Name: "greek"; MessagesFile: "compiler:Languages\Greek.isl"
+Name: "hebrew"; MessagesFile: "compiler:Languages\Hebrew.isl"
+Name: "hungarian"; MessagesFile: "compiler:Languages\Hungarian.isl"
+Name: "italian"; MessagesFile: "compiler:Languages\Italian.isl"
+Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
+Name: "nepali"; MessagesFile: "compiler:Languages\Nepali.islu"
+Name: "norwegian"; MessagesFile: "compiler:Languages\Norwegian.isl"
+Name: "polish"; MessagesFile: "compiler:Languages\Polish.isl"
+Name: "portuguese"; MessagesFile: "compiler:Languages\Portuguese.isl"
+Name: "scottishgaelic"; MessagesFile: "compiler:Languages\ScottishGaelic.isl"
+Name: "serbiancyrillic"; MessagesFile: "compiler:Languages\SerbianCyrillic.isl"
+Name: "serbianlatin"; MessagesFile: "compiler:Languages\SerbianLatin.isl"
+Name: "slovenian"; MessagesFile: "compiler:Languages\Slovenian.isl"
+Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
+Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
+Name: "ukrainian"; MessagesFile: "compiler:Languages\Ukrainian.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
@@ -40,6 +66,48 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "G:\EMC\EmerCert\Win32\Release\EmerCert.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "..\Win32\Release\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\openssl.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\iconengines\qsvgicon.dll"; DestDir: "{app}\iconengines"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qgif.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qicns.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qico.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qjpeg.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qsvg.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qtga.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qtiff.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qwbmp.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\imageformats\qwebp.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
+Source: "..\Win32\Release\platforms\qwindows.dll"; DestDir: "{app}\platforms"; Flags: ignoreversion
+Source: "..\Win32\Release\styles\qwindowsvistastyle.dll"; DestDir: "{app}\styles"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_ar.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_bg.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_ca.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_cs.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_da.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_de.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_en.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_es.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_fi.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_fr.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_gd.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_he.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_hu.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_it.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_ja.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_ko.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_lv.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_pl.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_ru.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_sk.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
+Source: "..\Win32\Release\translations\qt_uk.qm"; DestDir: "{app}\translations"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -48,3 +116,10 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+
+[Dirs]
+Name: "{app}\iconengines"
+Name: "{app}\imageformats"
+Name: "{app}\platforms"
+Name: "{app}\styles"
+Name: "{app}\translations"
