@@ -1,1 +1,3 @@
+Uncomment this file in script if you need it
+
 EmerCert allows you to manage EmerSsl certificates; and EmerSsl allows you to automatically login on many sites using certificate, stored in emercoin blockchain. This program allows to create and recreate certificates and prepares values to insert into emercoin blockchain ( using emercoin wallet).
