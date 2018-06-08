@@ -1,7 +1,7 @@
 ; Inno Setup Script.
 ; 1) build Visual Studio solution for 32 and 64 ttargets in release configuration
 ; 2) go to x64/Release and place openssl.exe there
-; 3) go to x64/Release and run windeployqt EmerCert
+; 3) go to Qt 64 folder, cd there and run windeployqt .../EmerCert.exe
 ; 4) use his script to generate installer
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
@@ -29,7 +29,7 @@ AllowNoIcons=yes
 LicenseFile="..\LICENSE.txt"
 ; InfoBeforeFile="intro.txt"
 OutputDir="..\x64"
-OutputBaseFilename=EmerCert {#MyAppVersion} setup
+OutputBaseFilename=EmerCert {#MyAppVersion} setup 64bit
 SetupIconFile="..\EmerCert\EmcCert.ico"
 Compression=lzma
 SolidCompression=yes

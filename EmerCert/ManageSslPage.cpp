@@ -15,7 +15,7 @@ ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 	auto lay = new QVBoxLayout(this);
 	//https://cryptor.net/tutorial/sozdaem-ssl-sertifikat-emcssl-dlya-avtorizacii-na-saytah
 	lay->addWidget(new QLabel(
-		"EmerSSL allows you to automatically login without passwords on many sites using cerificate, stored in blockchain."
+		"EmerSSL allows you to automatically login without passwords on many sites using certificate, stored in Emercoin blockchain."
 	));
 	_view = new CertTableView;
 	{
