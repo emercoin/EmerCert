@@ -70,6 +70,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "..\x64\Release\EmerCert.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "..\x64\Release\vcruntime140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion

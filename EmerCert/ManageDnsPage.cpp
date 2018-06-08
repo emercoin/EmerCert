@@ -41,7 +41,7 @@ ManageDnsPage::ManageDnsPage(QWidget*parent): QWidget(parent) {
     addLineEdit(form, "AAAA", tr("AAAA record"), tr("IPv6 address, like 2a04:5340:1:1::3"));
     addLineEdit(form, "MX", tr("MX record"), tr("Mail exchanger, like mx.yandex.ru:10"));
     addLineEdit(form, "NS", tr("NS record"), tr("Name server; delegates a DNS zone to use the given authoritative name servers"));
-    addLineEdit(form, "CNAME", tr("CNAME"), tr("Canonocal name; alias of one name to another: the DNS lookup will continue by retrying the lookup with the new name."));
+    addLineEdit(form, "CNAME", tr("CNAME"), tr("Canonical name; alias of one name to another: the DNS lookup will continue by retrying the lookup with the new name."));
     addLineEdit(form, "PTR", tr("PTR"), tr("Pointer to a canonical name. Unlike a CNAME, DNS processing stops and just the name is returned."));
     addLineEdit(form, "TXT", tr("TXT"), tr("Arbitrary human-readable text. Nowdays more often carries machine-readable data, such as Policy Framework, DKIM, DMARC, DNS-SD, etc."));
     addLineEdit(form, "SD", tr("SD"), tr("Subdomain - EmerDns feature"));
