@@ -1,6 +1,6 @@
 ; Inno Setup Script.
-; 1) build Visual Studio solution for 32 and 64 ttargets in release configuration
-; 2) go to Win32/Release and place openssl.exe there
+; 1) build Visual Studio solution for 32 and 64 targets in release configuration
+; 2) go to Win32/Release and place openssl.exe and *dll files there
 ; 3) go to Qt 32 folder, cd there and run windeployqt .../EmerCert.exe
 ; 4) use his script to generate installer
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
@@ -70,6 +70,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "..\Win32\Release\EmerCert.exe"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+Source: "..\Win32\Release\libssl-1_1.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\libcrypto-1_1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\D3Dcompiler_47.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
