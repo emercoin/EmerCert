@@ -152,7 +152,7 @@ void CertTableView::showInExplorer() {
 	QString path;
 	if(nRow>=0 && nRow < _model->rowCount()) {
 		const auto & row = _model->_rows[nRow];
-		path = row._certFile;
+		path = row._certPair;
 		if(path.isEmpty() || !QFile::exists(path))
 			path = row._templateFile;
 	}
@@ -183,7 +183,7 @@ QString CertTableView::selectedLogPath() {
 	if(-1 == nRow)
 		return QString();
 	const auto & row = _model->_rows[nRow];
-	return row.logFile();
+	return row.logFilePath();
 }
 void CertTableView::generateCertForSelectedRow() {
 	int nRow = selectedRow();

@@ -25,16 +25,17 @@ class CertTableModel: public QAbstractTableModel {
 		QString _InfoCardId;//optional
 		QString _templateFile;//absolute path
 		QString _baseName;//file name without path and extension
-		QString _certFile;
+		QString _certPair;
 		QDateTime _certCreated;
 		QByteArray _templateLine;//it's parsed into name, mail and InfoCard
 		
-		QString logFile()const;
+		QString logFilePath()const;
 		QString loadFromTemplateFile(const QFileInfo & entry);//returns error, isEmpty() -> ok
 		QString generateCert(CertType certType, const QString & pass, QString & sha256)const;//returns error, isEmpty() -> ok
 		QString removeFiles();//returns error, isEmpty() -> ok
 		void installIntoSystem()const;
 		QString pathByExt(const QString & extension)const;
+		QString sha256FromCertificate(QString & sha256)const;//returns error, isEmpty() -> ok
 	};
 	QList<Row> _rows;
 	

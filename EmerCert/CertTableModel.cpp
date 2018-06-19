@@ -5,7 +5,7 @@
 #include "Settings.h"
 #include "OpenSslExecutable.h"
 
-QString CertTableModel::Row::logFile()const {
+QString CertTableModel::Row::logFilePath()const {
 	return pathByExt("log");
 }
 QString CertTableModel::Row::loadFromTemplateFile(const QFileInfo & entry) {//QString::isEmpty -> ok
@@ -54,12 +54,35 @@ QString CertTableModel::Row::loadFromTemplateFile(const QFileInfo & entry) {//QS
 	const QString certPath = pathByExt("p12");
 	QFileInfo cert(certPath);
 	if(cert.exists()) {
-		_certFile = certPath;
+		_certPair = certPath;
 		_certCreated = cert.lastModified();
 	}
 	return QString();
 }
 using Shell = ShellImitation;
+QString CertTableModel::Row::sha256FromCertificate(QString & sha256)const {
+	QString path = pathByExt("crt");
+	QFile file(path);
+	if(!file.open(QFile::ReadOnly)) {
+		return tr("Can't open %1").arg(path);
+	}
+	QByteArray cert = file.readAll();
+	const QByteArray sectionBegin = "-----BEGIN CERTIFICATE-----";
+	const QByteArray sectionEnd = "-----END CERTIFICATE-----";
+	int i1 = cert.indexOf(sectionBegin);
+	int i2 = cert.indexOf(sectionEnd);
+	if(-1==i1 || -1==i2 || i1>i2) {
+		return tr("Wrong certificate file format %1").arg(path);
+	}
+	i1 += sectionBegin.count();
+	cert = cert.mid(i1, i2-i1);
+	cert.replace('\n', "");
+	cert.replace('\r', "");
+	QByteArray h = QCryptographicHash::hash(QByteArray::fromBase64(cert), QCryptographicHash::Sha256);
+	sha256 = QString::fromLatin1(h.toHex());
+	sha256 = sha256.toLower();
+	return {};
+}
 QString CertTableModel::Row::generateCert(CertType ctype, const QString & pass, QString & sha256)const {//QString::isEmpty -> ok
 	QString certType;
 	if(ctype == EC) {
@@ -88,11 +111,15 @@ QString CertTableModel::Row::generateCert(CertType ctype, const QString & pass, 
 	openssl.setLogger(Shell::s_logger);
 	if(!openssl.generateKeyAndCertificateRequest(_baseName, _templateLine)
 		|| !openssl.generateCertificate(_baseName, CA_DIR)
-		|| !openssl.createCertificatePair(_baseName, CA_DIR, pass)
-		|| !openssl.sha256FromCertificate(_baseName, sha256))
+		|| !openssl.createCertificatePair(_baseName, CA_DIR, pass))
 	{
 		return openssl.errorString();
 	}
+	
+	Shell::maybeLog(tr("sha256 from certificate..."));
+	QString error = sha256FromCertificate(sha256);
+	if(!error.isEmpty())
+		return error;
 
 	openssl.log("_______________________");
 	openssl.log(QObject::tr("Please, deposit into EmerCoin NVS pair:\n"
@@ -105,8 +132,8 @@ QString CertTableModel::Row::pathByExt(const QString & extension)const {
 	return _dir.absoluteFilePath(_baseName + '.' + extension);
 }
 void CertTableModel::Row::installIntoSystem()const {
-	if(!_certFile.isEmpty() && QFile::exists(_certFile)) {
-		QDesktopServices::openUrl(QUrl::fromLocalFile(_certFile));
+	if(!_certPair.isEmpty() && QFile::exists(_certPair)) {
+		QDesktopServices::openUrl(QUrl::fromLocalFile(_certPair));
 	}
 }
 QString CertTableModel::Row::removeFiles() {
@@ -205,7 +232,7 @@ QVariant CertTableModel::data(const QModelIndex &index, int role) const {
 }
 int CertTableModel::indexByFile(const QString & s)const {
 	for(int i = 0; i < _rows.count(); ++i) {
-		if(_rows[i]._templateFile==s || _rows[i]._certFile == s)
+		if(_rows[i]._templateFile==s || _rows[i]._certPair == s)
 			return i;
 	}
 	return -1;

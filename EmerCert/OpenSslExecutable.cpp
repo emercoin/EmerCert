@@ -236,31 +236,6 @@ bool OpenSslExecutable::createCertificatePair(const QString & baseName, const QS
 		return false;
 	return existsOrExit(dir, p12);
 }
-bool OpenSslExecutable::sha256FromCertificate(const QString & baseName, QString & sha256) {
-	log(tr("sha256 from certificate..."));
-	const QString crtFile = baseName + ".crt";
-	QDir dir = workingDirectory();
-	if(!existsOrExit(dir, crtFile))
-		return false;
-	QStringList args = QString("x509 -noout -in $CRT -fingerprint -sha256").split(' ');
-	args.replaceInStrings("$CRT", crtFile);
-	if(!exec(args).isEmpty())
-		return false;
-	if(exitCode() != 0)
-		return false;
-	//now we have something like
-	//SHA256 Fingerprint=D1:56:13:38:34:07:4C:B2:A8:01:21:EB:AF:3A:97:3E:65:3B:4E:3C:FA:C5:E9:07:C4:81:EB:82:30:D5:AE:3A
-	const QString prefix = "SHA256 Fingerprint=";
-	if(!_strOutput.startsWith(prefix)) {
-		_strOutput.prepend(tr("Unknown SHA256 Fingerprint output"));
-		return false;
-	}
-	sha256 = _strOutput;
-	sha256.remove(':');
-	sha256.remove(0, prefix.count());
-	sha256 = sha256.toLower();
-	return true;
-}
 QString OpenSslExecutable::log(const QString & s) {
 	if(_logger) {
 		_logger->append(s);
