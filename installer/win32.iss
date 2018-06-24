@@ -82,6 +82,7 @@ Source: "..\Win32\Release\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\openssl.cfg"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\iconengines\qsvgicon.dll"; DestDir: "{app}\iconengines"; Flags: ignoreversion
 Source: "..\Win32\Release\imageformats\qgif.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
 Source: "..\Win32\Release\imageformats\qicns.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion

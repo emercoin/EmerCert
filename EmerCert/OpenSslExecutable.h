@@ -23,4 +23,5 @@ class OpenSslExecutable: public QProcess {
 		static QString defaultPath();
 		static bool seemsOk(const QString & path);
 		struct SpecifyPathDialog;
+		static QString cfgFilePath();
 };

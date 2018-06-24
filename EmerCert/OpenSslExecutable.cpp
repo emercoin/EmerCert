@@ -126,6 +126,10 @@ QString OpenSslExecutable::errorString()const {
 	return QProcess::errorString() + '\n' + _strOutput;
 }
 QString OpenSslExecutable::exec(const QStringList & args) {
+	if(!QFile::exists(cfgFilePath())) {
+		log(tr("Config file not found: %1") + cfgFilePath());
+		return false;
+	}
 	log(tr("Starting openssl ") + args.join(' '));
 	_strOutput.clear();
 	if(!QFile::exists(s_path)) {
@@ -156,6 +160,11 @@ bool OpenSslExecutable::existsOrExit(const QDir & dir, const QString & file) {
 	_strOutput += tr("File %1 does not exist").arg(file);
 	return false;
 }
+QString OpenSslExecutable::cfgFilePath() {
+	 QDir dir = qApp->applicationDirPath();
+	 QString s = dir.absoluteFilePath("openssl.cfg");
+	 return s;
+}
 bool OpenSslExecutable::deleteOrExit(QDir & dir, const QString & file, int tries) {
 	for(int i = 0; i<tries; ++i) {
 		if(i>0)
@@ -176,10 +185,11 @@ bool OpenSslExecutable::generateKeyAndCertificateRequest(const QString & baseNam
 		return false;
 	if(!deleteOrExit(dir, csrFile))
 		return false;
-	QStringList args = QString("req -new -newkey rsa:2048 -nodes -keyout $KEY -subj $SUBJ -out $CSR").split(' ');
+	QStringList args = QString("req -config $CFG -new -newkey rsa:2048 -nodes -keyout $KEY -subj $SUBJ -out $CSR").split(' ');
 	args.replaceInStrings("$KEY", keyFile);
 	args.replaceInStrings("$CSR", csrFile);
 	args.replaceInStrings("$SUBJ", subj);
+	args.replaceInStrings("$CFG", cfgFilePath());
 	if(!exec(args).isEmpty() || exitCode() != 0)
 		return false;
 	return existsOrExit(dir, keyFile) && existsOrExit(dir, csrFile);
