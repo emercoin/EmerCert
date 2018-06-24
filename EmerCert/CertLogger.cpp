@@ -30,6 +30,10 @@ void CertLogger::clear() {
 		_file.close();
 	}
 }
+void CertLogger::setFileNear(const QDir & dir, const QString & fileName) {
+	QString p = dir.absoluteFilePath(QFileInfo(fileName).baseName() + ".log");
+	setFile(p);
+}
 void CertLogger::setFile(const QString & path) {
 	clear();
 	_file.setFileName(path);

@@ -217,7 +217,7 @@ bool OpenSslExecutable::createCertificatePair(const QString & baseName, const QS
 	QStringList args = QString("pkcs12 -export -in $CRT -inkey $KEY -certfile $CA_DIR/emcssl_ca.crt -out $P12 -passout env:%1")
 		.arg(passKeyName)
 		.split(' ');
-	for(auto & s : args) {
+	for(auto & s: args) {
 		if(s == "$CRT")
 			s = crtFile;
 		else if(s == "$KEY")

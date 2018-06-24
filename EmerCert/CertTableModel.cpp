@@ -51,10 +51,9 @@ QString CertTableModel::Row::loadFromTemplateFile(const QFileInfo & entry) {//QS
 		return tr("Invalid format: empty name in %1").arg(_templateFile);;
 	if(_mail.isEmpty())
 		return tr("Invalid format: empty email in %1").arg(_templateFile);;
-	const QString certPath = pathByExt("p12");
-	QFileInfo cert(certPath);
+	_certPair = pathByExt("p12");;
+	QFileInfo cert(_certPair);
 	if(cert.exists()) {
-		_certPair = certPath;
 		_certCreated = cert.lastModified();
 	}
 	return QString();

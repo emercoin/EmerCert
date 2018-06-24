@@ -13,3 +13,4 @@ struct ShellImitation {
 	protected:
 	static QString tr(const char*c);
 };
+using Shell = ShellImitation;

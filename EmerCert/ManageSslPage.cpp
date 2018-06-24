@@ -22,12 +22,12 @@ ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 		auto lay2 = new QHBoxLayout;
 		lay->addLayout(lay2);
 
-		auto btnNew = new QPushButton(tr("New"));
+		auto btnNew = new QPushButton(tr("New cerificate"));
 		btnNew->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/file-32.png"));
 		connect(btnNew, &QAbstractButton::clicked, this, &ManageSslPage::onCreate);
 		lay2->addWidget(btnNew);
 
-		_btnDelete = new QPushButton(tr("Delete"));
+		_btnDelete = new QPushButton(tr("Delete selected"));
 		_btnDelete->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-cancel-32.png"));
 		connect(_btnDelete, &QAbstractButton::clicked, this, &ManageSslPage::onDelete);
 		lay2->addWidget(_btnDelete);
@@ -156,7 +156,8 @@ void ManageSslPage::onCreate() {
 	QDir dir = Settings::certDir();
 	QString path = dir.absoluteFilePath(fileName);
 	QString error;
-	if(!ShellImitation::write(path, contents.toUtf8(), error))
+	Shell::s_logger->setFileNear(dir, fileName);
+	if(!Shell::write(path, contents.toUtf8(), error))
 		return;
 	_view->model()->reload();
 	int index = _view->model()->indexByFile(path);

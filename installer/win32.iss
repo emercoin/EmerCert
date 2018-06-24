@@ -1,6 +1,6 @@
 ; Inno Setup Script.
 ; 1) build Visual Studio solution for 32 and 64 targets in release configuration
-; 2) go to Win32/Release and place openssl.exe and *dll files there
+; 2) go to OpenSSL folder, and copy openssl.exe and *dll files to the Win32/Release
 ; 3) go to Qt 32 folder, cd there and run windeployqt .../EmerCert.exe
 ; 4) use his script to generate installer
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
@@ -81,6 +81,7 @@ Source: "..\Win32\Release\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Win32\Release\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\Win32\Release\iconengines\qsvgicon.dll"; DestDir: "{app}\iconengines"; Flags: ignoreversion
 Source: "..\Win32\Release\imageformats\qgif.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
 Source: "..\Win32\Release\imageformats\qicns.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
