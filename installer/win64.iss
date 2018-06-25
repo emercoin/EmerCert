@@ -23,7 +23,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={pf}\{#MyAppName}
+DefaultDirName={pf64}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile="..\LICENSE.txt"
@@ -83,7 +83,7 @@ Source: "..\x64\Release\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\x64\Release\openssl.cfg"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\Windows\openssl.cfg"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\iconengines\qsvgicon.dll"; DestDir: "{app}\iconengines"; Flags: ignoreversion
 Source: "..\x64\Release\imageformats\qgif.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
 Source: "..\x64\Release\imageformats\qicns.dll"; DestDir: "{app}\imageformats"; Flags: ignoreversion
