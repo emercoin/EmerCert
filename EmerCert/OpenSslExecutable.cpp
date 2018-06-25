@@ -127,6 +127,7 @@ QString OpenSslExecutable::errorString()const {
 }
 QString OpenSslExecutable::exec(const QStringList & args) {
 	if(!QFile::exists(cfgFilePath())) {
+		//look for *cfg file in this repo
 		log(tr("Config file not found: %1") + cfgFilePath());
 		return false;
 	}

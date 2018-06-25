@@ -115,6 +115,10 @@ QString CertTableModel::Row::generateCert(CertType ctype, const QString & pass, 
 		return openssl.errorString();
 	}
 	
+	Shell::maybeLog(tr("For security reasons, removing:"));
+	Shell::remove(pathByExt("key"));
+	Shell::remove(pathByExt("csr"));
+
 	Shell::maybeLog(tr("sha256 from certificate..."));
 	QString error = sha256FromCertificate(sha256);
 	if(!error.isEmpty())
@@ -123,8 +127,10 @@ QString CertTableModel::Row::generateCert(CertType ctype, const QString & pass, 
 	openssl.log("_______________________");
 	openssl.log(QObject::tr("Please, deposit into EmerCoin NVS pair:\n"
 		"Key:\nssl:%1\n"
-		"Value:nsha256=%2").arg(_baseName).arg(sha256));
+		"Value:\nsha256=%2").arg(_baseName).arg(sha256));
 	openssl.log("_______________________");
+	if(Shell::s_logger)
+		Shell::s_logger->find("ssl:"+_baseName, QTextDocument::FindBackward);
 	return QString();
 }
 QString CertTableModel::Row::pathByExt(const QString & extension)const {

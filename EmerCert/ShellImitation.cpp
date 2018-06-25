@@ -72,6 +72,13 @@ bool ShellImitation::write(const QString & path, const QByteArray & what, QStrin
 	maybeLog(err);
 	return false;
 }
+bool ShellImitation::remove(const QString &file) {
+	maybeLog(tr("Removing file %1...").arg(file));
+	if(QFile::remove(file))
+		return true;
+	maybeLog(tr("Can't remove file %1").arg(file));
+	return false;
+}
 bool ShellImitation::removeRecursiveFilesOnly(QDir & dir, QString &err) {
 	maybeLog(tr("Remove recursive from %1").arg(dir.absolutePath()));
 	err.clear();

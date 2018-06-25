@@ -52,7 +52,3 @@ void CertLogger::setFile(const QString & path) {
 	QTextBrowser::append(s);
 	_file.close();
 }
-void CertLogger::closeEvent(QCloseEvent *event) {
-	QMessageBox::information(this, "", "");
-	QTextBrowser::closeEvent(event);
-}
