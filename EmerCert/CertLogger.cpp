@@ -5,9 +5,14 @@
 CertLogger::CertLogger() {
 	auto timer = new QTimer(this);
 	connect(timer, &QTimer::timeout, this, [this]() {
-		_file.flush();
+		if(_file.isOpen())
+			_file.flush();
 	});
 	timer->start(1000);
+	
+	auto copy = new QShortcut(QKeySequence("Ctrl+C"), this);
+	copy->setContext(Qt::WidgetWithChildrenShortcut);
+	connect(copy, &QShortcut::activated, this, &CertLogger::copy);
 }
 void CertLogger::append(const QString & s) {
 	QTextBrowser::append(s);

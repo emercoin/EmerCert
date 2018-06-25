@@ -122,8 +122,8 @@ QString CertTableModel::Row::generateCert(CertType ctype, const QString & pass, 
 
 	openssl.log("_______________________");
 	openssl.log(QObject::tr("Please, deposit into EmerCoin NVS pair:\n"
-		"key: ssl:%1\n"
-		"value: sha256=%2").arg(_baseName).arg(sha256));
+		"Key:\nssl:%1\n"
+		"Value:nsha256=%2").arg(_baseName).arg(sha256));
 	openssl.log("_______________________");
 	return QString();
 }

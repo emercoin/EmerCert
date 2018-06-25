@@ -6,6 +6,7 @@ TableView::TableView(QWidget * parent): QTableView(parent) {
 	{
 		auto a = new QAction(tr("Copy text"));
 		a->setShortcut(QKeySequence::Copy);
+		a->setShortcutContext(Qt::WidgetShortcut);
 		connect(a, &QAction::triggered, this, &TableView::copyText);
 		addAction(a);
 	}
