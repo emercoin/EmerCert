@@ -92,6 +92,12 @@
     <ClCompile Include="IPv4LineEdit.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="InfoCardDialog.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCardExample.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -144,6 +150,12 @@
     </ClInclude>
     <ClInclude Include="ManageDnsPage.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardDialog.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardExample.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,9 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	setWindowTitle(tr("EmerCert Manager ") + QCoreApplication::applicationVersion());
 	add(new ManageSslPage);
 	add(new ManageDnsPage);
+#ifdef _DEBUG
+	add(new InfoCardsWidget);
+#endif
 
 	auto qt = new QPushButton(QIcon(":/qt-project.org/qmessagebox/images/qtlogo-64.png"), tr("About Qt"));
 	connect(qt, &QPushButton::clicked, qApp, &QApplication::aboutQt);

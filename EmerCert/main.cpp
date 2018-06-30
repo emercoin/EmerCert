@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "MainWindow.h"
+#include "InfoCardDialog.h"
 #include <QtWidgets/QApplication>
 
 QtMessageHandler g_oldQtMessageHandler;
@@ -15,6 +16,9 @@ int main(int argc, char *argv[]) {
 	QCoreApplication::setApplicationVersion("v0.6.3");
 	QCoreApplication::setOrganizationName("emercoin");
 	QCoreApplication::setOrganizationDomain("emercoin.com");
+	InfoCardDialog d;
+	d.exec();
+	return 0;
 	MainWindow w;
 	w.showNormal();
 	return a.exec();

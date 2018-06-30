@@ -25,6 +25,7 @@ ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 
 		auto btnNew = new QPushButton(tr("New cerificate"));
 		btnNew->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/file-32.png"));
+		btnNew->setShortcut(QKeySequence("Ctrl+N"));
 		connect(btnNew, &QAbstractButton::clicked, this, &ManageSslPage::onCreate);
 		lay2->addWidget(btnNew);
 
