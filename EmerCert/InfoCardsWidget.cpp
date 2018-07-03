@@ -32,7 +32,7 @@ InfoCardsWidget::InfoCardsWidget(QWidget*parent): QWidget(parent) {
 	auto view = new View;
 	lay->addWidget(view);
 
-	onCreate();
+	//onCreate();
 }
 void InfoCardsWidget::onDelete() {
 

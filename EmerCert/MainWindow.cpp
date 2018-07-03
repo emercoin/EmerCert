@@ -3,11 +3,13 @@
 #include "InfoCardsWidget.h"
 #include "ManageSslPage.h"
 #include "ManageDnsPage.h"
+#include "EnumerDialog.h"
 
 MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	setWindowTitle(tr("EmerCert Manager ") + QCoreApplication::applicationVersion());
 	add(new ManageSslPage);
 	add(new ManageDnsPage);
+	add(new EnumerDialog);
 #ifdef _DEBUG
 	add(new InfoCardsWidget);
 #endif

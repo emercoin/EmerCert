@@ -2,6 +2,13 @@
 #include "pch.h"
 #include "InfoCardExample.h"
 
+QString formatDesccription = R"DEMO(
+By default, value(s) from current INFO file overwrite values from parent's one
+To change merging behavior, use qualifiers at keyword:
+KeyWord+	- Parent's list will be added after current list
++KeyWord	- Parent's list will be added before current list
+KeyWord with no params - clear this value from resulting card
+)DEMO";
 const QString InfoCardExample::example =
 R"DEMO(#!info:10b0085be05e167d:75026577fafe0aff372db9846805c8
 #
@@ -17,14 +24,6 @@ R"DEMO(#!info:10b0085be05e167d:75026577fafe0aff372db9846805c8
 #
 # Card can contain reference to "parent" card(s) with syntax like:
 # Import info:569dcc6b7aee11375b76:62615c3f6f62096b68bbc980c153917d505f8d24	
-#
-# By default, value(s) from current INFO file overwrite values from parent's one
-# To change merging behavior, use qualifiers at keyword:
-# KeyWord+	- Parent's list will be added after current list
-# +KeyWord	- Parent's list will be added before current list
-# KeyWord with no params - clear this value from resulting card
-#
-# 
 #
 Alias		superabdul			# Short name (username, login)
 FirstName	Abdul				# First (short) name
@@ -64,13 +63,6 @@ R"DEMO(#
 #
 # Card can contain reference to "parent" card(s) with syntax like:
 # Import info:569dcc6b7aee11375b76:62615c3f6f62096b68bbc980c153917d505f8d24	
-#
-# By default, value(s) from current INFO file overwrite values from parent's one
-# To change merging behavior, use qualifiers at keyword:
-# KeyWord+	- Parent's list will be added after current list
-# +KeyWord	- Parent's list will be added before current list
-# KeyWord with no params - clear this value from resulting card
-#
 # 
 #
 BusinessAddress
@@ -102,13 +94,6 @@ R"DEMO(#!info:2eb9b3d01cd8315e:4c325ce03128150fb831d34c663136
 #
 # Card can contain reference to "parent" card(s) with syntax like:
 # Import info:569dcc6b7aee11375b76:62615c3f6f62096b68bbc980c153917d505f8d24	
-#
-# By default, value(s) from current INFO file overwrite values from parent's one
-# To change merging behavior, use qualifiers at keyword:
-# KeyWord+	- Parent's list will be added after current list
-# +KeyWord	- Parent's list will be added before current list
-# KeyWord with no params - clear this value from resulting card
-#
 # 
 #
 Import		info:de4190d91886046e:e8d6726e73a6079d5ef8d6c3bf5858

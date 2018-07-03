@@ -280,6 +280,7 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnumerDialog.cpp" />
     <ClCompile Include="InfoCardDialog.cpp" />
     <ClCompile Include="InfoCardExample.cpp" />
     <ClCompile Include="IPv4LineEdit.cpp">
@@ -303,6 +304,7 @@
     <ClCompile Include="IPv6LineEdit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="NameValueEditWidget.cpp" />
     <ClCompile Include="OpenSslConfigWriter.cpp" />
     <ClCompile Include="OpenSslExecutable.cpp" />
     <ClCompile Include="pch.cpp">
@@ -311,6 +313,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="SelectableLineEdit.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="ShellImitation.cpp" />
     <ClCompile Include="CertLogger.cpp" />
@@ -318,6 +321,7 @@
     <ClCompile Include="ValidatorToLabel.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnumerDialog.h" />
     <ClInclude Include="InfoCardDialog.h" />
     <ClInclude Include="InfoCardExample.h" />
     <ClInclude Include="ManageDnsPage.h" />
@@ -327,8 +331,10 @@
     <ClInclude Include="CertTableView.h" />
     <ClInclude Include="EmailLineEdit.h" />
     <ClInclude Include="IPv6LineEdit.h" />
+    <ClInclude Include="NameValueEditWidget.h" />
     <ClInclude Include="OpenSslConfigWriter.h" />
     <ClInclude Include="OpenSslExecutable.h" />
+    <ClInclude Include="SelectableLineEdit.h" />
     <ClInclude Include="ShellImitation.h" />
     <ClInclude Include="CertLogger.h" />
     <ClInclude Include="TableView.h" />

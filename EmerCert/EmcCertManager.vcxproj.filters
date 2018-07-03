@@ -98,6 +98,15 @@
     <ClCompile Include="InfoCardExample.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="EnumerDialog.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectableLineEdit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="NameValueEditWidget.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -156,6 +165,15 @@
     </ClInclude>
     <ClInclude Include="InfoCardExample.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumerDialog.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectableLineEdit.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="NameValueEditWidget.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

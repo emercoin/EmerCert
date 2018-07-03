@@ -11,20 +11,10 @@
 #include <QPushButton>
 #include <QCommandLinkButton>
 
-class SelectableLineEdit: public QLineEdit {
-	public:
-		SelectableLineEdit() {
-		}
-		virtual void mousePressEvent(QMouseEvent *e)override {
-			QLineEdit::mousePressEvent(e);
-			selectAll();
-		}
-};
 ManageDnsPage::ManageDnsPage(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("DNS names"));
-    _resultingName = new SelectableLineEdit;
-    _resultingValue = new SelectableLineEdit;
 	auto lay = new QVBoxLayout(this);
+	_NVPair = new NameValueEditWidget;
 
     auto description = new QLabel(tr(
       "<a href=\"https://wiki.emercoin.com/en/EMCDNS\">EmerDNS</a> "
@@ -45,61 +35,16 @@ ManageDnsPage::ManageDnsPage(QWidget*parent): QWidget(parent) {
     addLineEdit(form, "PTR", tr("PTR"), tr("Pointer to a canonical name. Unlike a CNAME, DNS processing stops and just the name is returned."));
     addLineEdit(form, "TXT", tr("TXT"), tr("Arbitrary human-readable text. Nowdays more often carries machine-readable data, such as Policy Framework, DKIM, DMARC, DNS-SD, etc."));
     addLineEdit(form, "SD", tr("SD"), tr("Subdomain - EmerDns feature"));
-
-	form->addRow(new QLabel(tr("Resulting values to insert to blockchain (in Emercoin wallet):")));
-	{
-		auto w = new QWidget;
-		auto lay = new QHBoxLayout(w);
-		lay->setSpacing(0);
-		lay->setMargin(0);
-		
-        _resultingName->setPlaceholderText(tr("This field will contain name to insert to 'Manage names' panel"));
-		_resultingName->setReadOnly(true);
-		lay->addWidget(_resultingName);
-		
-		auto copy = new QToolButton;
-		copy->setText(tr("Copy to clipboard"));
-		connect(copy, &QAbstractButton::clicked, this, [=] () {
-			_resultingValue->deselect();
-			_resultingName->selectAll();
-			QApplication::clipboard()->setText(_resultingName->text());
-			auto pt = copy->rect().bottomLeft();
-			QToolTip::showText(copy->mapToGlobal(pt), tr("Copied"));
-		});
-		lay->addWidget(copy);
-		form->addRow(tr("Name:"), w);
-	}
-	{
-		auto w = new QWidget;
-		auto lay = new QHBoxLayout(w);
-		lay->setSpacing(0);
-		lay->setMargin(0);
-
-		_resultingValue->setReadOnly(true);
-        _resultingValue->setPlaceholderText(tr("This field will contain value to insert to 'Manage names' panel"));
-		lay->addWidget(_resultingValue);
-
-		auto copy = new QToolButton;
-		copy->setText(tr("Copy to clipboard"));
-		connect(copy, &QAbstractButton::clicked, this, [=] () {
-			_resultingName->deselect();
-			_resultingValue->selectAll();
-			QApplication::clipboard()->setText(_resultingValue->text());
-			auto pt = copy->rect().bottomLeft();
-			QToolTip::showText(copy->mapToGlobal(pt), tr("Copied"));
-		});
-		lay->addWidget(copy);
-		form->addRow(tr("Value:"), w);
-	}
+	lay->addWidget(_NVPair);
   
     lay->addStretch();
 }
 void ManageDnsPage::recalcValue() {
     const QString dns = _editName->text().trimmed();
     if(dns.isEmpty())
-        _resultingName->setText(QString());//to display placeholderText
+        _NVPair->_resultingName->setText(QString());//to display placeholderText
     else
-        _resultingName->setText("dns:" + dns);
+        _NVPair->_resultingName->setText("dns:" + dns);
 
     QStringList parts;
     for(auto e: _edits) {
@@ -109,7 +54,7 @@ void ManageDnsPage::recalcValue() {
         if(!value.isEmpty())
             parts << e->_dnsRecord + "=" + value;
     }
-	_resultingValue->setText(parts.join('|'));
+	_NVPair->setValue(parts.join('|'));
 }
 ManageDnsPage::LineEdit* ManageDnsPage::addLineEdit(QFormLayout*form, QString dnsRecord, QString text, QString tooltip) {
     auto edit = new LineEdit;
