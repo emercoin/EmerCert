@@ -22,7 +22,17 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	quit->setShortcut(QKeySequence("Ctrl+Q"));
 	connect(quit, &QAction::triggered, qApp, &QCoreApplication::quit);
 	addAction(quit);
+
+	QSettings sett;
+	int index = sett.value("MainWindow.tabIndex", 0).toInt();
+	index = qBound(0, index, count()-1);
+	setCurrentIndex(index);
 }
 void MainWindow::add(QWidget *w) {
 	addTab(w, w->windowTitle());
+}
+void MainWindow::closeEvent(QCloseEvent *e) {
+	QSettings sett;
+	sett.setValue("MainWindow.tabIndex", currentIndex());
+	QTabWidget::closeEvent(e);
 }

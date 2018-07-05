@@ -5,4 +5,5 @@ class MainWindow: public QTabWidget {
 		MainWindow(QWidget *parent = 0);
 	protected:
 		void add(QWidget *w);
+		virtual void closeEvent(QCloseEvent *e)override;
 };
