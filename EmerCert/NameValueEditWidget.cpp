@@ -38,7 +38,9 @@ NameValueEditWidget::NameValueEditWidget() {
 		lay->setSpacing(0);
 		lay->setMargin(0);
 		
-        _resultingName->setPlaceholderText(tr("This field will contain name to insert to 'Manage names' panel"));
+		QString namePlaceholder = tr("This field will contain name to insert to 'Manage names' panel");
+        _resultingName->setPlaceholderText(namePlaceholder);
+		_resultingName->setToolTip(tr("Read-only") + ". " +  namePlaceholder);
 		_resultingName->setReadOnly(true);
 		lay->addWidget(_resultingName);
 		
@@ -94,6 +96,10 @@ NameValueEditWidget::NameValueEditWidget() {
 		_w1Line->hide();
 	else
 		_wMultiLine->hide();
+}
+void NameValueEditWidget::setValuePlaceholder(const QString & s) {
+	_resultingValue->setPlaceholderText(s);
+	_resultingMultiline->setPlaceholderText(s);
 }
 void NameValueEditWidget::copyValue() {
 	if(_multiline) {

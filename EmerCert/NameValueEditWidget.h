@@ -8,6 +8,7 @@ class NameValueEditWidget: public QWidget {
 		NameValueEditWidget();
 		void setName(const QString & s);
 		void setValue(const QString & s);
+		void setValuePlaceholder(const QString & s);
 		void setValueMultiline(bool b);
 		void setValueReadOnly(bool b);
 		

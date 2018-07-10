@@ -1,4 +1,4 @@
-﻿//EnumerDialog.h by Emercoin developers - 2018.07.03 12:33:17
+﻿//EnumerDialog.h by Emercoin developers
 #pragma once
 #include "NameValueEditWidget.h"
 class PhoneNumberLineEdit;

@@ -3,7 +3,16 @@
 
 class InfoCardDialog: public QDialog {
 	public:
-		InfoCardDialog(QWidget*parent = 0);
+		InfoCardDialog(QWidget*parent=0);
+		bool allValid()const;
+		void addExample(QTabWidget*tabs, int n);
+		void enableOk();
+		virtual void accept()override;
+
+		QLabel* _id = new QLabel;
+		QTextEdit* _text = new QTextEdit;
+		QPushButton* _okBtn = 0;
+		QString text()const;
 	protected:
 		QFormLayout* _lay = 0;
 		struct Row {

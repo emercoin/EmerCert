@@ -12,13 +12,13 @@ class CertTableView: public TableView {
 		int selectedRow()const;
 		QString selectedLogPath();
 		void showInExplorer();
+		static void showInGraphicalShell(QWidget *parent, const QString &pathIn);
 	protected:
 		CertTableModel* _model = 0;
 		struct Dialog;
 		void reloadLog();
 		void recreateButtons();
 		void generateCertByButton();
-		static void showInGraphicalShell(QWidget *parent, const QString &pathIn);
 		int rowFromAction(QAction*a);
 		void installSelectedIntoSystem();
 };

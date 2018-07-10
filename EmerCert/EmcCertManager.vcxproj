@@ -281,8 +281,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="EnumerDialog.cpp" />
+    <ClCompile Include="InfoCard.cpp" />
     <ClCompile Include="InfoCardDialog.cpp" />
     <ClCompile Include="InfoCardExample.cpp" />
+    <ClCompile Include="InfoCardHighlighter.cpp" />
+    <ClCompile Include="InfoCardTableModel.cpp" />
+    <ClCompile Include="InfoCardTableView.cpp" />
     <ClCompile Include="IPv4LineEdit.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -322,8 +326,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EnumerDialog.h" />
+    <ClInclude Include="InfoCard.h" />
     <ClInclude Include="InfoCardDialog.h" />
     <ClInclude Include="InfoCardExample.h" />
+    <ClInclude Include="InfoCardHighlighter.h" />
+    <ClInclude Include="InfoCardTableModel.h" />
+    <ClInclude Include="InfoCardTableView.h" />
     <ClInclude Include="ManageDnsPage.h" />
     <ClInclude Include="IPv4LineEdit.h" />
     <ClInclude Include="ManageSslPage.h" />

@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h</Extensions>
-    </Filter>
     <Filter Include="Form Files">
       <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
       <Extensions>ui</Extensions>
@@ -33,20 +29,24 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;cxx;c;def</Extensions>
     </Filter>
+    <Filter Include="InfoCard">
+      <UniqueIdentifier>{9f6568ef-e4b2-4119-8781-823508683705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DNS">
+      <UniqueIdentifier>{7351b2bb-fb2e-4242-a90e-e627f5bebcbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enumer">
+      <UniqueIdentifier>{560f35e8-95e9-4c8e-86a3-8a065e864818}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+    </Filter>
+    <Filter Include="Cerificates">
+      <UniqueIdentifier>{dd164864-2567-40c2-b778-8fd56354e520}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="pch.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="InfoCardsWidget.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Settings.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -62,43 +62,7 @@
     <ClCompile Include="IPv6LineEdit.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="CertTableModel.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="TableView.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="CertTableView.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="ManageSslPage.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="ShellImitation.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenSslExecutable.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="CertLogger.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenSslConfigWriter.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="ManageDnsPage.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="IPv4LineEdit.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="InfoCardDialog.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="InfoCardExample.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EnumerDialog.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="SelectableLineEdit.cpp">
@@ -107,14 +71,68 @@
     <ClCompile Include="NameValueEditWidget.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="InfoCardDialog.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCardExample.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCardsWidget.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCardTableModel.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCardTableView.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
+    <ClCompile Include="ManageDnsPage.cpp">
+      <Filter>DNS</Filter>
+    </ClCompile>
+    <ClCompile Include="EnumerDialog.cpp">
+      <Filter>Enumer</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="TableView.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenSslConfigWriter.cpp">
+      <Filter>Cerificates</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenSslExecutable.cpp">
+      <Filter>Cerificates</Filter>
+    </ClCompile>
+    <ClCompile Include="ShellImitation.cpp">
+      <Filter>Cerificates</Filter>
+    </ClCompile>
+    <ClCompile Include="ManageSslPage.cpp">
+      <Filter>Cerificates</Filter>
+    </ClCompile>
+    <ClCompile Include="CertLogger.cpp">
+      <Filter>Cerificates</Filter>
+    </ClCompile>
+    <ClCompile Include="CertTableModel.cpp">
+      <Filter>Cerificates</Filter>
+    </ClCompile>
+    <ClCompile Include="CertTableView.cpp">
+      <Filter>Cerificates</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCardHighlighter.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
+    <ClCompile Include="InfoCard.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InfoCardsWidget.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="Settings.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -127,46 +145,7 @@
     <ClInclude Include="IPv6LineEdit.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="CertTableModel.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="TableView.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="CertTableView.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="ManageSslPage.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="ShellImitation.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenSslExecutable.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="CertLogger.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenSslConfigWriter.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="MainWindow.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="IPv4LineEdit.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="ManageDnsPage.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="InfoCardDialog.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="InfoCardExample.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EnumerDialog.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="SelectableLineEdit.h">
@@ -174,6 +153,63 @@
     </ClInclude>
     <ClInclude Include="NameValueEditWidget.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardDialog.h">
+      <Filter>InfoCard</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardExample.h">
+      <Filter>InfoCard</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardsWidget.h">
+      <Filter>InfoCard</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardTableModel.h">
+      <Filter>InfoCard</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardTableView.h">
+      <Filter>InfoCard</Filter>
+    </ClInclude>
+    <ClInclude Include="ManageDnsPage.h">
+      <Filter>DNS</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumerDialog.h">
+      <Filter>Enumer</Filter>
+    </ClInclude>
+    <ClInclude Include="MainWindow.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="TableView.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenSslExecutable.h">
+      <Filter>Cerificates</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenSslConfigWriter.h">
+      <Filter>Cerificates</Filter>
+    </ClInclude>
+    <ClInclude Include="ShellImitation.h">
+      <Filter>Cerificates</Filter>
+    </ClInclude>
+    <ClInclude Include="ManageSslPage.h">
+      <Filter>Cerificates</Filter>
+    </ClInclude>
+    <ClInclude Include="CertTableView.h">
+      <Filter>Cerificates</Filter>
+    </ClInclude>
+    <ClInclude Include="CertLogger.h">
+      <Filter>Cerificates</Filter>
+    </ClInclude>
+    <ClInclude Include="CertTableModel.h">
+      <Filter>Cerificates</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardHighlighter.h">
+      <Filter>InfoCard</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCard.h">
+      <Filter>InfoCard</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

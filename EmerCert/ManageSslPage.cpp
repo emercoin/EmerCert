@@ -147,13 +147,6 @@ void ManageSslPage::onCreate() {
 	if(!ecard.isEmpty())
 		contents += "/UID=" + ecard;
 	contents += '\n';
-	QString fileNameTemplate = name + ' ' + mail;
-	for(QChar & c : fileNameTemplate) {
-		if(c.isDigit() || c.isLetter() || c==' ' || c=='.' || c=='@')
-			c;
-		else
-			c = '.';
-	}
 	QString fileName = randName() + ".tpl";
 	QDir dir = Settings::certDir();
 	QString path = dir.absoluteFilePath(fileName);

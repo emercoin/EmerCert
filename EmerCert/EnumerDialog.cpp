@@ -1,4 +1,4 @@
-﻿//EnumerDialog.cpp by Emercoin developers - 2018.07.03 12:33:17
+﻿//EnumerDialog.cpp by Emercoin developers
 #include "pch.h"
 #include "EnumerDialog.h"
 
@@ -40,10 +40,13 @@ EnumerDialog::EnumerDialog() {
 	_NVEdit->setValueReadOnly(false);
 	_phone = new PhoneNumberLineEdit;
 	connect(_phone, &QLineEdit::textChanged, this, &EnumerDialog::generateNVPair);
+	connect(_antiSquatter, static_cast<void(QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &EnumerDialog::generateNVPair);
 	_phone->setFocus();
 
-	lay->addRow(new QLabel(tr("<a href=\"https://emercoin.com/en/documentation/blockchain-services/enumer\">ENUMER</a> is a free VoIP system, based on emercoin blockchain"
-		"<br>\nStep 1: create ENUM record")));
+	auto href = new QLabel(tr("<a href=\"https://emercoin.com/en/documentation/blockchain-services/enumer\">ENUMER</a> is a free VoIP system, based on emercoin blockchain"
+		"<br>\nStep 1: create ENUM record"));
+	href->setOpenExternalLinks(true);
+	lay->addRow(href);
 	//Good russian article, maybe translate it to english: https://habr.com/company/emercoin/blog/337034/
 	lay->addRow(tr("Phone number:"), _phone);//E.164 format https://en.wikipedia.org/wiki/E.164
 	{
@@ -53,15 +56,10 @@ EnumerDialog::EnumerDialog() {
 		desc->setToolTip(str);
 		lay->addRow(desc, _antiSquatter);
 	}
+	
 	{
-		auto text = new QPlainTextEdit;
-		QString str = tr(R"DEMO(Add several lines to value, like:
-E2U+sip=Priority|Preference|Regex, like
-E2U+sip=100|10|!^(.*)$!sip:17772325555@in.callcentric.com!
-Or signature records from steps below)DEMO");
-		text->setPlainText(str);
-		text->setReadOnly(true);
-		lay->addRow(text);
+		QString str = tr(R"DEMO(Add several lines here to value, like E2U+sip=Priority|Preference|Regex (i. e., E2U+sip=100|10|!^(.*)$!sip:17772325555@in.callcentric.com!) or signature records from steps below)DEMO");
+		_NVEdit->setValuePlaceholder(str);
 	}
 	lay->addRow(_NVEdit);
 	lay->addRow(new QLabel("Step 2: add this name-value pair to the emercoin blockchain"));

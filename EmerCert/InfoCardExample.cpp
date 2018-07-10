@@ -1,4 +1,4 @@
-﻿//InfoCardExample.cpp by Konstantine Kozachuck as neurocod - 2018.06.30 17:59:03
+﻿//InfoCardExample.cpp by Emercoin developers
 #include "pch.h"
 #include "InfoCardExample.h"
 
@@ -24,7 +24,7 @@ R"DEMO(#!info:10b0085be05e167d:75026577fafe0aff372db9846805c8
 #
 # Card can contain reference to "parent" card(s) with syntax like:
 # Import info:569dcc6b7aee11375b76:62615c3f6f62096b68bbc980c153917d505f8d24	
-#
+
 Alias		superabdul			# Short name (username, login)
 FirstName	Abdul				# First (short) name
 LastName	Kurbashi Bey			# Remain part of full name
@@ -62,9 +62,8 @@ R"DEMO(#
 # into values list, reference by this keyword (see HomeAddress following).
 #
 # Card can contain reference to "parent" card(s) with syntax like:
-# Import info:569dcc6b7aee11375b76:62615c3f6f62096b68bbc980c153917d505f8d24	
-# 
-#
+# Import info:569dcc6b7aee11375b76:62615c3f6f62096b68bbc980c153917d505f8d24 
+
 BusinessAddress
 	Kucuk Ayasofya Cad. Kapi Agasi		# Free form address
 	Sok. No:55				# Free form address 
@@ -118,5 +117,11 @@ Facebook	Abdul.KurbashiBey
 Twitter		AbdulKurbashiBey
 EMC	EdvJ7b7zPL6gj5f8VNfX6zmVcftb35sKX2	# EmerCoin payment address
 BTC	1MkKuU78bikC2ACLspofQZnNb6Vz9AP1Np	# BitCoin payment address
+)DEMO";
+const QString InfoCardExample::emptyDoc = R"DEMO(#This is comment, ignored by InfoCard processor. It is marked with different color.
+#To insert # sign itself, place \ sign before it.
+#See examples in the right tabs on how to fill your InfoCard
 
+Key1 Value
+Key2 Value # Another comment
 )DEMO";

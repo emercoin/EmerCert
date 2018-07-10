@@ -1,9 +1,52 @@
 ﻿//InfoCardDialog.cpp by Emercoin developers
 #include "pch.h"
 #include "InfoCardDialog.h"
+#include "InfoCardExample.h"
+#include "InfoCardHighlighter.h"
 
 InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
-	_lay = new QFormLayout(this);
+	setWindowTitle(tr("Edit InfoCard"));
+	setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+	setWindowFlag(Qt::WindowMaximizeButtonHint, true);
+
+	auto lay = new QVBoxLayout(this);
+	auto tabs = new QTabWidget;
+	lay->addWidget(tabs);
+	tabs->addTab(_text, tr("Text"));
+	addExample(tabs, 1);
+	addExample(tabs, 0);
+
+	_text->setText(InfoCardExample::emptyDoc);
+	new InfoCardHighlighter(_text->document());
+	auto box = new QDialogButtonBox;
+	lay->addWidget(box);
+	_okBtn = box->addButton(QDialogButtonBox::Ok);
+	auto cancel = box->addButton(QDialogButtonBox::Cancel);
+	_okBtn->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-apply-32.png"));
+	cancel->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-cancel-32.png"));
+	connect(_okBtn, &QAbstractButton::clicked, this, &QDialog::accept);
+	connect(cancel, &QAbstractButton::clicked, this, &QDialog::reject);
+	connect(_text, &QTextEdit::textChanged, this, &InfoCardDialog::enableOk);
+	_okBtn->setEnabled(false);
+}
+void InfoCardDialog::addExample(QTabWidget*tabs, int n) {
+	QString text = n>0 ? InfoCardExample::user : InfoCardExample::corporate;
+	QString tabName = n>0 ? tr("User card example"): tr("Corporate card example");
+	auto w = new QTextEdit;
+	new InfoCardHighlighter(w->document());
+	w->setPlainText(text);
+	w->setReadOnly(true);
+	tabs->addTab(w, tabName);
+}
+bool InfoCardDialog::allValid()const {
+	return !_text->toPlainText().trimmed().isEmpty();
+}
+void InfoCardDialog::enableOk() {
+	_okBtn->setEnabled(allValid());
+}
+void InfoCardDialog::accept() {
+	if(allValid())
+		QDialog::accept();
 }
 QString InfoCardDialog::Row::text()const {
 	if(!_multiline && _line) {
@@ -27,4 +70,7 @@ void InfoCardDialog::add(Row & row) {
 		row._text = new QPlainTextEdit;;
 	_rows << row;
 	_lay->addRow(row._name, row.widget());
+}
+QString InfoCardDialog::text()const {
+	return _text->toPlainText();
 }
