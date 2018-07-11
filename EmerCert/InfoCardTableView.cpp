@@ -5,16 +5,19 @@
 #include "ShellImitation.h"
 #include "Settings.h"
 #include "CertTableView.h"
+#include "InfoCardItemDelegate.h"
 
 InfoCardTableView::InfoCardTableView() {
 	horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
-	_model = new Model(this);
+	horizontalHeader()->hide();
+	_model = new InfoCardTableModel(this);
 	setModel(_model);
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	setSelectionMode(QAbstractItemView::SingleSelection);
 	connect(selectionModel(), &QItemSelectionModel::selectionChanged, this, &InfoCardTableView::reloadLog);
+	setItemDelegate(new InfoCardItemDelegate(this, _model));
 }
-InfoCardTableView::Model* InfoCardTableView::model()const {
+InfoCardTableModel* InfoCardTableView::model()const {
 	return _model;
 }
 void InfoCardTableView::reloadLog() {
@@ -25,12 +28,11 @@ void InfoCardTableView::reloadLog() {
 void InfoCardTableView::showInExplorer() {
 	int nRow = selectedRow();
 	QString path;
-	if(nRow>=0 && nRow < _model->rowCount()) {
-		const auto & row = _model->_rows[nRow];
-		path = row._file;
-	}
-	if(path.isEmpty())
+	if(const auto & row = _model->itemBy(nRow)) {
+		path = row->_file;
+	} else {
 		path = Settings::certDir().absolutePath();
+	}
 	CertTableView::showInGraphicalShell(this, path);
 }
 int InfoCardTableView::selectedRow()const {
@@ -41,8 +43,7 @@ int InfoCardTableView::selectedRow()const {
 }
 QString InfoCardTableView::selectedLogPath() {
 	int nRow = selectedRow();
-	if(-1 == nRow)
-		return QString();
-	const auto & row = _model->_rows[nRow];
-	return row.logFilePath();
+	if(const auto & row = _model->itemBy(nRow))
+		return row->logFilePath();
+	return {};
 }

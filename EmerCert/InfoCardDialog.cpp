@@ -9,6 +9,9 @@ InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
 	setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 	setWindowFlag(Qt::WindowMaximizeButtonHint, true);
 
+	if(parent)
+		resize(parent->sizeHint());
+
 	auto lay = new QVBoxLayout(this);
 	auto tabs = new QTabWidget;
 	lay->addWidget(tabs);
@@ -17,6 +20,7 @@ InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
 	addExample(tabs, 0);
 
 	_text->setText(InfoCardExample::emptyDoc);
+	_text->setWordWrapMode(QTextOption::NoWrap);
 	new InfoCardHighlighter(_text->document());
 	auto box = new QDialogButtonBox;
 	lay->addWidget(box);
@@ -48,7 +52,7 @@ void InfoCardDialog::accept() {
 	if(allValid())
 		QDialog::accept();
 }
-QString InfoCardDialog::Row::text()const {
+QString InfoCardDialog::Item::text()const {
 	if(!_multiline && _line) {
 		return _line->text();
 	}
@@ -58,12 +62,12 @@ QString InfoCardDialog::Row::text()const {
 	Q_ASSERT(0);
 	return QString();
 }
-QWidget* InfoCardDialog::Row::widget()const {
+QWidget* InfoCardDialog::Item::widget()const {
 	if(_multiline)
 		return _line;
 	return _text;
 }
-void InfoCardDialog::add(Row & row) {
+void InfoCardDialog::add(Item & row) {
 	if(row._multiline)
 		row._line = new QLineEdit;
 	else

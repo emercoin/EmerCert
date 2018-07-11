@@ -5,10 +5,10 @@
 #include "Settings.h"
 #include "OpenSslExecutable.h"
 
-QString CertTableModel::Row::logFilePath()const {
+QString CertTableModel::Item::logFilePath()const {
 	return pathByExt("log");
 }
-QString CertTableModel::Row::loadFromTemplateFile(const QFileInfo & entry) {//QString::isEmpty -> ok
+QString CertTableModel::Item::loadFromTemplateFile(const QFileInfo & entry) {//QString::isEmpty -> ok
 	//file example: /CN=Konstantine Kozachuk/emailAddress=neurocod@gmail.com/UID=123
 	_templateFile = entry.filePath();
 	_dir = entry.dir();
@@ -59,7 +59,7 @@ QString CertTableModel::Row::loadFromTemplateFile(const QFileInfo & entry) {//QS
 	return QString();
 }
 using Shell = ShellImitation;
-QString CertTableModel::Row::sha256FromCertificate(QString & sha256)const {
+QString CertTableModel::Item::sha256FromCertificate(QString & sha256)const {
 	QString path = pathByExt("crt");
 	QFile file(path);
 	if(!file.open(QFile::ReadOnly)) {
@@ -82,7 +82,7 @@ QString CertTableModel::Row::sha256FromCertificate(QString & sha256)const {
 	sha256 = sha256.toLower();
 	return {};
 }
-QString CertTableModel::Row::generateCert(CertType ctype, const QString & pass, QString & sha256)const {//QString::isEmpty -> ok
+QString CertTableModel::Item::generateCert(CertType ctype, const QString & pass, QString & sha256)const {//QString::isEmpty -> ok
 	QString certType;
 	if(ctype == EC) {
 		certType = "EC";
@@ -133,15 +133,15 @@ QString CertTableModel::Row::generateCert(CertType ctype, const QString & pass, 
 		Shell::s_logger->find("ssl:"+_baseName, QTextDocument::FindBackward);
 	return QString();
 }
-QString CertTableModel::Row::pathByExt(const QString & extension)const {
+QString CertTableModel::Item::pathByExt(const QString & extension)const {
 	return _dir.absoluteFilePath(_baseName + '.' + extension);
 }
-void CertTableModel::Row::installIntoSystem()const {
+void CertTableModel::Item::installIntoSystem()const {
 	if(!_certPair.isEmpty() && QFile::exists(_certPair)) {
 		QDesktopServices::openUrl(QUrl::fromLocalFile(_certPair));
 	}
 }
-QString CertTableModel::Row::removeFiles() {
+QString CertTableModel::Item::removeFiles() {
 	for(auto ext: QString("crt|csr|key|p12|tpl|log").split('|')) {
 		QString path = pathByExt(ext);
 		if(QFile::exists(path)) {
@@ -163,7 +163,7 @@ void CertTableModel::removeRows(const QModelIndexList & rows) {
 		Q_ASSERT(0);
 		return;
 	}
-	Row & r = _rows[row];
+	Item & r = _rows[row];
 	QString error = r.removeFiles();
 	if(!error.isEmpty()) {
 		reload();
@@ -180,7 +180,7 @@ void CertTableModel::reload() {
 	QDir dir = Settings::certDir();
 	const QFileInfoList list = dir.entryInfoList(QStringList() << "*.tpl", QDir::Files, QDir::Name);
 	for(const QFileInfo & entry : list) {
-		Row item;
+		Item item;
 		const QString code = item.loadFromTemplateFile(entry);
 		if(code.isEmpty()) {
 			_rows << item;

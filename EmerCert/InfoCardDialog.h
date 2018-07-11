@@ -15,7 +15,7 @@ class InfoCardDialog: public QDialog {
 		QString text()const;
 	protected:
 		QFormLayout* _lay = 0;
-		struct Row {
+		struct Item {
 			QString _name;
 			bool _multiline = false;
 			QLineEdit* _line = 0;
@@ -23,6 +23,6 @@ class InfoCardDialog: public QDialog {
 			QString text()const;
 			QWidget* widget()const;
 		};
-		QList<Row> _rows;
-		void add(Row & row);
+		QList<Item> _rows;
+		void add(Item & row);
 };

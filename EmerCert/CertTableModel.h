@@ -18,7 +18,7 @@ class CertTableModel: public QAbstractTableModel {
 		EC,
 		RSA
 	};
-	struct Row {
+	struct Item {
 		QString _name;//like nickname
 		QDir _dir;
 		QString _mail;
@@ -37,7 +37,7 @@ class CertTableModel: public QAbstractTableModel {
 		QString pathByExt(const QString & extension)const;
 		QString sha256FromCertificate(QString & sha256)const;//returns error, isEmpty() -> ok
 	};
-	QList<Row> _rows;
+	QList<Item> _rows;
 	
 	CertTableModel(QObject*parent);
 	void reload();

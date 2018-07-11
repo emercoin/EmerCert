@@ -285,6 +285,7 @@
     <ClCompile Include="InfoCardDialog.cpp" />
     <ClCompile Include="InfoCardExample.cpp" />
     <ClCompile Include="InfoCardHighlighter.cpp" />
+    <ClCompile Include="InfoCardItemDelegate.cpp" />
     <ClCompile Include="InfoCardTableModel.cpp" />
     <ClCompile Include="InfoCardTableView.cpp" />
     <ClCompile Include="IPv4LineEdit.cpp">
@@ -330,6 +331,7 @@
     <ClInclude Include="InfoCardDialog.h" />
     <ClInclude Include="InfoCardExample.h" />
     <ClInclude Include="InfoCardHighlighter.h" />
+    <ClInclude Include="InfoCardItemDelegate.h" />
     <ClInclude Include="InfoCardTableModel.h" />
     <ClInclude Include="InfoCardTableView.h" />
     <ClInclude Include="ManageDnsPage.h" />

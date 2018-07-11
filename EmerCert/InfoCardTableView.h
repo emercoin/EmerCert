@@ -6,12 +6,12 @@ class InfoCardTableModel;
 class InfoCardTableView: public TableView {
 	public:
 		InfoCardTableView();
-		using Model = InfoCardTableModel;
-		Model* model()const;
+		InfoCardTableModel* model()const;
 		int selectedRow()const;
 		QString selectedLogPath();
 		void showInExplorer();
 	protected:
 		InfoCardTableModel* _model = 0;
 		void reloadLog();
+
 };

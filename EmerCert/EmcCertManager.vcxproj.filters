@@ -131,6 +131,9 @@
     <ClCompile Include="InfoCard.cpp">
       <Filter>InfoCard</Filter>
     </ClCompile>
+    <ClCompile Include="InfoCardItemDelegate.cpp">
+      <Filter>InfoCard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -209,6 +212,9 @@
       <Filter>InfoCard</Filter>
     </ClInclude>
     <ClInclude Include="InfoCard.h">
+      <Filter>InfoCard</Filter>
+    </ClInclude>
+    <ClInclude Include="InfoCardItemDelegate.h">
       <Filter>InfoCard</Filter>
     </ClInclude>
   </ItemGroup>

@@ -73,7 +73,6 @@ QString InfoCardsWidget::randName() {
 }
 void InfoCardsWidget::onCreate() {
 	InfoCardDialog dlg(this);
-	dlg.resize(sizeHint());
 	if(dlg.exec()!=QDialog::Accepted)
 		return;
 	QString contents = dlg._text->toPlainText().trimmed();

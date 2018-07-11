@@ -3,7 +3,6 @@
 #include "InfoCardHighlighter.h"
 
 InfoCardHighlighter::InfoCardHighlighter(QTextDocument *parent): QSyntaxHighlighter(parent) {
-	//_comment.setFontWeight(QFont::Bold);
     _comment.setForeground(Qt::darkGreen);
     _key.setForeground(Qt::darkRed);
 }
