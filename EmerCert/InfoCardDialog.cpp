@@ -2,26 +2,22 @@
 #include "pch.h"
 #include "InfoCardDialog.h"
 #include "InfoCardExample.h"
-#include "InfoCardHighlighter.h"
+#include "InfoCardTextEdit.h"
 
 InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
 	setWindowTitle(tr("Edit InfoCard"));
 	setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 	setWindowFlag(Qt::WindowMaximizeButtonHint, true);
 
-	if(parent)
-		resize(parent->sizeHint());
-
 	auto lay = new QVBoxLayout(this);
 	auto tabs = new QTabWidget;
 	lay->addWidget(tabs);
+	_text = new InfoCardTextEdit;
+	_text->setText(InfoCardExample::emptyDoc);
 	tabs->addTab(_text, tr("Text"));
 	addExample(tabs, 1);
 	addExample(tabs, 0);
 
-	_text->setText(InfoCardExample::emptyDoc);
-	_text->setWordWrapMode(QTextOption::NoWrap);
-	new InfoCardHighlighter(_text->document());
 	auto box = new QDialogButtonBox;
 	lay->addWidget(box);
 	_okBtn = box->addButton(QDialogButtonBox::Ok);
@@ -32,12 +28,17 @@ InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
 	connect(cancel, &QAbstractButton::clicked, this, &QDialog::reject);
 	connect(_text, &QTextEdit::textChanged, this, &InfoCardDialog::enableOk);
 	_okBtn->setEnabled(false);
+	if(parent) {
+		QWidget*topMost = parent;
+		for(; parent; parent = parent->parentWidget())
+			topMost = parent;
+		resize(topMost->sizeHint());
+	}
 }
 void InfoCardDialog::addExample(QTabWidget*tabs, int n) {
 	QString text = n>0 ? InfoCardExample::user : InfoCardExample::corporate;
 	QString tabName = n>0 ? tr("User card example"): tr("Corporate card example");
-	auto w = new QTextEdit;
-	new InfoCardHighlighter(w->document());
+	auto w = new InfoCardTextEdit;
 	w->setPlainText(text);
 	w->setReadOnly(true);
 	tabs->addTab(w, tabName);
@@ -77,4 +78,7 @@ void InfoCardDialog::add(Item & row) {
 }
 QString InfoCardDialog::text()const {
 	return _text->toPlainText();
+}
+void InfoCardDialog::setText(const QString & s) {
+	_text->setPlainText(s);
 }

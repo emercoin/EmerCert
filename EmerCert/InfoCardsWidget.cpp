@@ -75,7 +75,7 @@ void InfoCardsWidget::onCreate() {
 	InfoCardDialog dlg(this);
 	if(dlg.exec()!=QDialog::Accepted)
 		return;
-	QString contents = dlg._text->toPlainText().trimmed();
+	QString contents = dlg.text().trimmed();
 	contents += '\n';
 	QString fileName = randName() + ".info";
 	QDir dir = Settings::certDir();

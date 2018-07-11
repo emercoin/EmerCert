@@ -1,5 +1,6 @@
 ﻿//InfoCardDialog.h by Emercoin developers
 #pragma once
+class InfoCardTextEdit;
 
 class InfoCardDialog: public QDialog {
 	public:
@@ -10,10 +11,11 @@ class InfoCardDialog: public QDialog {
 		virtual void accept()override;
 
 		QLabel* _id = new QLabel;
-		QTextEdit* _text = new QTextEdit;
 		QPushButton* _okBtn = 0;
 		QString text()const;
+		void setText(const QString & s);
 	protected:
+		InfoCardTextEdit* _text = 0;
 		QFormLayout* _lay = 0;
 		struct Item {
 			QString _name;

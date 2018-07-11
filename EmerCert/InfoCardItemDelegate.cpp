@@ -13,10 +13,10 @@ QWidget * InfoCardItemDelegate::createEditor(QWidget * parent, const QStyleOptio
 	if(!item)
 		return 0;
 	InfoCardDialog dlg(parent);
-	dlg._text->setPlainText(item->_text);
+	dlg.setText(item->_text);
 	if(dlg.exec()!=QDialog::Accepted)
 		return false;
-	_model->setData(index, dlg._text->toPlainText());
+	_model->setData(index, dlg.text());
 	return 0;
 }
 void InfoCardItemDelegate::setEditorData(QWidget *editor, const QModelIndex &index)const {

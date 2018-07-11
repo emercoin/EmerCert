@@ -121,7 +121,7 @@ QVariant InfoCardTableModel::headerData(int section, Qt::Orientation orientation
 	return QVariant();
 }
 Qt::ItemFlags InfoCardTableModel::flags(const QModelIndex &index) const {
-
+	return QAbstractTableModel::flags(index) | Qt::ItemIsEditable; 
 }
 QVariant InfoCardTableModel::data(const QModelIndex &index, int role) const {
 	int row = index.row();
