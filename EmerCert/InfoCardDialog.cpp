@@ -22,7 +22,7 @@ InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
 	lay->addWidget(box);
 	_okBtn = box->addButton(QDialogButtonBox::Ok);
 	auto cancel = box->addButton(QDialogButtonBox::Cancel);
-	_okBtn->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-apply-32.png"));
+	_okBtn->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/floppy-32.png"));
 	cancel->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-cancel-32.png"));
 	connect(_okBtn, &QAbstractButton::clicked, this, &QDialog::accept);
 	connect(cancel, &QAbstractButton::clicked, this, &QDialog::reject);

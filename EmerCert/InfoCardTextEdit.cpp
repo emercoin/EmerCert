@@ -8,9 +8,9 @@ InfoCardTextEdit::InfoCardTextEdit() {
 	new InfoCardHighlighter(document());
 
 	auto completer = new QCompleter(this);
-	QStringList keywords = QString("Import Alias FirstName LastName HomeAddress HomePhone CellPhone Gender Birthdate Email WEB Facebook Twitter EMC BTC").split(' ');
-	qSort(keywords);
-	auto model = new QStringListModel(keywords, this);
+	_keywords = QString("Import Alias FirstName LastName HomeAddress HomePhone CellPhone Gender Birthdate Email WEB Facebook Twitter EMC BTC").split(' ');
+	qSort(_keywords);
+	auto model = new QStringListModel(_keywords, this);
     completer->setModel(model);
     completer->setFilterMode(Qt::MatchContains);
     completer->setModelSorting(QCompleter::CaseInsensitivelySortedModel);
@@ -19,22 +19,22 @@ InfoCardTextEdit::InfoCardTextEdit() {
     setCompleter(completer);
 }
 void InfoCardTextEdit::setCompleter(QCompleter *completer) {
-    if (c)
-        QObject::disconnect(c, 0, this, 0);
-    c = completer;
-    if (!c)
+    if (_c)
+        QObject::disconnect(_c, 0, this, 0);
+    _c = completer;
+    if (!_c)
         return;
 
-    c->setWidget(this);
-    c->setCompletionMode(QCompleter::PopupCompletion);
-    c->setCaseSensitivity(Qt::CaseInsensitive);
-    connect(c, static_cast<void(QCompleter::*)(const QString&)>(&QCompleter::activated), this, &InfoCardTextEdit::insertCompletion);
+    _c->setWidget(this);
+    _c->setCompletionMode(QCompleter::PopupCompletion);
+    _c->setCaseSensitivity(Qt::CaseInsensitive);
+    connect(_c, static_cast<void(QCompleter::*)(const QString&)>(&QCompleter::activated), this, &InfoCardTextEdit::insertCompletion);
 }
 QCompleter *InfoCardTextEdit::completer() const {
-    return c;
+    return _c;
 }
 void InfoCardTextEdit::insertCompletion(const QString& completion) {
-    if (c->widget() != this)
+    if (_c->widget() != this)
         return;
     QTextCursor tc = textCursor();
 	tc.select(QTextCursor::WordUnderCursor);
@@ -46,51 +46,90 @@ QString InfoCardTextEdit::textUnderCursor()const {
     tc.select(QTextCursor::WordUnderCursor);
     return tc.selectedText();
 }
+QString InfoCardTextEdit::wordLeftFromCursor()const {
+    QTextCursor tc = textCursor();
+	QTextBlock block = tc.block();
+	QString s = block.text();
+	const int cur = tc.positionInBlock();
+	return s.left(cur).trimmed();
+}
+bool InfoCardTextEdit::cursorIsOnKeywordPosition()const {
+    QTextCursor tc = textCursor();
+	QTextBlock block = tc.block();
+	QString s = block.text();
+	const int cur = tc.positionInBlock();
+	if(0==cur)
+		return true;
+	for(int i = 0; i < s.count(); ++i) {
+		if(s[i].isSpace() || isCommentStart(s, i))
+			return false;
+		if(i + 1==cur)
+			return true;
+	}
+	return false;
+}
+bool InfoCardTextEdit::isCommentStart(const QString & s, int pos) {
+	if(s.isEmpty())
+		return false;
+	if(s[pos] == '#') {
+		if(pos>0 && s[pos-1]=='\\')
+			return false;
+		return true;
+	}
+	return false;
+}
 void InfoCardTextEdit::focusInEvent(QFocusEvent *e) {
-    if (c)
-        c->setWidget(this);
+    if (_c)
+        _c->setWidget(this);
     QTextEdit::focusInEvent(e);
 }
 void InfoCardTextEdit::keyPressEvent(QKeyEvent *e) {
-    if (c && c->popup()->isVisible()) {
-        // The following keys are forwarded by the completer to the widget
-       switch (e->key()) {
-       case Qt::Key_Enter:
-       case Qt::Key_Return:
-       case Qt::Key_Escape:
-       case Qt::Key_Tab:
-       case Qt::Key_Backtab:
-            e->ignore();
-            return; // let the completer do default behavior
-       default:
-           break;
-       }
-    }
+	if (_c && _c->popup()->isVisible()) {
+	// The following keys are forwarded by the completer to the widget
+	switch (e->key()) {
+		case Qt::Key_Enter:
+		case Qt::Key_Return:
+		case Qt::Key_Escape:
+		case Qt::Key_Tab:
+		case Qt::Key_Backtab:
+			e->ignore();
+			return; // let the completer do default behavior
+		}
+	}
 
-    bool isShortcut = ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_Space); // CTRL+Space
-    if (!c || !isShortcut) // do not process the shortcut when we have a completer
-        QTextEdit::keyPressEvent(e);
+	bool isShortcut = ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_Space); // CTRL+Space
+	if (!_c || !isShortcut) // do not process the shortcut when we have a completer
+		QTextEdit::keyPressEvent(e);
 
-    const bool ctrlOrShift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
-    if (!c || (ctrlOrShift && e->text().isEmpty()))
-        return;
+	const bool ctrlOrShift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
+	if (!_c || (ctrlOrShift && e->text().isEmpty()))
+		return;
 
-    static QString eow("~!@#$%^&*()_+{}|:\"<>?,./;'[]\\-="); // end of word
-    bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
-    QString completionPrefix = textUnderCursor();
+	bool hasModifier = (e->modifiers() != Qt::NoModifier) && !ctrlOrShift;
 
-    //if (!isShortcut && (hasModifier || e->text().isEmpty()|| completionPrefix.length() < 3
-    //                  || eow.contains(e->text().right(1)))) {
-    //    c->popup()->hide();
-    //    return;
-    //}
+	bool hide = !cursorIsOnKeywordPosition() && !isShortcut && (!hasModifier || e->text().isEmpty());
+	if(!hide) {
+		if(_keywords.contains(textUnderCursor()))
+			hide = true;
+		else if(//is multiline selection with paragraph separator
+			textCursor().selectedText().contains(QChar(0x2029)))
+		{
+			hide = true;
+		}
+			
+	}
+	if(hide) {
+		_c->popup()->hide();
+		return;
+	}
 
-    if (completionPrefix != c->completionPrefix()) {
-        c->setCompletionPrefix(completionPrefix);
-        c->popup()->setCurrentIndex(c->completionModel()->index(0, 0));
-    }
-    QRect cr = cursorRect();
-    cr.setWidth(c->popup()->sizeHintForColumn(0)
-                + c->popup()->verticalScrollBar()->sizeHint().width());
-    c->complete(cr); // popup it up!
+	QString completionPrefix = wordLeftFromCursor();
+	if (completionPrefix != _c->completionPrefix()) {
+		_c->setCompletionPrefix(completionPrefix);
+		_c->popup()->setCurrentIndex(_c->completionModel()->index(0, 0));
+	}
+	QRect cr = cursorRect();
+	cr.setWidth(_c->popup()->sizeHintForColumn(0)
+				+ _c->popup()->verticalScrollBar()->sizeHint().width());
+	_c->complete(cr); // popup it up!
 }
