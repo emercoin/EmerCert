@@ -256,3 +256,6 @@ QString OpenSslExecutable::log(const QString & s) {
 void OpenSslExecutable::setLogger(CertLogger*l) {
 	_logger = l;
 }
+bool OpenSslExecutable::encryptInfocardAes(const QString & infocardFile, const QString & pass) {
+	return false;
+}

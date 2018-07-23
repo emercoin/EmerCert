@@ -17,13 +17,12 @@ class InfoCardTableModel: public QAbstractTableModel {
 			RSA
 		};
 		struct Item: public InfoCard {
-			QString _html;
 			QString _displayedText;
 			QString _InfoCardId;//optional
 			QDir _dir;
-			QString _file;
 			QString _baseName;
 		
+			Item(const QString & path);
 			QString logFilePath()const;
 			QString loadFromFile(const QFileInfo & entry);//returns error, isEmpty() -> ok
 			QString removeFiles();//returns error, isEmpty() -> ok

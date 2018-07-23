@@ -58,7 +58,6 @@ QString CertTableModel::Item::loadFromTemplateFile(const QFileInfo & entry) {//Q
 	}
 	return QString();
 }
-using Shell = ShellImitation;
 QString CertTableModel::Item::sha256FromCertificate(QString & sha256)const {
 	QString path = pathByExt("crt");
 	QFile file(path);
@@ -82,6 +81,7 @@ QString CertTableModel::Item::sha256FromCertificate(QString & sha256)const {
 	sha256 = sha256.toLower();
 	return {};
 }
+using Shell = ShellImitation;
 QString CertTableModel::Item::generateCert(CertType ctype, const QString & pass, QString & sha256)const {//QString::isEmpty -> ok
 	QString certType;
 	if(ctype == EC) {

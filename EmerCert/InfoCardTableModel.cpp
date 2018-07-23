@@ -12,6 +12,8 @@ InfoCardTableModel::InfoCardTableModel(QObject*parent): QAbstractTableModel(pare
 InfoCardTableModel::~InfoCardTableModel() {
 	qDeleteAll(_rows);
 }
+InfoCardTableModel::Item::Item(const QString & path): InfoCard(path) {
+}
 QString InfoCardTableModel::Item::logFilePath()const {
 	return pathByExt("log");
 }
@@ -21,25 +23,9 @@ InfoCardTableModel::Item* InfoCardTableModel::itemBy(int row)const {
 	return _rows[row];
 }
 QString InfoCardTableModel::Item::loadFromFile(const QFileInfo & entry) {//QString::isEmpty -> ok
-	_file = entry.filePath();
 	_baseName = entry.baseName();
 	_dir = entry.dir();
-	QFile file(_file);
-	if(!file.open(QFile::ReadOnly))
-		return file.errorString();
-	const QByteArray arr = file.readAll();
-	_text = arr;
-	parse(_text);
-	{
-		/*QTextDocument doc;
-		InfoCardHighlighter hi(&doc);
-		hi._key.setFontWeight(QFont::Bold);
-		hi._comment.setFontItalic(true);
-		doc.setPlainText(_text);
-		_html = doc.toHtml();*/
-		_html = _text;
-	}
-	return QString();
+	return load();
 }
 using Shell = ShellImitation;
 QString InfoCardTableModel::Item::pathByExt(const QString & extension)const {
@@ -90,8 +76,8 @@ void InfoCardTableModel::reload() {
 	QDir dir = Settings::certDir();
 	const QFileInfoList list = dir.entryInfoList(QStringList() << "*.info", QDir::Files, QDir::Name);
 	for(const QFileInfo & entry : list) {
-		QScopedPointer<Item> item(new Item);
-		const QString code = item->loadFromFile(entry);
+		QScopedPointer<Item> item(new Item(entry.filePath()));
+		const QString code = item->load();
 		if(code.isEmpty()) {
 			_rows << item.take();
 		} else {
@@ -133,7 +119,7 @@ QVariant InfoCardTableModel::data(const QModelIndex &index, int role) const {
 		switch(index.column()) {
 			case ColText:
 				if(role == Qt::ToolTipRole)
-					return item->_html;
+					return item->_text;
 				return item->_displayedText;
 			//case ColDateTime: return item._InfoCardId;
 		}
@@ -142,7 +128,7 @@ QVariant InfoCardTableModel::data(const QModelIndex &index, int role) const {
 }
 int InfoCardTableModel::indexByFile(const QString & s)const {
 	for(int i = 0; i < _rows.count(); ++i) {
-		if(_rows[i]->_file==s)
+		if(_rows[i]->_fileName==s)
 			return i;
 	}
 	return -1;

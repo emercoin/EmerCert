@@ -131,5 +131,5 @@ void InfoCardTextEdit::keyPressEvent(QKeyEvent *e) {
 	QRect cr = cursorRect();
 	cr.setWidth(_c->popup()->sizeHintForColumn(0)
 				+ _c->popup()->verticalScrollBar()->sizeHint().width());
-	_c->complete(cr); // popup it up!
+	_c->complete(cr); // popup it up
 }

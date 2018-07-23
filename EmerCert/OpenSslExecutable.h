@@ -10,6 +10,7 @@ class OpenSslExecutable: public QProcess {
 		bool generateKeyAndCertificateRequest(const QString & baseName, const QString & subj);
 		bool generateCertificate(const QString & baseName, const QString & configDir);
 		bool createCertificatePair(const QString & baseName, const QString & configDir, const QString & pass);
+		bool encryptInfocardAes(const QString & infocardFile, const QString & pass);
 		void setLogger(CertLogger*l);
 		QString log(const QString & s);
 		static bool isFoundOrMessageBox();

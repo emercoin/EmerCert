@@ -3,8 +3,9 @@
 #include "InfoCardDialog.h"
 #include "InfoCardExample.h"
 #include "InfoCardTextEdit.h"
+#include "InfoCard.h"
 
-InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
+InfoCardDialog::InfoCardDialog(InfoCard&info, QWidget*parent): QDialog(parent), _info(info) {
 	setWindowTitle(tr("Edit InfoCard"));
 	setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 	setWindowFlag(Qt::WindowMaximizeButtonHint, true);
@@ -34,6 +35,7 @@ InfoCardDialog::InfoCardDialog(QWidget*parent): QDialog(parent) {
 			topMost = parent;
 		resize(topMost->sizeHint());
 	}
+	setText(info._text);
 }
 void InfoCardDialog::addExample(QTabWidget*tabs, int n) {
 	QString text = n>0 ? InfoCardExample::user : InfoCardExample::corporate;
@@ -50,8 +52,13 @@ void InfoCardDialog::enableOk() {
 	_okBtn->setEnabled(allValid());
 }
 void InfoCardDialog::accept() {
-	if(allValid())
-		QDialog::accept();
+	if(!allValid())
+		return;
+	QDialog::accept();
+	_info._text = text();
+	_info.save();
+	auto err = _info.encrypt();
+	//if(err.isEmpty())
 }
 QString InfoCardDialog::Item::text()const {
 	if(!_multiline && _line) {

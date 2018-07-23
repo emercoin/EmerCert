@@ -29,7 +29,7 @@ void InfoCardTableView::showInExplorer() {
 	int nRow = selectedRow();
 	QString path;
 	if(const auto & row = _model->itemBy(nRow)) {
-		path = row->_file;
+		path = row->_fileName;
 	} else {
 		path = Settings::certDir().absolutePath();
 	}

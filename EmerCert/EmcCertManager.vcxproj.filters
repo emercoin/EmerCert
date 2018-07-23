@@ -45,6 +45,9 @@
     <Filter Include="Cerificates">
       <UniqueIdentifier>{dd164864-2567-40c2-b778-8fd56354e520}</UniqueIdentifier>
     </Filter>
+    <Filter Include="zlib">
+      <UniqueIdentifier>{1c88013d-25d3-4574-a6fd-6d616deb869d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Settings.cpp">

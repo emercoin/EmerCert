@@ -72,26 +72,23 @@ QString InfoCardsWidget::randName() {
 	return uid.toHex();
 }
 void InfoCardsWidget::onCreate() {
-	InfoCardDialog dlg(this);
-	if(dlg.exec()!=QDialog::Accepted)
-		return;
-	QString contents = dlg.text().trimmed();
-	contents += '\n';
-	QString fileName = randName() + ".info";
-	QDir dir = Settings::certDir();
-	QString path = dir.absoluteFilePath(fileName);
+	const QString fileName = randName() + ".info";
+	const QDir dir = Settings::certDir();
+	const QString path = dir.absoluteFilePath(fileName);
 	QString error;
-	Shell::s_logger->setFileNear(dir, fileName);
-	if(!Shell::write(path, contents.toUtf8(), error))
+	if(!Shell::write(path, "", error))
 		return;
+	Shell::s_logger->setFileNear(dir, fileName);
 	_view->model()->reload();
-	int index = _view->model()->indexByFile(path);
+	const int index = _view->model()->indexByFile(path);
 	Q_ASSERT(index!=-1);
 	if(-1==index)
 		return;
 	_view->selectRow(index);
 	_view->setFocus();
-	//_view->generateInfoZForSelectedRow();
+
+	InfoCardDialog dlg(*_view->model()->itemBy(index), this);
+	dlg.exec();
 }
 void InfoCardsWidget::onDelete() {
 	auto rows = _view->selectionModel()->selectedRows();

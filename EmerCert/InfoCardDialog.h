@@ -1,15 +1,17 @@
 ﻿//InfoCardDialog.h by Emercoin developers
 #pragma once
 class InfoCardTextEdit;
+class InfoCard;
 
 class InfoCardDialog: public QDialog {
 	public:
-		InfoCardDialog(QWidget*parent=0);
+		InfoCardDialog(InfoCard&info, QWidget*parent=0);
 		virtual void accept()override;
 
 		QString text()const;
 		void setText(const QString & s);
 	protected:
+		InfoCard& _info;
 		QPushButton* _okBtn = 0;
 		QLabel* _id = new QLabel;
 		InfoCardTextEdit* _text = 0;

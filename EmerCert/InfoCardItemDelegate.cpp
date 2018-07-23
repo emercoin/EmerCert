@@ -12,8 +12,7 @@ QWidget * InfoCardItemDelegate::createEditor(QWidget * parent, const QStyleOptio
 	auto item = _model->itemBy(index.row());
 	if(!item)
 		return 0;
-	InfoCardDialog dlg(parent);
-	dlg.setText(item->_text);
+	InfoCardDialog dlg(*item, parent);
 	if(dlg.exec()!=QDialog::Accepted)
 		return false;
 	_model->setData(index, dlg.text());
