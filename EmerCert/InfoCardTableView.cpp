@@ -47,3 +47,8 @@ QString InfoCardTableView::selectedLogPath() {
 		return row->logFilePath();
 	return {};
 }
+void InfoCardTableView::dataChanged(int row) {
+	auto index = _model->index(row, 0);
+	auto index2 = _model->index(row, _model->columnCount()-1);
+	_model->dataChanged(index, index2);
+}

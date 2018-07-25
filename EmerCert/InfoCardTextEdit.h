@@ -9,6 +9,7 @@ class InfoCardTextEdit: public QTextEdit {
 	protected:
 		virtual void keyPressEvent(QKeyEvent *e)override;
 		virtual void focusInEvent(QFocusEvent *e)override;
+		virtual void wheelEvent(QWheelEvent *e)override;
 		void insertCompletion(const QString &completion);
 		QString wordLeftFromCursor()const;
 		QString textUnderCursor()const;

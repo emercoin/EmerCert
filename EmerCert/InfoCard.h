@@ -10,7 +10,7 @@ class InfoCard {
 		InfoCard(const QString& fileName);
 		QString load();//"" -> ok
 		QString save()const;//"" -> ok
-		void parse();
+		virtual void parse();
 		static QString tr(const char *t);
 		QString encrypt();//"" -> ok
 	protected:

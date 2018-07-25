@@ -7,7 +7,7 @@ class CertLogger: public QTextBrowser {
 		void append(const QString & s);
 		void setFile(const QString & path);//read from and log to
 		void setFileNear(const QDir & dir, const QString & fileName);
-		void clear();
+		void clear(bool removeFile = false);
 	protected:
 		QFile _file;
 };

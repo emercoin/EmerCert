@@ -29,9 +29,11 @@ void CertLogger::append(const QString & s) {
 	}
 	QCoreApplication::processEvents();
 }
-void CertLogger::clear() {
+void CertLogger::clear(bool removeFile) {
 	QTextBrowser::clear();
-	if(_file.isOpen()) {
+	if(removeFile) {
+		_file.remove();
+	} else if(_file.isOpen()) {
 		_file.close();
 	}
 }
@@ -40,6 +42,8 @@ void CertLogger::setFileNear(const QDir & dir, const QString & fileName) {
 	setFile(p);
 }
 void CertLogger::setFile(const QString & path) {
+	if(path==_file.fileName())
+		return;
 	clear();
 	_file.setFileName(path);
 	if(path.isEmpty())

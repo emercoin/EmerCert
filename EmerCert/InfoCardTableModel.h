@@ -24,10 +24,10 @@ class InfoCardTableModel: public QAbstractTableModel {
 		
 			Item(const QString & path);
 			QString logFilePath()const;
-			QString loadFromFile(const QFileInfo & entry);//returns error, isEmpty() -> ok
 			QString removeFiles();//returns error, isEmpty() -> ok
 			QString pathByExt(const QString & extension)const;
 			virtual void add(const QString & key, const QString & value, bool replace)override;
+			virtual void parse()override;
 		};
 		Item* itemBy(int row)const;
 		void reload();
@@ -37,6 +37,7 @@ class InfoCardTableModel: public QAbstractTableModel {
 		virtual int columnCount(const QModelIndex& index = QModelIndex())const override;
 		virtual QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole)const override;
 		virtual QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+		virtual bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole)override;
 		virtual Qt::ItemFlags flags(const QModelIndex &index)const override;
 	protected:
 		QList<Item*> _rows;

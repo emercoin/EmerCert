@@ -78,6 +78,19 @@ bool InfoCardTextEdit::isCommentStart(const QString & s, int pos) {
 	}
 	return false;
 }
+void InfoCardTextEdit::wheelEvent(QWheelEvent *e) {
+	if(e->modifiers() == Qt::ControlModifier || !isReadOnly() || e->buttons()) {
+		//read-only is processed by default
+		e->accept();
+		QPoint numDegrees = e->angleDelta() / 8;
+		if(numDegrees.y()>0)
+			zoomIn();
+		else
+			zoomOut();
+		return;
+	}
+	QTextEdit::wheelEvent(e);
+}
 void InfoCardTextEdit::focusInEvent(QFocusEvent *e) {
     if (_c)
         _c->setWidget(this);

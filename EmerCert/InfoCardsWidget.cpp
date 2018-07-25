@@ -9,6 +9,7 @@
 #include "Settings.h"
 #include "OpenSslExecutable.h"
 #include "InfoCardDialog.h"
+#include "InfoCardExample.h"
 
 InfoCardsWidget::InfoCardsWidget(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("InfoCard"));
@@ -75,20 +76,26 @@ void InfoCardsWidget::onCreate() {
 	const QString fileName = randName() + ".info";
 	const QDir dir = Settings::certDir();
 	const QString path = dir.absoluteFilePath(fileName);
+	Shell::s_logger->setFileNear(dir, fileName);
 	QString error;
 	if(!Shell::write(path, "", error))
 		return;
-	Shell::s_logger->setFileNear(dir, fileName);
-	_view->model()->reload();
-	const int index = _view->model()->indexByFile(path);
-	Q_ASSERT(index!=-1);
-	if(-1==index)
+	auto model = _view->model();
+	model->reload();
+	const int row = _view->model()->indexByFile(path);
+	Q_ASSERT(row!=-1);
+	if(-1==row)
 		return;
-	_view->selectRow(index);
+	_view->selectRow(row);
 	_view->setFocus();
 
-	InfoCardDialog dlg(*_view->model()->itemBy(index), this);
-	dlg.exec();
+	InfoCardDialog dlg(*_view->model()->itemBy(row), this);
+	dlg.setText(InfoCardExample::emptyDoc);
+	if(dlg.exec() == QDialog::Accepted) {
+		_view->dataChanged(row);
+	} else {
+		onDelete();
+	}
 }
 void InfoCardsWidget::onDelete() {
 	auto rows = _view->selectionModel()->selectedRows();

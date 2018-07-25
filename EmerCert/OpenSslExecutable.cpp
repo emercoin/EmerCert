@@ -128,8 +128,7 @@ QString OpenSslExecutable::errorString()const {
 QString OpenSslExecutable::exec(const QStringList & args) {
 	if(!QFile::exists(cfgFilePath())) {
 		//look for *cfg file in this repo
-		log(tr("Config file not found: %1") + cfgFilePath());
-		return false;
+		return log(tr("Config file not found: %1") + cfgFilePath());
 	}
 	log(tr("Starting openssl ") + args.join(' '));
 	_strOutput.clear();
@@ -140,6 +139,12 @@ QString OpenSslExecutable::exec(const QStringList & args) {
 	const int maxTimeout = 10000 * 1000;
 	if(!waitForStarted(maxTimeout)) {
 		return log(tr("Can't start: %1").arg(error()));
+	}
+	if(!_dataToWrite.isEmpty()) {
+		write(_dataToWrite);
+		_dataToWrite.clear();
+		waitForBytesWritten();
+		closeWriteChannel();
 	}
 	if(!waitForFinished(maxTimeout)) {
 		return log(tr("Failed waiting to finish: %1").arg(error()));
@@ -212,6 +217,7 @@ bool OpenSslExecutable::generateCertificate(const QString & baseName, const QStr
 		return false;
 	return existsOrExit(dir, crtFile);
 }
+static const QString passKeyName = "b20bdb78a28343488aace4fc75dd47cf";
 bool OpenSslExecutable::createCertificatePair(const QString & baseName, const QString & configDir, const QString & pass) {
 	log(tr("Create certificate pair:"));
 	const QString keyFile = baseName + ".key";
@@ -224,7 +230,6 @@ bool OpenSslExecutable::createCertificatePair(const QString & baseName, const QS
 		return false;
 	dir.remove(p12);
 	//OpenSSL password options: https://www.openssl.org/docs/man1.1.0/apps/openssl.html#Pass-Phrase-Options
-	const QString passKeyName = "B20BDB78A28343488AACE4FC75DD47CF";
 	QStringList args = QString("pkcs12 -export -in $CRT -inkey $KEY -certfile $CA_DIR/emcssl_ca.crt -out $P12 -passout env:%1")
 		.arg(passKeyName)
 		.split(' ');
@@ -238,9 +243,11 @@ bool OpenSslExecutable::createCertificatePair(const QString & baseName, const QS
 		else if(s.startsWith("$CA_DIR"))
 			s.replace("$CA_DIR", configDir);
 	}
-	auto env = systemEnvironment();
-	env << passKeyName + "=" + pass;
-	setEnvironment(env);
+	{
+		auto env = systemEnvironment();
+		env << passKeyName + "=" + pass;
+		setEnvironment(env);
+	}
 	if(!exec(args).isEmpty())
 		return false;
 	if(exitCode() != 0)
@@ -256,6 +263,18 @@ QString OpenSslExecutable::log(const QString & s) {
 void OpenSslExecutable::setLogger(CertLogger*l) {
 	_logger = l;
 }
-bool OpenSslExecutable::encryptInfocardAes(const QString & infocardFile, const QString & pass) {
-	return false;
+bool OpenSslExecutable::encryptInfocardAes(const QByteArray& data, const QString & outFile, const QString & pass) {
+	_dataToWrite = data;
+	QStringList args = QString("enc -aes-256-cbc -salt -out $OUTF -pass env:%1").arg(passKeyName).split(' ');
+	args.replaceInStrings("$OUTF", outFile);
+	{
+		auto env = systemEnvironment();
+		env << passKeyName + "=" + pass;
+		setEnvironment(env);
+	}
+	if(!exec(args).isEmpty())
+		return false;
+	if(exitCode() != 0)
+		return false;
+	return true;
 }

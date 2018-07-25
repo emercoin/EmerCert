@@ -10,6 +10,7 @@ class InfoCardTableView: public TableView {
 		int selectedRow()const;
 		QString selectedLogPath();
 		void showInExplorer();
+		void dataChanged(int row);
 	protected:
 		InfoCardTableModel* _model = 0;
 		void reloadLog();

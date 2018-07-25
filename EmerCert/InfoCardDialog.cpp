@@ -14,7 +14,6 @@ InfoCardDialog::InfoCardDialog(InfoCard&info, QWidget*parent): QDialog(parent), 
 	auto tabs = new QTabWidget;
 	lay->addWidget(tabs);
 	_text = new InfoCardTextEdit;
-	_text->setText(InfoCardExample::emptyDoc);
 	tabs->addTab(_text, tr("Text"));
 	addExample(tabs, 1);
 	addExample(tabs, 0);
@@ -57,6 +56,7 @@ void InfoCardDialog::accept() {
 	QDialog::accept();
 	_info._text = text();
 	_info.save();
+	_info.parse();
 	auto err = _info.encrypt();
 	//if(err.isEmpty())
 }

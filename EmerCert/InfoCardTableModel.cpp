@@ -13,19 +13,21 @@ InfoCardTableModel::~InfoCardTableModel() {
 	qDeleteAll(_rows);
 }
 InfoCardTableModel::Item::Item(const QString & path): InfoCard(path) {
+	QFileInfo entry(path);
+	_baseName = entry.baseName();
+	_dir = entry.dir();
 }
 QString InfoCardTableModel::Item::logFilePath()const {
 	return pathByExt("log");
+}
+void InfoCardTableModel::Item::parse() {
+	_displayedText.clear();
+	InfoCard::parse();
 }
 InfoCardTableModel::Item* InfoCardTableModel::itemBy(int row)const {
 	if(row<0 || row>=_rows.count())
 		return 0;
 	return _rows[row];
-}
-QString InfoCardTableModel::Item::loadFromFile(const QFileInfo & entry) {//QString::isEmpty -> ok
-	_baseName = entry.baseName();
-	_dir = entry.dir();
-	return load();
 }
 using Shell = ShellImitation;
 QString InfoCardTableModel::Item::pathByExt(const QString & extension)const {
@@ -119,7 +121,7 @@ QVariant InfoCardTableModel::data(const QModelIndex &index, int role) const {
 		switch(index.column()) {
 			case ColText:
 				if(role == Qt::ToolTipRole)
-					return item->_text;
+					return tr("File: %1\n").arg(item->_fileName) + item->_text;
 				return item->_displayedText;
 			//case ColDateTime: return item._InfoCardId;
 		}
@@ -132,4 +134,15 @@ int InfoCardTableModel::indexByFile(const QString & s)const {
 			return i;
 	}
 	return -1;
+}
+bool InfoCardTableModel::setData(const QModelIndex &index, const QVariant &value, int role) {
+	int row = index.row();
+	Item * item = itemBy(row);
+	if(!item)
+		return false;
+	if(index.column()!=0 || role!=Qt::EditRole)
+		return false;
+	item->parse();
+	emit dataChanged(index, index);
+	return true;
 }

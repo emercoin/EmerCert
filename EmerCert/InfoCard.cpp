@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "InfoCard.h"
 #include "ShellImitation.h"
+#include "OpenSslExecutable.h"
 
 InfoCard::InfoCard(const QString& fileName): _fileName(fileName) {
 }
@@ -84,6 +85,10 @@ struct GZip: public QProcess {
 	}
 };
 QString InfoCard::encrypt() {
+	if(Shell::s_logger) {
+		Shell::s_logger->clear(true);
+		Shell::s_logger->append(tr("Running file encryption at ") + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss"));
+	}
 	QString index, pass;
 	auto err = indexAndPassFromText(index, pass);
 	if(!err.isEmpty())
@@ -99,14 +104,30 @@ QString InfoCard::encrypt() {
 		Shell::maybeLog(err);
 		return err;
 	}
-	//openssl enc -aes-256-cbc -out $OUTF -pass pass:$PASSW
+	OpenSslExecutable openssl;
+	openssl.setLogger(Shell::s_logger);
+	QString infozFile = _fileName + ".infoz";
+	if(!openssl.encryptInfocardAes(clean.toUtf8(), infozFile, pass))
+		return openssl.errorString();
+	openssl.log("_______________________");
+	openssl.log(tr("Please, deposit into EmerCoin NVS pair:\n"
+		"Key:\ninfo:%1\n"
+		"Value: body of the file %2\n").arg(index).arg(infozFile));
+	if(Shell::s_logger) {
+		Shell::s_logger->find("info:" + index, QTextDocument::FindBackward);
+		Shell::s_logger->setFocus();
+	}
+	openssl.log(tr("To link EMCSSL Certificate to this info file, create certificate in Certificates tab and use value for UID: info:%1:%2")
+		.arg(index).arg(pass));
+	openssl.log("_______________________");
 	return {};
 }
 void InfoCard::parse() {
-	_text.replace("\r\n", "\n");
-	_text.replace('\r', '\n');
-	_text.replace('\t', ' ');
-	auto lines = _text.split('\n', QString::SkipEmptyParts);
+	QString text = _text;
+	text.replace("\r\n", "\n");
+	text.replace('\r', '\n');
+	text.replace('\t', ' ');
+	auto lines = text.split('\n', QString::SkipEmptyParts);
 	QString lastKey;
 	for(QString & line: lines) {
 		parseLine(line, lastKey);
