@@ -19,13 +19,10 @@ class InfoCardTableModel: public QAbstractTableModel {
 		struct Item: public InfoCard {
 			QString _displayedText;
 			QString _InfoCardId;//optional
-			QDir _dir;
-			QString _baseName;
 		
 			Item(const QString & path);
 			QString logFilePath()const;
 			QString removeFiles();//returns error, isEmpty() -> ok
-			QString pathByExt(const QString & extension)const;
 			virtual void add(const QString & key, const QString & value, bool replace)override;
 			virtual void parse()override;
 		};

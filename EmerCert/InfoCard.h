@@ -13,6 +13,7 @@ class InfoCard {
 		virtual void parse();
 		static QString tr(const char *t);
 		QString encrypt();//"" -> ok
+		QString pathByExt(const QString & extension)const;
 	protected:
 		QString indexAndPassFromText(QString & index, QString & pass);
 		virtual void add(const QString & key, const QString & value, bool replace);
@@ -20,4 +21,7 @@ class InfoCard {
 		static void removeComments(QString & text);
 		void parseLine(QString & line, QString & lastKey);
 		InfoCard()=delete;
+
+		QDir _dir;
+		QString _baseName;
 };

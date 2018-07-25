@@ -17,6 +17,9 @@ InfoCardTextEdit::InfoCardTextEdit() {
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     //completer->setWrapAround(false);
     setCompleter(completer);
+
+	//commented cause Qt bug - somtimes it get zero width tab
+	//setTabStopDistance(QFontMetricsF(font()).width(QLatin1Char('x')) * 4);
 }
 void InfoCardTextEdit::setCompleter(QCompleter *completer) {
     if (_c)
@@ -79,7 +82,7 @@ bool InfoCardTextEdit::isCommentStart(const QString & s, int pos) {
 	return false;
 }
 void InfoCardTextEdit::wheelEvent(QWheelEvent *e) {
-	if(e->modifiers() == Qt::ControlModifier || !isReadOnly() || e->buttons()) {
+	if(e->modifiers() == Qt::ControlModifier && !isReadOnly() && e->buttons()==Qt::NoButton) {
 		//read-only is processed by default
 		e->accept();
 		QPoint numDegrees = e->angleDelta() / 8;

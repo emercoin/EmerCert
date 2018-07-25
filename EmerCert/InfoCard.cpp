@@ -5,6 +5,9 @@
 #include "OpenSslExecutable.h"
 
 InfoCard::InfoCard(const QString& fileName): _fileName(fileName) {
+	QFileInfo entry(fileName);
+	_baseName = entry.baseName();
+	_dir = entry.dir();
 }
 QString InfoCard::tr(const char *t) {
 	return QObject::tr(t);
@@ -84,6 +87,9 @@ struct GZip: public QProcess {
 		return {};
 	}
 };
+QString InfoCard::pathByExt(const QString & extension)const {
+	return _dir.absoluteFilePath(_baseName + '.' + extension);
+}
 QString InfoCard::encrypt() {
 	if(Shell::s_logger) {
 		Shell::s_logger->clear(true);
@@ -95,18 +101,18 @@ QString InfoCard::encrypt() {
 		return err;
 	QString clean = _text;
 	removeComments(clean);
-	QString cleanFiileName = _fileName+".txt";
+	QString cleanFiileName = pathByExt("txt");
 	if(!Shell::write(cleanFiileName, clean.toUtf8(), err))
 		return err;
 	GZip gzip;
-	err = gzip.compress(clean.toUtf8(), _fileName+".zip");
+	err = gzip.compress(clean.toUtf8(), pathByExt("zip"));
 	if(!err.isEmpty()) {
 		Shell::maybeLog(err);
 		return err;
 	}
 	OpenSslExecutable openssl;
 	openssl.setLogger(Shell::s_logger);
-	QString infozFile = _fileName + ".infoz";
+	QString infozFile = pathByExt("infoz");
 	if(!openssl.encryptInfocardAes(clean.toUtf8(), infozFile, pass))
 		return openssl.errorString();
 	openssl.log("_______________________");

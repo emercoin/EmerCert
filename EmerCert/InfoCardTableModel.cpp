@@ -13,9 +13,6 @@ InfoCardTableModel::~InfoCardTableModel() {
 	qDeleteAll(_rows);
 }
 InfoCardTableModel::Item::Item(const QString & path): InfoCard(path) {
-	QFileInfo entry(path);
-	_baseName = entry.baseName();
-	_dir = entry.dir();
 }
 QString InfoCardTableModel::Item::logFilePath()const {
 	return pathByExt("log");
@@ -30,9 +27,6 @@ InfoCardTableModel::Item* InfoCardTableModel::itemBy(int row)const {
 	return _rows[row];
 }
 using Shell = ShellImitation;
-QString InfoCardTableModel::Item::pathByExt(const QString & extension)const {
-	return _dir.absoluteFilePath(_baseName + '.' + extension);
-}
 void InfoCardTableModel::Item::add(const QString & key, const QString & value, bool replace) {
 	InfoCard::add(key, value, replace);
 	if(key=="Import")
@@ -42,7 +36,7 @@ void InfoCardTableModel::Item::add(const QString & key, const QString & value, b
 	_displayedText += key % ": " % value;
 }
 QString InfoCardTableModel::Item::removeFiles() {
-	for(auto ext: QString("info|infoz|log").split('|')) {
+	for(auto ext: QString("info|infoz|log|txt|zip").split('|')) {
 		QString path = pathByExt(ext);
 		if(QFile::exists(path)) {
 			if(!QFile::remove(path)) {

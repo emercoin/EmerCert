@@ -21,6 +21,7 @@ InfoCardDialog::InfoCardDialog(InfoCard&info, QWidget*parent): QDialog(parent), 
 	auto box = new QDialogButtonBox;
 	lay->addWidget(box);
 	_okBtn = box->addButton(QDialogButtonBox::Ok);
+	_okBtn->setShortcut(QKeySequence("Ctrl+Enter"));
 	auto cancel = box->addButton(QDialogButtonBox::Cancel);
 	_okBtn->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/floppy-32.png"));
 	cancel->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-cancel-32.png"));
@@ -58,7 +59,6 @@ void InfoCardDialog::accept() {
 	_info.save();
 	_info.parse();
 	auto err = _info.encrypt();
-	//if(err.isEmpty())
 }
 QString InfoCardDialog::Item::text()const {
 	if(!_multiline && _line) {
