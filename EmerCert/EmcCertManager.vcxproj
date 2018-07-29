@@ -389,8 +389,18 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="quazip\unzip.c" />
-    <ClCompile Include="quazip\zip.c" />
+    <ClCompile Include="quazip\unzip.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="quazip\zip.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="SelectableLineEdit.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="ShellImitation.cpp" />
@@ -514,11 +524,11 @@
     <ClInclude Include="quazip\quaadler32.h" />
     <ClInclude Include="quazip\quachecksum32.h" />
     <ClInclude Include="quazip\quacrc32.h" />
-    <QtMoc Include="quazip\quagzipfile.h" />
-    <QtMoc Include="quazip\quaziodevice.h" />
+    <ClInclude Include="quazip\quagzipfile.h" />
+    <ClInclude Include="quazip\quaziodevice.h" />
     <ClInclude Include="quazip\quazip.h" />
     <ClInclude Include="quazip\quazipdir.h" />
-    <QtMoc Include="quazip\quazipfile.h" />
+    <ClInclude Include="quazip\quazipfile.h" />
     <ClInclude Include="quazip\quazipfileinfo.h" />
     <ClInclude Include="quazip\quazipnewinfo.h" />
     <ClInclude Include="quazip\quazip_global.h" />

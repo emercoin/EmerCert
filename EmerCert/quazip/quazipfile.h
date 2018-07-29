@@ -1,5 +1,4 @@
-#ifndef QUA_ZIPFILE_H
-#define QUA_ZIPFILE_H
+#pragma once
 
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
@@ -73,7 +72,7 @@ class QuaZipFilePrivate;
  **/
 class QUAZIP_EXPORT QuaZipFile: public QIODevice {
   friend class QuaZipFilePrivate;
-  Q_OBJECT
+  //Q_OBJECT
   private:
     QuaZipFilePrivate *p;
     // these are not supported nor implemented
@@ -452,5 +451,3 @@ class QUAZIP_EXPORT QuaZipFile: public QIODevice {
     /// Returns the number of bytes available for reading.
     virtual qint64 bytesAvailable() const;
 };
-
-#endif

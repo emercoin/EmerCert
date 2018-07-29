@@ -1,6 +1,4 @@
-#ifndef QUACRC32_H
-#define QUACRC32_H
-
+#pragma once
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
@@ -46,5 +44,3 @@ public:
 private:
 	quint32 checksum;
 };
-
-#endif //QUACRC32_H

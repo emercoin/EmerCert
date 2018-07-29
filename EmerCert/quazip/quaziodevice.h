@@ -1,6 +1,4 @@
-#ifndef QUAZIP_QUAZIODEVICE_H
-#define QUAZIP_QUAZIODEVICE_H
-
+#pragma once
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
@@ -39,7 +37,7 @@ class QuaZIODevicePrivate;
   example.
   */
 class QUAZIP_EXPORT QuaZIODevice: public QIODevice {
-  Q_OBJECT
+  //Q_OBJECT
 public:
   /// Constructor.
   /**
@@ -99,4 +97,3 @@ protected:
 private:
   QuaZIODevicePrivate *d;
 };
-#endif // QUAZIP_QUAZIODEVICE_H

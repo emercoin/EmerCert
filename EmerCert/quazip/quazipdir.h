@@ -1,6 +1,4 @@
-#ifndef QUAZIP_QUAZIPDIR_H
-#define QUAZIP_QUAZIPDIR_H
-
+#pragma once
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
@@ -219,5 +217,3 @@ public:
     /// Returns the default sorting mode.
     QDir::SortFlags sorting() const;
 };
-
-#endif // QUAZIP_QUAZIPDIR_H

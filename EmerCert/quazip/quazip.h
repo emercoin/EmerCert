@@ -1,6 +1,4 @@
-#ifndef QUA_ZIP_H
-#define QUA_ZIP_H
-
+#pragma once
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
@@ -567,5 +565,3 @@ class QUAZIP_EXPORT QuaZip {
      */
     static void setDefaultFileNameCodec(const char *codecName);
 };
-
-#endif

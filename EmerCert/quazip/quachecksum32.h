@@ -1,6 +1,4 @@
-#ifndef QUACHECKSUM32_H
-#define QUACHECKSUM32_H
-
+#pragma once
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
@@ -74,5 +72,3 @@ public:
 	 */
 	virtual quint32 value() = 0;
 };
-
-#endif //QUACHECKSUM32_H

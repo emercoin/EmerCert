@@ -1,6 +1,4 @@
-#ifndef QUA_ZIPFILEINFO_H
-#define QUA_ZIPFILEINFO_H
-
+#pragma once
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
@@ -174,5 +172,3 @@ struct QUAZIP_EXPORT QuaZipFileInfo64 {
   /// Checks whether the file is encrypted.
   bool isEncrypted() const {return (flags & 1) != 0;}
 };
-
-#endif

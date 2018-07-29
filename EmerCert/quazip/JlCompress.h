@@ -1,6 +1,4 @@
-#ifndef JLCOMPRESSFOLDER_H_
-#define JLCOMPRESSFOLDER_H_
-
+#pragma once
 /*
 Copyright (C) 2010 Roberto Pompermaier
 Copyright (C) 2005-2016 Sergey A. Tachenov
@@ -193,5 +191,3 @@ public:
       */
     static QStringList getFileList(QIODevice *ioDevice); 
 };
-
-#endif /* JLCOMPRESSFOLDER_H_ */

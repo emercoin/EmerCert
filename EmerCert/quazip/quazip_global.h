@@ -1,6 +1,4 @@
-#ifndef QUAZIP_GLOBAL_H
-#define QUAZIP_GLOBAL_H
-
+#pragma once
 /*
 Copyright (C) 2005-2014 Sergey A. Tachenov
 
@@ -40,12 +38,13 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
  * When building a DLL with MSVC, QUAZIP_BUILD must be defined.
  * qglobal.h takes care of defining Q_DECL_* correctly for msvc/gcc.
  */
-#if defined(QUAZIP_BUILD)
-	#define QUAZIP_EXPORT Q_DECL_EXPORT
-#else
-	#define QUAZIP_EXPORT Q_DECL_IMPORT
-#endif
+//#if defined(QUAZIP_BUILD)
+//	#define QUAZIP_EXPORT Q_DECL_EXPORT
+//#else
+//	#define QUAZIP_EXPORT Q_DECL_IMPORT
+//#endif
 #endif // QUAZIP_STATIC
+#define QUAZIP_EXPORT
 
 #ifdef __GNUC__
 #define QUAZIP_UNUSED __attribute__((__unused__))
@@ -55,5 +54,3 @@ see quazip/(un)zip.h files for details. Basically it's the zlib license.
 
 #define QUAZIP_EXTRA_NTFS_MAGIC 0x000Au
 #define QUAZIP_EXTRA_NTFS_TIME_MAGIC 0x0001u
-
-#endif // QUAZIP_GLOBAL_H
