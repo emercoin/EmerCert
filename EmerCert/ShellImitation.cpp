@@ -97,3 +97,22 @@ bool ShellImitation::removeRecursiveFilesOnly(QDir & dir, QString &err) {
 	}
 	return true;
 }
+QString Shell::GZip::compress(const QByteArray&data, const QString & fileO) {
+	QStringList args;
+	args << "-c" << "-9";
+	start("gzip", args, QIODevice::ReadWrite);
+	Shell::maybeLog("Running gzip " + args.join(' '));
+	if(!waitForStarted())
+		return tr("can't start gzip - ") + errorString();
+	write(data);
+	waitForBytesWritten();
+	closeWriteChannel();
+	if(!waitForFinished())
+		return tr("can't wait for gzip to finish - ") + errorString();
+	if(exitCode()!=0)
+		return tr("Invalid gzip exit code %1").arg(exitCode());
+	QString err;
+	if(!Shell::write(fileO, readAll(), err))
+		return err;
+	return {};
+}

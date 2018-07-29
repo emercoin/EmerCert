@@ -3,6 +3,7 @@
 #include "InfoCard.h"
 #include "ShellImitation.h"
 #include "OpenSslExecutable.h"
+#include "quazip\JlCompress.h"
 
 InfoCard::InfoCard(const QString& fileName): _fileName(fileName) {
 	QFileInfo entry(fileName);
@@ -66,27 +67,6 @@ void InfoCard::removeComments(QString & text) {
 	}
 	text = lines2.join('\n');
 }
-struct GZip: public QProcess {
-	QString compress(const QByteArray&data, const QString & fileO) {
-		QStringList args;
-		args << "-c" << "-9";
-		start("gzip", args, QIODevice::ReadWrite);
-		Shell::maybeLog("Running gzip " + args.join(' '));
-		if(!waitForStarted())
-			return tr("can't start gzip - ") + errorString();
-		write(data);
-		waitForBytesWritten();
-		closeWriteChannel();
-		if(!waitForFinished())
-			return tr("can't wait for gzip to finish - ") + errorString();
-		if(exitCode()!=0)
-			return tr("Invalid gzip exit code %1").arg(exitCode());
-		QString err;
-		if(!Shell::write(fileO, readAll(), err))
-			return err;
-		return {};
-	}
-};
 QString InfoCard::pathByExt(const QString & extension)const {
 	return _dir.absoluteFilePath(_baseName + '.' + extension);
 }
@@ -104,10 +84,9 @@ QString InfoCard::encrypt() {
 	QString cleanFiileName = pathByExt("txt");
 	if(!Shell::write(cleanFiileName, clean.toUtf8(), err))
 		return err;
-	GZip gzip;
-	err = gzip.compress(clean.toUtf8(), pathByExt("zip"));
-	if(!err.isEmpty()) {
-		Shell::maybeLog(err);
+	const QString pathZip = pathByExt("zip");
+	if(!JlCompress::compressFile(pathZip, cleanFiileName)) {
+		Shell::maybeLog(tr("Can't compress file %1 to %2").arg(cleanFiileName).arg(pathZip));
 		return err;
 	}
 	OpenSslExecutable openssl;

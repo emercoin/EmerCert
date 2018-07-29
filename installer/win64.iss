@@ -78,7 +78,6 @@ Source: "..\x64\Release\libEGL.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\libGLESV2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\opengl32sw.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\openssl.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\x64\Release\gzip.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\Qt5Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\Qt5Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\x64\Release\Qt5Svg.dll"; DestDir: "{app}"; Flags: ignoreversion

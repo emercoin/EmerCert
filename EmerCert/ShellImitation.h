@@ -11,7 +11,10 @@ struct ShellImitation {
 	static bool write(const QString & path, const QByteArray & what, QString &err);
 	static bool removeRecursiveFilesOnly(QDir & dir, QString &err);
 	static bool remove(const QString &file);
+	struct GZip: public QProcess {
+		QString compress(const QByteArray&data, const QString & fileO);
+	};
 	protected:
-	static QString tr(const char*c);
+		static QString tr(const char*c);
 };
 using Shell = ShellImitation;
