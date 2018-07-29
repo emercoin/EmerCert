@@ -51,6 +51,12 @@
     <Filter Include="zlib\C">
       <UniqueIdentifier>{9fa4ea19-66e0-490e-b8ab-9c91026957f6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="QuaZip">
+      <UniqueIdentifier>{26a45e4d-193a-419c-baba-286dc17674ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="QuaZip\cpp">
+      <UniqueIdentifier>{3cc15378-af79-4d8e-90f5-47c5b2554281}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Settings.cpp">
@@ -188,6 +194,45 @@
     <ClCompile Include="zlib\zutil.c">
       <Filter>zlib\C</Filter>
     </ClCompile>
+    <ClCompile Include="quazip\unzip.c">
+      <Filter>QuaZip</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\zip.c">
+      <Filter>QuaZip</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\JlCompress.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quaadler32.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quagzipfile.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quaziodevice.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quazip.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quacrc32.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quazipfile.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quazipfileinfo.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quazipdir.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\quazipnewinfo.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="quazip\qioapi.cpp">
+      <Filter>QuaZip\cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -307,6 +352,45 @@
     <ClInclude Include="zlib\zutil.h">
       <Filter>zlib</Filter>
     </ClInclude>
+    <ClInclude Include="quazip\ioapi.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\JlCompress.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\minizip_crypt.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quaadler32.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quachecksum32.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quacrc32.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quazip.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quazip_global.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quazipdir.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quazipfileinfo.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\quazipnewinfo.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\unzip.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="quazip\zip.h">
+      <Filter>QuaZip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="MainWindow.qrc">
@@ -318,5 +402,16 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="EmerCert.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="quazip\quagzipfile.h">
+      <Filter>QuaZip</Filter>
+    </QtMoc>
+    <QtMoc Include="quazip\quaziodevice.h">
+      <Filter>QuaZip</Filter>
+    </QtMoc>
+    <QtMoc Include="quazip\quazipfile.h">
+      <Filter>QuaZip</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>
