@@ -18,7 +18,7 @@ QValidator::State EmailValidator::checkLocal(const QString & str, int & pos)cons
 		//"+-/=?^_`{|}~" //characters after + are valid but ignored
 		;
 	if(str.isEmpty()) {
-		return set(tr("Empty name before @ character"));;
+		return set(tr("Empty name before @ character"));
 	}
 	int i = 0;
 	pos = 0;
@@ -62,7 +62,7 @@ QValidator::State EmailValidator::checkDomain(const QString & str, int & pos)con
 			QChar ch = part.at(i);
 			if(isAsciiAlpha(ch) || ch.isDigit() || ch == '-')
 				continue;
-			return set(tr("Unsupported character ") + ch);;
+			return set(tr("Unsupported character ") + ch);
 		}
 		pos++;
 	}

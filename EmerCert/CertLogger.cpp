@@ -33,7 +33,8 @@ void CertLogger::clear(bool removeFile) {
 	QTextBrowser::clear();
 	if(removeFile) {
 		_file.remove();
-	} else if(_file.isOpen()) {
+	}
+	if(_file.isOpen()) {
 		_file.close();
 	}
 }

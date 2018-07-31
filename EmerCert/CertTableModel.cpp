@@ -20,19 +20,24 @@ QString CertTableModel::Item::loadFromTemplateFile(const QFileInfo & entry) {//Q
 	const QString str = arr;
 	auto lines = str.split('\n', QString::SkipEmptyParts);
 	if(lines.count()!=1)
-		return tr("Invalid file format: more than 1 non-empty line in %1").arg(_templateFile);
+		return tr("Invalid file format: more than 1 non-empty line in %1")
+		.arg(QDir::toNativeSeparators(_templateFile));
 	const QString line = lines[0];
 	_templateLine.append(line.toUtf8());
 	auto parts = line.split('/', QString::SkipEmptyParts);
 	bool formatOk = parts.size() == 2 || parts.size() == 3;
 	if(!formatOk)
-		return tr("Invalid format of file %1: %2 parts, looking for 2 or 3").arg(_templateFile).arg(parts.size());
+		return tr("Invalid format of file %1: %2 parts, looking for 2 or 3")
+		.arg(QDir::toNativeSeparators(_templateFile))
+		.arg(parts.size());
 	for(QString part: parts) {
 		if(!part.contains('='))
-			return tr("Invalid format: must be key=value in %1").arg(_templateFile);
+			return tr("Invalid format: must be key=value in %1")
+			.arg(QDir::toNativeSeparators(_templateFile));
 		auto kv = part.split('=', QString::SkipEmptyParts);
 		if(kv.size() != 2)
-			return tr("Invalid format: must be key=value in %1").arg(_templateFile);
+			return tr("Invalid format: must be key=value in %1")
+			.arg(QDir::toNativeSeparators(_templateFile));
 		const QString key = kv.first();
 		const QString value = kv.last();
 		if(key == "CN") {
@@ -42,16 +47,19 @@ QString CertTableModel::Item::loadFromTemplateFile(const QFileInfo & entry) {//Q
 		} else if(key == "UID") {
 			_InfoCardId = value;
 		} else {
-			return tr("Unknown key %1 in %2").arg(key).arg(_templateFile);
+			return tr("Unknown key %1 in %2").arg(key)
+				.arg(QDir::toNativeSeparators(_templateFile));
 		}
 	}
 	_name = _name.trimmed();
 	_mail = _mail.trimmed();
 	if(_name.isEmpty())
-		return tr("Invalid format: empty name in %1").arg(_templateFile);;
+		return tr("Invalid format: empty name in %1")
+			.arg(QDir::toNativeSeparators(_templateFile));
 	if(_mail.isEmpty())
-		return tr("Invalid format: empty email in %1").arg(_templateFile);;
-	_certPair = pathByExt("p12");;
+		return tr("Invalid format: empty email in %1")
+			.arg(QDir::toNativeSeparators(_templateFile));
+	_certPair = pathByExt("p12");
 	QFileInfo cert(_certPair);
 	if(cert.exists()) {
 		_certCreated = cert.lastModified();

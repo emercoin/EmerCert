@@ -14,10 +14,10 @@ QString ShellImitation::tr(const char*c) {
 }
 bool ShellImitation::touch(const QDir & dir, const QString & fileName, QString & err) {
 	QString path = dir.absoluteFilePath(fileName);
-	maybeLog(tr("Touching %1").arg(path));
+	maybeLog(tr("Touching %1").arg(QDir::toNativeSeparators(path)));
 	QFile file(path);
 	if(!file.open(QIODevice::WriteOnly)) {
-		err = tr("Can't open file %1: %2").arg(path).arg(file.errorString());
+		err = tr("Can't open file %1: %2").arg(QDir::toNativeSeparators(path)).arg(file.errorString());
 		maybeLog(err);
 		return false;
 	}
@@ -26,7 +26,7 @@ bool ShellImitation::touch(const QDir & dir, const QString & fileName, QString &
 	return true;
 }
 bool ShellImitation::mkpath(const QDir & dir, const QString & path, QString & error, int tries) {
-	maybeLog(tr("mkpath %1").arg(dir.absoluteFilePath(path)));
+	maybeLog(tr("mkpath %1").arg(QDir::toNativeSeparators(dir.absoluteFilePath(path))));
 	for(int i = 0; i < tries; ++i) {
 		if(i>0)
 			QThread::msleep(50);
@@ -38,7 +38,7 @@ bool ShellImitation::mkpath(const QDir & dir, const QString & path, QString & er
 		}
 		maybeLog(tr("Trying again..."));
 	}
-	error = tr("Can't create directory %1").arg(dir.absoluteFilePath(path));
+	error = tr("Can't create directory %1").arg(QDir::toNativeSeparators(dir.absoluteFilePath(path)));
 	maybeLog(error);
 	return false;
 }

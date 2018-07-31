@@ -79,7 +79,7 @@ void InfoCardDialog::add(Item & row) {
 	if(row._multiline)
 		row._line = new QLineEdit;
 	else
-		row._text = new QPlainTextEdit;;
+		row._text = new QPlainTextEdit;
 	_rows << row;
 	_lay->addRow(row._name, row.widget());
 }

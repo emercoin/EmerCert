@@ -38,7 +38,7 @@ QString InfoCard::indexAndPassFromText(QString & index, QString & pass) {
 QString InfoCard::load() {
 	QFile file(_fileName);
 	if(!file.open(QFile::ReadOnly)) {
-		return tr("Can't open %1").arg(_fileName);
+		return tr("Can't open %1").arg(QDir::toNativeSeparators(_fileName));
 	}
 	QByteArray arr = file.readAll();
 	_text = QString::fromUtf8(arr);
@@ -48,12 +48,14 @@ QString InfoCard::load() {
 QString InfoCard::save()const {
 	QFile file(_fileName);
 	if(!file.open(QFile::WriteOnly)) {
-		return tr("Can't open %1 for writing: %2").arg(_fileName).arg(file.errorString());
+		return tr("Can't open %1 for writing: %2")
+			.arg(QDir::toNativeSeparators(_fileName)).arg(file.errorString());
 	}
 	auto arr = _text.toUtf8();
 	const qint64 written = file.write(arr);
 	if(written!=arr.count())
-		return tr("Can't write all data to %1: %2").arg(_fileName).arg(file.errorString());
+		return tr("Can't write all data to %1: %2")
+			.arg(QDir::toNativeSeparators(_fileName)).arg(file.errorString());
 	return {};
 }
 void InfoCard::removeComments(QString & text) {
