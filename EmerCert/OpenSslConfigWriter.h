@@ -1,9 +1,12 @@
 ﻿//OpenSslConfigWriter.h by Emercoin developers
 #pragma once
+class CertLogger;
 
 class OpenSslConfigWriter {
 	public:
-		static QString checkAndWrite();
+		OpenSslConfigWriter(CertLogger*logger);
+		QString checkAndWrite();
 	protected:
-		static bool writeIfAbsent(const QString & subPath, const char* strContents, QString & error);
+		CertLogger* _logger = 0;
+		bool writeIfAbsent(const QString & subPath, const char* strContents, QString & error);
 };

@@ -12,13 +12,14 @@
 
 ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("EmerSSL certificates"));
+	_logger = new CertLogger();
 	auto lay = new QVBoxLayout(this);
 	//https://cryptor.net/tutorial/sozdaem-ssl-sertifikat-emcssl-dlya-avtorizacii-na-saytah
 	auto label = new QLabel(
 		"<a href=\"https://docs.emercoin.com/en/Blockchain_Services/EmerSSL/EmerSSL_Introduction.html\">EmerSSL</a> allows you to automatically login without passwords on many sites using certificate, stored in Emercoin blockchain.");
 	label->setOpenExternalLinks(true);
 	lay->addWidget(label);
-	_view = new CertTableView;
+	_view = new CertTableView(_logger);
 	{
 		auto lay2 = new QHBoxLayout;
 		lay->addLayout(lay2);
@@ -56,11 +57,8 @@ ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 	enableButtons();
 	splitter->addWidget(_view);
 
-	_logger = new CertLogger();
 	splitter->addWidget(_logger);
-	ShellImitation::s_logger = _logger;
-
-	OpenSslConfigWriter::checkAndWrite();
+	OpenSslConfigWriter(_logger).checkAndWrite();
 	QTimer::singleShot(1, &OpenSslExecutable::isFoundOrMessageBox);
 }
 void ManageSslPage::enableButtons() {
@@ -151,8 +149,8 @@ void ManageSslPage::onCreate() {
 	QDir dir = Settings::certDir();
 	QString path = dir.absoluteFilePath(fileName);
 	QString error;
-	Shell::s_logger->setFileNear(dir, fileName);
-	if(!Shell::write(path, contents.toUtf8(), error))
+	_logger->setFileNear(dir, fileName);
+	if(!Shell(_logger).write(path, contents.toUtf8(), error))
 		return;
 	_view->model()->reload();
 	int index = _view->model()->indexByFile(path);

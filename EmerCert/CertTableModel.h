@@ -1,5 +1,6 @@
 ﻿//CertTableModel.h by Emercoin developers
 #pragma once
+class CertLogger;
 
 class CertTableModel: public QAbstractTableModel {
 	public:
@@ -31,7 +32,7 @@ class CertTableModel: public QAbstractTableModel {
 		
 		QString logFilePath()const;
 		QString loadFromTemplateFile(const QFileInfo & entry);//returns error, isEmpty() -> ok
-		QString generateCert(CertType certType, const QString & pass, QString & sha256)const;//returns error, isEmpty() -> ok
+		QString generateCert(CertLogger*logger, CertType certType, const QString & pass, QString & sha256)const;//returns error, isEmpty() -> ok
 		QString removeFiles();//returns error, isEmpty() -> ok
 		void installIntoSystem()const;
 		QString pathByExt(const QString & extension)const;

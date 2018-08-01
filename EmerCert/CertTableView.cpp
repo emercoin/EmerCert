@@ -5,7 +5,7 @@
 #include "ShellImitation.h"
 #include "Settings.h"
 
-CertTableView::CertTableView() {
+CertTableView::CertTableView(CertLogger*log): _logger(log) {
 	horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	_model = new Model(this);
 	setModel(_model);
@@ -22,8 +22,7 @@ CertTableView::Model* CertTableView::model()const {
 }
 void CertTableView::reloadLog() {
 	QString path = selectedLogPath();
-	if(ShellImitation::s_logger)
-		ShellImitation::s_logger->setFile(path);
+	_logger->setFile(path);
 }
 void CertTableView::recreateButtons() {
 	for(int row = 0; row < _model->rowCount(); ++row) {
@@ -196,10 +195,10 @@ void CertTableView::generateCertForSelectedRow() {
 	setEnabled(false);//prevent selection change to prevent selected log file change
 	auto certType = (CertTableModel::CertType)dlg._certType->currentData().toInt();
 	QString sha256;
-	QString msg = row.generateCert(certType, dlg._pass->text(), sha256);
+	QString msg = row.generateCert(_logger, certType, dlg._pass->text(), sha256);
 	setEnabled(true);
-	if(!msg.isEmpty()) {
-		ShellImitation::maybeLog(msg);
+	if(_logger && !msg.isEmpty()) {
+		_logger->append(msg);
 		return;
 	}
 	if(QMessageBox::question(this, tr("EmerSSL certificate installation"),

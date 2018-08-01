@@ -72,10 +72,10 @@ void InfoCard::removeComments(QString & text) {
 QString InfoCard::pathByExt(const QString & extension)const {
 	return _dir.absoluteFilePath(_baseName + '.' + extension);
 }
-QString InfoCard::encrypt() {
-	if(Shell::s_logger) {
-		Shell::s_logger->clear(true);
-		Shell::s_logger->append(tr("Running file encryption at ") + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss"));
+QString InfoCard::encrypt(CertLogger*logger) {
+	if(logger) {
+		logger->clear(true);
+		logger->append(tr("Running file encryption at ") + QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss"));
 	}
 	QString index, pass;
 	auto err = indexAndPassFromText(index, pass);
@@ -84,15 +84,15 @@ QString InfoCard::encrypt() {
 	QString clean = _text;
 	removeComments(clean);
 	QString cleanFiileName = pathByExt("txt");
-	if(!Shell::write(cleanFiileName, clean.toUtf8(), err))
+	if(!Shell(logger).write(cleanFiileName, clean.toUtf8(), err))
 		return err;
 	const QString pathZip = pathByExt("zip");
 	if(!JlCompress::compressFile(pathZip, cleanFiileName)) {
-		Shell::maybeLog(tr("Can't compress file %1 to %2").arg(cleanFiileName).arg(pathZip));
+		Shell(logger).maybeLog(tr("Can't compress file %1 to %2").arg(cleanFiileName).arg(pathZip));
 		return err;
 	}
 	OpenSslExecutable openssl;
-	openssl.setLogger(Shell::s_logger);
+	openssl.setLogger(logger);
 	QString infozFile = pathByExt("infoz");
 	if(!openssl.encryptInfocardAes(clean.toUtf8(), infozFile, pass))
 		return openssl.errorString();
@@ -100,9 +100,9 @@ QString InfoCard::encrypt() {
 	openssl.log(tr("Please, deposit into EmerCoin NVS pair:\n"
 		"Key:\ninfo:%1\n"
 		"Value: body of the file %2\n").arg(index).arg(infozFile));
-	if(Shell::s_logger) {
-		Shell::s_logger->find("info:" + index, QTextDocument::FindBackward);
-		Shell::s_logger->setFocus();
+	if(logger) {
+		logger->find("info:" + index, QTextDocument::FindBackward);
+		logger->setFocus();
 	}
 	openssl.log(tr("To link EMCSSL Certificate to this info file, create certificate in Certificates tab and use value for UID: info:%1:%2")
 		.arg(index).arg(pass));

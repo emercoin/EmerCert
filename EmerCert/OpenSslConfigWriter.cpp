@@ -4,11 +4,14 @@
 #include "ShellImitation.h"
 #include "Settings.h"
 
+OpenSslConfigWriter::OpenSslConfigWriter(CertLogger*logger): _logger(logger) {
+}
 bool OpenSslConfigWriter::writeIfAbsent(const QString & subPath, const char* strContents, QString & error) {
 	const QString path = Settings::certDir().absoluteFilePath(subPath);
 	if(QFile::exists(path))
 		return true;
-	return ShellImitation::write(path, QByteArray(strContents), error);
+	ShellImitation shell(_logger);
+	return shell.write(path, QByteArray(strContents), error);
 }
 static const char ecConfig[] =
 R"HOBOT([ ca ]

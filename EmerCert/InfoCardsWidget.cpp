@@ -13,13 +13,14 @@
 
 InfoCardsWidget::InfoCardsWidget(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("InfoCard"));
+	_logger = new CertLogger();
 	auto lay = new QVBoxLayout(this);
 	//https://cryptor.net/tutorial/sozdaem-ssl-sertifikat-emcssl-dlya-avtorizacii-na-saytah
 	auto label = new QLabel(
 		"<a href=\"https://docs.emercoin.com/en/Blockchain_Services/EmerSSL/EmerSSL_InfoCard.html\">InfoCards</a> is a decentralized distributed 'business card' system on the Emercoin blockchain that complements EmerSSL's passwordless login");
 	label->setOpenExternalLinks(true);
 	lay->addWidget(label);
-	_view = new InfoCardTableView;
+	_view = new InfoCardTableView(_logger);
 	{
 		auto lay2 = new QHBoxLayout;
 		lay->addLayout(lay2);
@@ -50,10 +51,7 @@ InfoCardsWidget::InfoCardsWidget(QWidget*parent): QWidget(parent) {
 	connect(_view->selectionModel(), &QItemSelectionModel::selectionChanged, this, &InfoCardsWidget::enableButtons);
 	enableButtons();
 	splitter->addWidget(_view);
-
-	_logger = new CertLogger();
 	splitter->addWidget(_logger);
-	ShellImitation::s_logger = _logger;
 
 	QTimer::singleShot(1, &OpenSslExecutable::isFoundOrMessageBox);
 }
@@ -76,9 +74,9 @@ void InfoCardsWidget::onCreate() {
 	const QString fileName = randName() + ".info";
 	const QDir dir = Settings::certDir();
 	const QString path = dir.absoluteFilePath(fileName);
-	Shell::s_logger->setFileNear(dir, fileName);
+	_logger->setFileNear(dir, fileName);
 	QString error;
-	if(!Shell::write(path, "", error))
+	if(!Shell(_logger).write(path, "", error))
 		return;
 	auto model = _view->model();
 	model->reload();
@@ -89,7 +87,7 @@ void InfoCardsWidget::onCreate() {
 	_view->selectRow(row);
 	_view->setFocus();
 
-	InfoCardDialog dlg(*_view->model()->itemBy(row), this);
+	InfoCardDialog dlg(*_view->model()->itemBy(row), _logger, this);
 	dlg.setText(InfoCardExample::emptyDoc);
 	if(dlg.exec() == QDialog::Accepted) {
 		_view->dataChanged(row);

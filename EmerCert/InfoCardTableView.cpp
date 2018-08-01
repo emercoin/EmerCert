@@ -7,7 +7,7 @@
 #include "CertTableView.h"
 #include "InfoCardItemDelegate.h"
 
-InfoCardTableView::InfoCardTableView() {
+InfoCardTableView::InfoCardTableView(CertLogger*logger): _logger(logger) {
 	horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	horizontalHeader()->hide();
 	_model = new InfoCardTableModel(this);
@@ -20,10 +20,14 @@ InfoCardTableView::InfoCardTableView() {
 InfoCardTableModel* InfoCardTableView::model()const {
 	return _model;
 }
+CertLogger*InfoCardTableView::logger()const {
+	return _logger;
+}
 void InfoCardTableView::reloadLog() {
-	QString path = selectedLogPath();
-	if(ShellImitation::s_logger)
-		ShellImitation::s_logger->setFile(path);
+	if(_logger) {
+		QString path = selectedLogPath();
+		_logger->setFile(path);
+	}
 }
 void InfoCardTableView::showInExplorer() {
 	int nRow = selectedRow();

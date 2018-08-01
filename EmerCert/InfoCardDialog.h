@@ -2,16 +2,18 @@
 #pragma once
 class InfoCardTextEdit;
 class InfoCard;
+class CertLogger;
 
 class InfoCardDialog: public QDialog {
 	public:
-		InfoCardDialog(InfoCard&info, QWidget*parent=0);
+		InfoCardDialog(InfoCard&info, CertLogger* logger, QWidget*parent=0);
 		virtual void accept()override;
 
 		QString text()const;
 		void setText(const QString & s);
 	protected:
 		InfoCard& _info;
+		CertLogger* _logger = 0;
 		QPushButton* _okBtn = 0;
 		QLabel* _id = new QLabel;
 		InfoCardTextEdit* _text = 0;

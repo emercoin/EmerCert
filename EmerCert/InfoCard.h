@@ -1,5 +1,6 @@
 ﻿//InfoCard.h by Emercoin developers
 #pragma once
+class CertLogger;
 
 class InfoCard {
 	public:
@@ -12,7 +13,7 @@ class InfoCard {
 		QString save()const;//"" -> ok
 		virtual void parse();
 		static QString tr(const char *t);
-		QString encrypt();//"" -> ok
+		QString encrypt(CertLogger*logger);//"" -> ok
 		QString pathByExt(const QString & extension)const;
 	protected:
 		QString indexAndPassFromText(QString & index, QString & pass);

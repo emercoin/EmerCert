@@ -90,7 +90,7 @@ QString CertTableModel::Item::sha256FromCertificate(QString & sha256)const {
 	return {};
 }
 using Shell = ShellImitation;
-QString CertTableModel::Item::generateCert(CertType ctype, const QString & pass, QString & sha256)const {//QString::isEmpty -> ok
+QString CertTableModel::Item::generateCert(CertLogger*logger, CertType ctype, const QString & pass, QString & sha256)const {//QString::isEmpty -> ok
 	QString certType;
 	if(ctype == EC) {
 		certType = "EC";
@@ -104,18 +104,19 @@ QString CertTableModel::Item::generateCert(CertType ctype, const QString & pass,
 	const QDir cur = Settings::certDir();
 	QDir db = cur.absoluteFilePath("db");
 	QString err;
-	if(Shell::s_logger) {
-		Shell::s_logger->clear();
-		Shell::s_logger->append(QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss"));
+	Shell shell(logger);
+	if(logger) {
+		logger->clear();
+		logger->append(QDateTime::currentDateTime().toString("yyyy.MM.dd hh:mm:ss"));
 	}
-	if(!Shell::removeRecursiveFilesOnly(db, err)
-	|| !Shell::mkpath(cur, "db/certs", err)
-	|| !Shell::mkpath(cur, "db/newcerts", err)
-	|| !Shell::touch(db, "index.txt", err)
-	|| !Shell::write(db.absoluteFilePath("serial"), _baseName.toLatin1(), err))
+	if(!shell.removeRecursiveFilesOnly(db, err)
+	|| !shell.mkpath(cur, "db/certs", err)
+	|| !shell.mkpath(cur, "db/newcerts", err)
+	|| !shell.touch(db, "index.txt", err)
+	|| !shell.write(db.absoluteFilePath("serial"), _baseName.toLatin1(), err))
 		return err;
 	OpenSslExecutable openssl;
-	openssl.setLogger(Shell::s_logger);
+	openssl.setLogger(logger);
 	if(!openssl.generateKeyAndCertificateRequest(_baseName, _templateLine)
 		|| !openssl.generateCertificate(_baseName, CA_DIR)
 		|| !openssl.createCertificatePair(_baseName, CA_DIR, pass))
@@ -123,11 +124,11 @@ QString CertTableModel::Item::generateCert(CertType ctype, const QString & pass,
 		return openssl.errorString();
 	}
 	
-	Shell::maybeLog(tr("For security reasons, removing:"));
-	Shell::remove(pathByExt("key"));
-	Shell::remove(pathByExt("csr"));
+	shell.maybeLog(tr("For security reasons, removing:"));
+	shell.remove(pathByExt("key"));
+	shell.remove(pathByExt("csr"));
 
-	Shell::maybeLog(tr("sha256 from certificate..."));
+	shell.maybeLog(tr("sha256 from certificate..."));
 	QString error = sha256FromCertificate(sha256);
 	if(!error.isEmpty())
 		return error;
@@ -137,8 +138,8 @@ QString CertTableModel::Item::generateCert(CertType ctype, const QString & pass,
 		"Key:\nssl:%1\n"
 		"Value:\nsha256=%2").arg(_baseName).arg(sha256));
 	openssl.log("_______________________");
-	if(Shell::s_logger)
-		Shell::s_logger->find("ssl:"+_baseName, QTextDocument::FindBackward);
+	if(logger)
+		logger->find("ssl:"+_baseName, QTextDocument::FindBackward);
 	return QString();
 }
 QString CertTableModel::Item::pathByExt(const QString & extension)const {

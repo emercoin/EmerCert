@@ -5,7 +5,11 @@
 #include "InfoCardTextEdit.h"
 #include "InfoCard.h"
 
-InfoCardDialog::InfoCardDialog(InfoCard&info, QWidget*parent): QDialog(parent), _info(info) {
+InfoCardDialog::InfoCardDialog(InfoCard&info, CertLogger* logger, QWidget*parent):
+	QDialog(parent),
+	_info(info),
+	_logger(logger)
+{
 	setWindowTitle(tr("Edit InfoCard"));
 	setWindowFlag(Qt::WindowContextHelpButtonHint, false);
 	setWindowFlag(Qt::WindowMaximizeButtonHint, true);
@@ -58,7 +62,7 @@ void InfoCardDialog::accept() {
 	_info._text = text();
 	_info.save();
 	_info.parse();
-	auto err = _info.encrypt();
+	auto err = _info.encrypt(_logger);
 }
 QString InfoCardDialog::Item::text()const {
 	if(!_multiline && _line) {
