@@ -24,6 +24,9 @@ void CertLogger::append(const QString & s) {
 		QString s2 = s;
 		if(!s2.endsWith('\n'))
 			s2 += '\n';
+#ifdef Q_OS_WIN
+		s2.replace("\n", "\r\n");
+#endif
 		_file.write(s2.toUtf8());
 		_file.flush();
 	}
@@ -31,11 +34,11 @@ void CertLogger::append(const QString & s) {
 }
 void CertLogger::clear(bool removeFile) {
 	QTextBrowser::clear();
-	if(removeFile) {
-		_file.remove();
-	}
 	if(_file.isOpen()) {
 		_file.close();
+	}
+	if(removeFile) {
+		_file.remove();
 	}
 }
 void CertLogger::setFileNear(const QDir & dir, const QString & fileName) {
