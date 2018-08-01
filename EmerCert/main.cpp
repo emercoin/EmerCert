@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 	g_oldQtMessageHandler = qInstallMessageHandler(myMsgHandler);
 	QApplication a(argc, argv);
 	QCoreApplication::setApplicationName("EmerCert");
-	QCoreApplication::setApplicationVersion("v0.6.3");
+	QCoreApplication::setApplicationVersion("v0.7");
 	QCoreApplication::setOrganizationName("emercoin");
 	QCoreApplication::setOrganizationDomain("emercoin.com");
 	//InfoCardDialog d;

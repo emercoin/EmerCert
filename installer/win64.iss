@@ -6,7 +6,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "EmerCert"
-#define MyAppVersion "0.6.3"
+#define MyAppVersion "0.7"
 #define MyAppPublisher "Emercoin developers"
 #define MyAppURL "https://emercoin.com/"
 #define MyAppExeName "EmerCert.exe"
