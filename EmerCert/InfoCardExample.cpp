@@ -4,8 +4,7 @@
 
 //_____________________________________________
 const QString InfoCardExample::corporate =
-R"DEMO(#
-# This is example of corp InfoCard for EmerCoin Info system
+R"DEMO(# This is example of corp InfoCard for EmerCoin Info system
 # This card will be retrieved by reference to NVS from EMCSSL subsystem,
 # or imported by another card.
 #
@@ -34,9 +33,7 @@ Twitter		BubbleInflators
 )DEMO";
 //_____________________________________________
 const QString InfoCardExample::user =
-R"DEMO(#!info:2eb9b3d01cd8315e:4c325ce03128150fb831d34c663136
-#
-# This is example of personal card for emerCoin Info system
+R"DEMO(# This is example of personal card for emerCoin Info system
 # This card will be retrieved by reference to NVS from EMCSSL subsystem.
 #
 # All fields are OPTIONAL
@@ -48,9 +45,6 @@ R"DEMO(#!info:2eb9b3d01cd8315e:4c325ce03128150fb831d34c663136
 #
 # Card can contain reference to "parent" card(s) with syntax like:
 # Import info:569dcc6b7aee11375b76:62615c3f6f62096b68bbc980c153917d505f8d24	
-# 
-#
-Import		info:de4190d91886046e:e8d6726e73a6079d5ef8d6c3bf5858
 
 Alias		superabdul		# Short name (username, login)
 FirstName	Abdul			# First (short) name

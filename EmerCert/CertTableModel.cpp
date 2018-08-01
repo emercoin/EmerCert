@@ -134,8 +134,8 @@ QString CertTableModel::Item::generateCert(CertLogger*logger, CertType ctype, co
 		return error;
 
 	openssl.log("_______________________");
-	openssl.log(QObject::tr("Please, deposit into EmerCoin NVS pair:\n"
-		"Key:\nssl:%1\n"
+	openssl.log(QObject::tr("Please, deposit into EmerCoin 'Manage names' tab:\n"
+		"Name of key (whole next line):\nssl:%1\n"
 		"Value:\nsha256=%2").arg(_baseName).arg(sha256));
 	openssl.log("_______________________");
 	if(logger)

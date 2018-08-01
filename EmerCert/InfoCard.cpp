@@ -97,9 +97,9 @@ QString InfoCard::encrypt(CertLogger*logger) {
 	if(!openssl.encryptInfocardAes(clean.toUtf8(), infozFile, pass))
 		return openssl.errorString();
 	openssl.log("_______________________");
-	openssl.log(tr("Please, deposit into EmerCoin NVS pair:\n"
-		"Key:\ninfo:%1\n"
-		"Value: body of the file %2\n").arg(index).arg(infozFile));
+	openssl.log(tr("Please, deposit into EmerCoin 'Manage names' tab:\n"
+		"Name of key (whole next line):\ninfo:%1\n"
+		"Value - import file %2\n").arg(index).arg(infozFile));
 	if(logger) {
 		logger->find("info:" + index, QTextDocument::FindBackward);
 		logger->setFocus();

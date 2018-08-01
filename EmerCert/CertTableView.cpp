@@ -75,6 +75,7 @@ struct CertTableView::Dialog: public QDialog {
 			connect(ok, &QAbstractButton::clicked, this, &QDialog::accept);
 			connect(cancel, &QAbstractButton::clicked, this, &QDialog::reject);
 		}
+		_pass->setFocus();
 	}
 	void showError(const QString & str) {
 		QString str2 = QString("<font color='red'>%1</font>").arg(str.toHtmlEscaped());
