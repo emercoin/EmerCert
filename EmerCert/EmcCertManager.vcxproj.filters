@@ -60,6 +60,9 @@
     <Filter Include="QuaZip\C">
       <UniqueIdentifier>{2fbed7b7-1255-4790-9b19-01f580b9170d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TrustedDiploma">
+      <UniqueIdentifier>{0512ba2f-9bd8-4dfa-9daf-16c58fcfb47f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Settings.cpp">
@@ -236,6 +239,18 @@
     <ClCompile Include="quazip\unzip.c">
       <Filter>QuaZip\C</Filter>
     </ClCompile>
+    <ClCompile Include="DiplomaWidget.cpp">
+      <Filter>TrustedDiploma</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckDiplomaWidget.cpp">
+      <Filter>TrustedDiploma</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterDiplomaWidget.cpp">
+      <Filter>TrustedDiploma</Filter>
+    </ClCompile>
+    <ClCompile Include="RegisterUniversityWidget.cpp">
+      <Filter>TrustedDiploma</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -402,6 +417,18 @@
     </ClInclude>
     <ClInclude Include="quazip\quagzipfile.h">
       <Filter>QuaZip</Filter>
+    </ClInclude>
+    <ClInclude Include="DiplomaWidget.h">
+      <Filter>TrustedDiploma</Filter>
+    </ClInclude>
+    <ClInclude Include="CheckDiplomaWidget.h">
+      <Filter>TrustedDiploma</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterDiplomaWidget.h">
+      <Filter>TrustedDiploma</Filter>
+    </ClInclude>
+    <ClInclude Include="RegisterUniversityWidget.h">
+      <Filter>TrustedDiploma</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -284,6 +284,9 @@
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CheckDiplomaWidget.cpp" />
+    <ClCompile Include="RegisterUniversityWidget.cpp" />
+    <ClCompile Include="DiplomaWidget.cpp" />
     <ClCompile Include="EnumerDialog.cpp" />
     <ClCompile Include="InfoCard.cpp" />
     <ClCompile Include="InfoCardDialog.cpp" />
@@ -401,6 +404,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="RegisterDiplomaWidget.cpp" />
     <ClCompile Include="SelectableLineEdit.cpp" />
     <ClCompile Include="Settings.cpp" />
     <ClCompile Include="ShellImitation.cpp" />
@@ -499,6 +503,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CheckDiplomaWidget.h" />
+    <ClInclude Include="RegisterUniversityWidget.h" />
+    <ClInclude Include="DiplomaWidget.h" />
     <ClInclude Include="EnumerDialog.h" />
     <ClInclude Include="InfoCard.h" />
     <ClInclude Include="InfoCardDialog.h" />
@@ -534,6 +541,7 @@
     <ClInclude Include="quazip\quazip_global.h" />
     <ClInclude Include="quazip\unzip.h" />
     <ClInclude Include="quazip\zip.h" />
+    <ClInclude Include="RegisterDiplomaWidget.h" />
     <ClInclude Include="SelectableLineEdit.h" />
     <ClInclude Include="ShellImitation.h" />
     <ClInclude Include="CertLogger.h" />

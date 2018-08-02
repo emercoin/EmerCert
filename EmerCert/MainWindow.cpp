@@ -4,6 +4,7 @@
 #include "ManageSslPage.h"
 #include "ManageDnsPage.h"
 #include "EnumerDialog.h"
+#include "DiplomaWidget.h"
 
 MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	setWindowTitle(tr("EmerCert Manager ") + QCoreApplication::applicationVersion());
@@ -12,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	add(new ManageDnsPage);
 #ifdef _DEBUG
 	add(new EnumerDialog);
+	add(new DiplomaWidget);
 #endif
 
 	auto qt = new QPushButton(QIcon(":/qt-project.org/qmessagebox/images/qtlogo-64.png"), tr("About Qt"));
