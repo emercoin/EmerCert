@@ -52,19 +52,22 @@ void ManageDnsPage::recalcValue() {
             continue;
         QString value = e->text().trimmed();
         if(!value.isEmpty())
-            parts << e->_dnsRecord + "=" + value;
+            parts << e->objectName() + "=" + value;
     }
 	_NVPair->setValue(parts.join('|'));
 }
-ManageDnsPage::LineEdit* ManageDnsPage::addLineEdit(QFormLayout*form, QString dnsRecord, QString text, QString tooltip) {
-    auto edit = new LineEdit;
-    edit->_dnsRecord = dnsRecord;
+QLineEdit* ManageDnsPage::addLineEdit(QFormLayout*form, const QString& name,
+	const QString& text, const QString& tooltip)
+{
+    auto edit = new QLineEdit;
+    edit->setObjectName(name);
     edit->setClearButtonEnabled(true);
     connect(edit, &QLineEdit::textChanged, this, &ManageDnsPage::recalcValue);
 	auto label = new QLabel(text);
 	label->setToolTip(tooltip);
     edit->setToolTip(tooltip);
     form->addRow(label, edit);
-    _edits << edit;
+	if(!name.isEmpty())
+		_edits << edit;
     return edit;
 }

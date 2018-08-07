@@ -10,15 +10,11 @@ class QString;
 class ManageDnsPage: public QWidget {
     public:
 	    ManageDnsPage(QWidget*parent=0);
-
-        QLineEdit* _editName = 0;
-        struct LineEdit: public QLineEdit {
-            QString _dnsRecord;
-        };
-        QList<LineEdit*> _edits;
-
-		NameValueEditWidget* _NVPair = 0;
     protected:
-        void recalcValue();
-        LineEdit* addLineEdit(QFormLayout*form, QString dnsParam, QString text, QString tooltipq);
+		NameValueEditWidget* _NVPair = 0;
+		QLineEdit* _editName = 0;
+		QList<QLineEdit*> _edits;
+
+		void recalcValue();
+		QLineEdit* addLineEdit(QFormLayout*form, const QString& dnsParam, const QString& text, const QString& tooltip);
 };

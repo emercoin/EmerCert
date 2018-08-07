@@ -12,5 +12,5 @@ class RegisterUniversityWidget: public QWidget {
 		QPlainTextEdit* _editOther = 0;
 		QList<QLineEdit*> _edits;
 		void recalcValue();
-		QLineEdit* addLineEdit(QFormLayout*form, QString dnsParam, QString text, QString tooltipq);
+		QLineEdit* addLineEdit(QFormLayout*form, const QString& name, const QString& text, const QString& tooltip);
 };

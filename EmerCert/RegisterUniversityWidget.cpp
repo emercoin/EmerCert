@@ -14,13 +14,13 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 
 	auto form = new QFormLayout;
 	lay->addLayout(form);
-    _editName = addLineEdit(form, "", tr("University name"), tr(""));
-	_edits.removeOne(_editName);
-    addLineEdit(form, "brand", tr("Full university name"), tr(""));
-    addLineEdit(form, "url", tr("Url"), tr("Your university website address"));
+    _editName = addLineEdit(form, QString(), tr("University abbreviation for blockchain"),
+		tr("If this name is already registered, you can modify it or add random characters, like 'orig' or ':1'"));
+    addLineEdit(form, "brand", tr("Full university name (brand)"), tr("There will be no conflicts within blockchain"));
+    addLineEdit(form, "url", tr("Web-site address"), tr("Your university website address"));
     addLineEdit(form, "email", tr("Email"), tr(""));
-    addLineEdit(form, "tel", tr("Tel"), tr(""));
-	form->addRow(new QLabel("Any other data in format: key=value"));
+	addLineEdit(form, "tel", tr("Telephone"), tr(""));
+	form->addRow(new QLabel("Any other data in format: key=value (for example, type=private), each value in new line"));
 	_editOther = new QPlainTextEdit;
 	connect(_editOther, &QPlainTextEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
 	form->addRow(_editOther);
@@ -46,7 +46,9 @@ void RegisterUniversityWidget::recalcValue() {
 		s = s.trimmed();
 	_NVPair->setValue(parts.join('\n'));
 }
-QLineEdit* RegisterUniversityWidget::addLineEdit(QFormLayout*form, QString name, QString text, QString tooltip) {
+QLineEdit* RegisterUniversityWidget::addLineEdit(QFormLayout*form, const QString& name,
+	const QString& text, const QString& tooltip)
+{
     auto edit = new QLineEdit;
     edit->setObjectName(name);
     edit->setClearButtonEnabled(true);
@@ -55,6 +57,7 @@ QLineEdit* RegisterUniversityWidget::addLineEdit(QFormLayout*form, QString name,
 	label->setToolTip(tooltip);
     edit->setToolTip(tooltip);
     form->addRow(label, edit);
-    _edits << edit;
+	if(!name.isEmpty())
+		_edits << edit;
     return edit;
 }
