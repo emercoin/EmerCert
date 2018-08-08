@@ -71,7 +71,6 @@ struct ManageSslPage::TemplateDialog: public QDialog {
 	QLineEdit* _name = new QLineEdit;
 	EmailLineEdit* _email = new EmailLineEdit;
 	QLineEdit* _ecard = new QLineEdit;
-	QLabel* _emailErrorDesc = new QLabel;
 	QPushButton* _okBtn = 0;
 	TemplateDialog(QWidget*parent): QDialog(parent) {
 		setWindowTitle(tr("New certificate template"));
@@ -87,9 +86,12 @@ struct ManageSslPage::TemplateDialog: public QDialog {
 			auto lay = new QVBoxLayout;
 			lay->addWidget(_email);
 			_email->setPlaceholderText(strMandatoryField);
-			lay->addWidget(_emailErrorDesc);
-			_email->validator()->_labelError = _emailErrorDesc;
-			_emailErrorDesc->hide();
+
+			QLabel* errorDesc = new QLabel;
+			lay->addWidget(errorDesc);
+			_email->validator()->setErrorLabel(errorDesc);
+			errorDesc->hide();
+			
 			form->addRow(tr("E-mail:"), lay);
 		}
 		form->addRow(tr("Your UID to retrieve InfoCard info:"), _ecard);

@@ -16,3 +16,8 @@ QValidator::State ValidatorToLabel::set(QValidator::State state, QString str)con
 	}
 	return state;
 }
+void ValidatorToLabel::setErrorLabel(QLabel*label) {
+	_labelError = label;
+	if(label && label->text().isEmpty())
+		_labelError->hide();
+}

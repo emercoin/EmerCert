@@ -1,6 +1,7 @@
 ﻿//RegisterUniversityWidget.cpp by Emercoin developers
 #include "pch.h"
 #include "RegisterUniversityWidget.h"
+#include "EmailLineEdit.h"
 
 RegisterUniversityWidget::RegisterUniversityWidget() {
 	setWindowTitle(tr("Register university"));
@@ -18,7 +19,21 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 		tr("If this name is already registered, you can modify it or add random characters, like 'orig' or ':1'"));
     addLineEdit(form, "brand", tr("Full university name (brand)"), tr("There will be no conflicts within blockchain"));
     addLineEdit(form, "url", tr("Web-site address"), tr("Your university website address"));
-    addLineEdit(form, "email", tr("Email"), tr(""));
+	{
+		auto lay = new QVBoxLayout;
+		auto email = new EmailLineEdit;
+		email->setObjectName("email");
+		_edits << email;
+		connect(email, &QLineEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
+		lay->addWidget(email);
+
+		QLabel* errorDesc = new QLabel;
+		lay->addWidget(errorDesc);
+		email->validator()->setErrorLabel(errorDesc);
+		errorDesc->hide();
+			
+		form->addRow(tr("E-mail:"), lay);
+	}
 	addLineEdit(form, "tel", tr("Telephone"), tr(""));
 	form->addRow(new QLabel("Any other data in format: key=value (for example, type=private), each value in new line"));
 	_editOther = new QPlainTextEdit;
