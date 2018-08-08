@@ -1,36 +1,8 @@
 ﻿//EnumerDialog.cpp by Emercoin developers
 #include "pch.h"
 #include "EnumerDialog.h"
+#include "PhoneNumberLineEdit.h"
 
-struct PhoneValidator: public QValidator {
-	//E.164 format https://en.wikipedia.org/wiki/E.164
-	PhoneValidator(QObject*parent = 0): QValidator(parent) {}
-	virtual void fixup(QString &input) const override {
-		input = input.trimmed();
-	}
-	virtual State validate(QString &input, int &pos) const override {
-		input = input.trimmed();
-		for(QChar& c : input) {
-			if(c=='+' || c==' ' || c=='-' || c=='\t' || c.isDigit())
-				continue;
-			return Invalid;
-		}
-		return Acceptable;
-	}
-};
-struct PhoneNumberLineEdit: public QLineEdit {
-	PhoneNumberLineEdit() {
-		setValidator(new PhoneValidator(this));
-		setPlaceholderText(tr("Like +124-000-000"));
-	}
-	QString toPhoneNumber()const {
-		QString s = text();
-		s.remove(' ');
-		s.remove('\t');
-		s.remove('-');
-		return s;
-	}
-};
 EnumerDialog::EnumerDialog() {
 	setWindowTitle(tr("ENUMER"));
 	

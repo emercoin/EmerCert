@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "RegisterUniversityWidget.h"
 #include "EmailLineEdit.h"
+#include "PhoneNumberLineEdit.h"
 
 RegisterUniversityWidget::RegisterUniversityWidget() {
 	setWindowTitle(tr("Register university"));
@@ -34,7 +35,13 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 			
 		form->addRow(tr("E-mail:"), lay);
 	}
-	addLineEdit(form, "tel", tr("Telephone"), tr(""));
+	{
+		auto tel = new PhoneNumberLineEdit;
+		tel->setObjectName("tel");
+		connect(tel, &QLineEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
+		_edits << tel;
+		form->addRow(tr("Telephone"), tel);
+	}
 	form->addRow(new QLabel("Any other data in format: key=value (for example, type=private), each value in new line"));
 	_editOther = new QPlainTextEdit;
 	connect(_editOther, &QPlainTextEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
@@ -53,6 +60,8 @@ void RegisterUniversityWidget::recalcValue() {
 	QStringList parts;
     for(auto e: _edits) {
         QString value = e->text().trimmed();
+		if(auto tel = dynamic_cast<PhoneNumberLineEdit*>(e))
+			value = tel->toPhoneNumber();
         if(!value.isEmpty())
             parts << e->objectName() + "=" + value;
     }

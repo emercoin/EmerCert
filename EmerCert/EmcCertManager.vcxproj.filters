@@ -251,6 +251,9 @@
     <ClCompile Include="RegisterUniversityWidget.cpp">
       <Filter>TrustedDiploma</Filter>
     </ClCompile>
+    <ClCompile Include="PhoneNumberLineEdit.cpp">
+      <Filter>Enumer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -429,6 +432,9 @@
     </ClInclude>
     <ClInclude Include="RegisterUniversityWidget.h">
       <Filter>TrustedDiploma</Filter>
+    </ClInclude>
+    <ClInclude Include="PhoneNumberLineEdit.h">
+      <Filter>Enumer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
