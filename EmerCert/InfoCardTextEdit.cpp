@@ -92,12 +92,12 @@ void InfoCardTextEdit::wheelEvent(QWheelEvent *e) {
 			zoomOut();
 		return;
 	}
-	QTextEdit::wheelEvent(e);
+	QPlainTextEdit::wheelEvent(e);
 }
 void InfoCardTextEdit::focusInEvent(QFocusEvent *e) {
     if (_c)
         _c->setWidget(this);
-    QTextEdit::focusInEvent(e);
+    QPlainTextEdit::focusInEvent(e);
 }
 void InfoCardTextEdit::keyPressEvent(QKeyEvent *e) {
 	if (_c && _c->popup()->isVisible()) {
@@ -115,7 +115,7 @@ void InfoCardTextEdit::keyPressEvent(QKeyEvent *e) {
 
 	bool isShortcut = ((e->modifiers() & Qt::ControlModifier) && e->key() == Qt::Key_Space); // CTRL+Space
 	if (!_c || !isShortcut) // do not process the shortcut when we have a completer
-		QTextEdit::keyPressEvent(e);
+		QPlainTextEdit::keyPressEvent(e);
 
 	const bool ctrlOrShift = e->modifiers() & (Qt::ControlModifier | Qt::ShiftModifier);
 	if (!_c || (ctrlOrShift && e->text().isEmpty()))

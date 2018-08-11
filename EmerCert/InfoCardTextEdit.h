@@ -1,7 +1,7 @@
 ﻿//InfoCardTextEdit.h by Emercoin developers
 #pragma once
 
-class InfoCardTextEdit: public QTextEdit {
+class InfoCardTextEdit: public QPlainTextEdit {
 	public:
 		InfoCardTextEdit();
 		void setCompleter(QCompleter *c);

@@ -31,7 +31,7 @@ InfoCardDialog::InfoCardDialog(InfoCard&info, CertLogger* logger, QWidget*parent
 	cancel->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-cancel-32.png"));
 	connect(_okBtn, &QAbstractButton::clicked, this, &QDialog::accept);
 	connect(cancel, &QAbstractButton::clicked, this, &QDialog::reject);
-	connect(_text, &QTextEdit::textChanged, this, &InfoCardDialog::enableOk);
+	connect(_text, &QPlainTextEdit::textChanged, this, &InfoCardDialog::enableOk);
 	_okBtn->setEnabled(false);
 	if(parent) {
 		QWidget*topMost = parent;
