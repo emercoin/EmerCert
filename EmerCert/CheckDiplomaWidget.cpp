@@ -24,5 +24,9 @@ CheckDiplomaWidget::CheckDiplomaWidget() {
 	form->addRow("", search);
 }
 void CheckDiplomaWidget::onSearch() {
-
+	QString url = QString("https://trusted-diploma.com/?univ=%1&name=%2&admission=%3")
+		.arg(_university->text())
+		.arg(_name->text())
+		.arg(_year->value());
+	QDesktopServices::openUrl(url);
 }
