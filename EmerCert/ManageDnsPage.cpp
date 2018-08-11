@@ -42,9 +42,9 @@ ManageDnsPage::ManageDnsPage(QWidget*parent): QWidget(parent) {
 void ManageDnsPage::recalcValue() {
     const QString dns = _editName->text().trimmed();
     if(dns.isEmpty())
-        _NVPair->_resultingName->setText(QString());//to display placeholderText
+        _NVPair->setName(QString());//to display placeholderText
     else
-        _NVPair->_resultingName->setText("dns:" + dns);
+        _NVPair->setName("dns:" + dns);
 
     QStringList parts;
     for(auto e: _edits) {

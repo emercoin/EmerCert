@@ -44,5 +44,5 @@ EnumerDialog::EnumerDialog() {
 void EnumerDialog::generateNVPair() {
 	QString phone = _phone->toPhoneNumber();
 	QString name = QString("enum:%1:%2").arg(phone).arg(_antiSquatter->text());
-	_NVEdit->_resultingName->setText(name);
+	_NVEdit->setName(name);
 }

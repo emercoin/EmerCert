@@ -42,7 +42,7 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 		_edits << tel;
 		form->addRow(tr("Telephone"), tel);
 	}
-	form->addRow(new QLabel("Any other data in format: key=value (for example, type=private), each value in new line"));
+	form->addRow(new QLabel("Any other data in format: key=value (for example, type=private), each value on a new line:"));
 	_editOther = new QPlainTextEdit;
 	connect(_editOther, &QPlainTextEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
 	form->addRow(_editOther);
@@ -53,9 +53,9 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 void RegisterUniversityWidget::recalcValue() {
 	const QString dns = _editName->text().trimmed();
     if(dns.isEmpty())
-        _NVPair->_resultingName->setText(QString());//to display placeholderText
+        _NVPair->setName(QString());//to display placeholderText
     else
-        _NVPair->_resultingName->setText("dpo:" + dns);
+        _NVPair->setName("dpo:" + dns);
 
 	QStringList parts;
     for(auto e: _edits) {

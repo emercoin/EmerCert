@@ -27,7 +27,7 @@ void TableView::copyText() {
 }
 #ifdef _DEBUG
 void TableView::showClassInfo() {
-	PCSTR strLine = "_______________\n";
+	QString strLine = "_______________\n";
 	QString str = tr("Information about table classes:\n");
 	str += "Class hierarchy (to the parent direction):\n";
 	QString str1;

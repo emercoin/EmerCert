@@ -3,6 +3,7 @@
 #include "SelectableLineEdit.h"
 class SelectableTextEdit;
 
+//Displays NVS (Name-value storage) name and value in line edits, allows to copy them easily.
 class NameValueEditWidget: public QWidget {
 	public:
 		NameValueEditWidget();
@@ -12,8 +13,8 @@ class NameValueEditWidget: public QWidget {
 		void setValueMultiline(bool b);
 		void setValueReadOnly(bool b);
 		
-		SelectableLineEdit* _resultingName = 0;
 	protected:
+		SelectableLineEdit* _resultingName = 0;
 		bool _multiline = false;
 		QWidget* _w1Line = 0;
 		QWidget* _wMultiLine = 0;

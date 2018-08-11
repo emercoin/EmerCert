@@ -97,6 +97,9 @@ NameValueEditWidget::NameValueEditWidget() {
 	else
 		_wMultiLine->hide();
 }
+void NameValueEditWidget::setName(const QString & s) {
+	_resultingName->setText(s);
+}
 void NameValueEditWidget::setValuePlaceholder(const QString & s) {
 	_resultingValue->setPlaceholderText(s);
 	_resultingMultiline->setPlaceholderText(s);
