@@ -18,8 +18,10 @@ InfoCardTextEdit::InfoCardTextEdit() {
     //completer->setWrapAround(false);
     setCompleter(completer);
 
-	//commented cause Qt bug - somtimes it get zero width tab
-	//setTabStopDistance(QFontMetricsF(font()).width(QLatin1Char('x')) * 4);
+	//commented cause Qt bug - somtimes it get zero width tab after text like "EMC\tA"
+	//qreal w = QFontMetricsF(font()).width(QLatin1Char('x')) * 4;
+	//if(w>0)
+	//	setTabStopDistance(w);
 }
 void InfoCardTextEdit::setCompleter(QCompleter *completer) {
     if (_c)

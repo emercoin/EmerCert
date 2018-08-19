@@ -48,14 +48,14 @@ R"DEMO(# This is example of personal card for emerCoin Info system
 
 Alias		superabdul		# Short name (username, login)
 FirstName	Abdul			# First (short) name
-LastName	Kurbashi Bey	# Remain part of full name
+LastName	Kurbashi Bey		# Remain part of full name
 HomeAddress
-	Sinan Pasa Mah. Hayrettin Iskelesi	# Free form address
-	Sok. No \#1				# Free form address 
+	Sinan Pasa Mah. Hayrettin Iskelesi# Free form address
+	Sok. No \#1			# Free form address 
 	Besiktas, Besiktas		# Free form address
 	Istanbul				# City
-	34353					# ZIP code
-	Turkey					# Country
+	34353				# ZIP code
+	Turkey				# Country
 HomePhone	+90-555-123-4567
 CellPhone	+90-555-123-4569
 Gender		M
