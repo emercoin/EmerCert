@@ -285,6 +285,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CheckDiplomaWidget.cpp" />
+    <ClCompile Include="NameValueTextEdit.cpp" />
     <ClCompile Include="PhoneNumberLineEdit.cpp" />
     <ClCompile Include="RegisterUniversityWidget.cpp" />
     <ClCompile Include="DiplomaWidget.cpp" />
@@ -505,6 +506,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CheckDiplomaWidget.h" />
+    <ClInclude Include="NameValueTextEdit.h" />
     <ClInclude Include="PhoneNumberLineEdit.h" />
     <ClInclude Include="RegisterUniversityWidget.h" />
     <ClInclude Include="DiplomaWidget.h" />
