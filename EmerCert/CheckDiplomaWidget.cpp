@@ -23,14 +23,28 @@ CheckDiplomaWidget::CheckDiplomaWidget() {
 	form->addRow(tr("Year of submission"), _year);
 
 	auto search = new QPushButton(tr("Check"));
+	search->setShortcut(QKeySequence("Return"));
 	connect(search, &QPushButton::clicked, this, &CheckDiplomaWidget::onSearch);
-	form->addRow("", search);
+	form->addRow(QString(), search);
 }
 void CheckDiplomaWidget::onSearch() {
-	QString univ = _university->text().simplified().trimmed();
+	auto showMsg = [](QWidget*w) {
+		auto pt = w->rect().bottomLeft();
+		w->setFocus();
+		QToolTip::showText(w->mapToGlobal(pt), tr("This field can't be empty"));
+	};
 	QString name = _name->text().simplified().trimmed();
-	univ.replace("  ", " ");
+	QString univ = _university->text().simplified().trimmed();
 	name.replace("  ", " ");
+	univ.replace("  ", " ");
+	if(name.isEmpty()) {
+		showMsg(_name);
+		return;
+	}
+	if(univ.isEmpty()) {
+		showMsg(_university);
+		return;
+	}
 	QString url = QString("https://trusted-diploma.com/?univ=%1&name=%2&admission=%3")
 		.arg(univ)
 		.arg(name)
