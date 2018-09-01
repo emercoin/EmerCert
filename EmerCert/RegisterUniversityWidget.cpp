@@ -6,7 +6,8 @@
 
 RegisterUniversityWidget::RegisterUniversityWidget() {
 	setWindowTitle(tr("Register university"));
-	auto lay = new QVBoxLayout(this);
+	auto w = new QWidget;
+	auto lay = new QVBoxLayout(w);
 	_NVPair = new NameValueEditWidget;
 	_NVPair->setValueMultiline(true);
 
@@ -49,6 +50,7 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 
 	lay->addWidget(_NVPair);
     lay->addStretch();
+	setWidget(w);
 }
 void RegisterUniversityWidget::recalcValue() {
 	const QString dns = _editName->text().trimmed();

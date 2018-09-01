@@ -22,7 +22,7 @@ CheckDiplomaWidget::CheckDiplomaWidget() {
 	_year->setValue(QDate::currentDate().year());
 	form->addRow(tr("Year of submission"), _year);
 
-	auto search = new QPushButton(tr("Check"));
+	auto search = new QPushButton(tr("Check..."));
 	search->setShortcut(QKeySequence("Return"));
 	connect(search, &QPushButton::clicked, this, &CheckDiplomaWidget::onSearch);
 	form->addRow(QString(), search);

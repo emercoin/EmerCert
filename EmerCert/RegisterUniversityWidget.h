@@ -2,7 +2,7 @@
 #pragma once
 #include "NameValueEditWidget.h"
 
-class RegisterUniversityWidget: public QWidget {
+class RegisterUniversityWidget: public QScrollArea {
 	public:
 		RegisterUniversityWidget();
 
