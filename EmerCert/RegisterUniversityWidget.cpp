@@ -60,7 +60,7 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 	{
 		_hrefForSite = addLineEdit(form, {}, tr("Hyperlink for your site (?)"), 
 			tr("You can place this hyperlink to your site, so visitors can check verified diplomas by it."), true);
-		_hrefForSite->setPlaceholderText(tr("This field will contains web address to check your university"));
+		_hrefForSite->setPlaceholderText(tr("This field will contain web address to check your university diplomas"));
 	}
 	lay->addWidget(_NVPair);
     lay->addStretch();
