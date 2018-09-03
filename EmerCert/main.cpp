@@ -11,6 +11,7 @@ void myMsgHandler(QtMsgType type, const QMessageLogContext & context, const QStr
 }
 int main(int argc, char *argv[]) {
 	g_oldQtMessageHandler = qInstallMessageHandler(myMsgHandler);
+	QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QApplication a(argc, argv);
 	QCoreApplication::setApplicationName("EmerCert");
 	QCoreApplication::setApplicationVersion("v0.7");

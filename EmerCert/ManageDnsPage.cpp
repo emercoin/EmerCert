@@ -13,6 +13,7 @@
 
 ManageDnsPage::ManageDnsPage(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("DNS names"));
+	setWindowIcon(QIcon(":/icons/DNS-128.png"));
 	auto lay = new QVBoxLayout(this);
 	_NVPair = new NameValueEditWidget;
 

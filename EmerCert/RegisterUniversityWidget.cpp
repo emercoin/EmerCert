@@ -46,7 +46,14 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 		form->addRow(tr("Telephone"), tel);
 	}
 	form->addRow(new QLabel("Any other data:"));
-	_editOther = new QPlainTextEdit;
+	struct PlainTextEdit: public QPlainTextEdit {
+		virtual QSize sizeHint()const override {
+			auto s = QPlainTextEdit::sizeHint();
+			s.setHeight(30);
+			return s;
+		}
+	};
+	_editOther = new PlainTextEdit;
 	_editOther->setPlaceholderText("Format: key=value (like 'country=UK'), each 'name=value' pair on a new line");
 	connect(_editOther, &QPlainTextEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
 	form->addRow(_editOther);

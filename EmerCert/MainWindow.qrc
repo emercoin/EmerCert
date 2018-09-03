@@ -1,4 +1,9 @@
 <RCC>
-    <qresource prefix="MainWindow">
+    <qresource prefix="/">
+        <file>icons/48.jpg</file>
+        <file>icons/DNS-128.png</file>
+        <file>icons/SSL.png</file>
+        <file>icons/SSL-64.png</file>
+        <file>icons/TrustedDiploma-16.png</file>
     </qresource>
 </RCC>

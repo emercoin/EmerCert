@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	setCurrentIndex(index);
 }
 void MainWindow::add(QWidget *w) {
-	addTab(w, w->windowTitle());
+	addTab(w, w->windowIcon(), w->windowTitle());
 }
 void MainWindow::closeEvent(QCloseEvent *e) {
 	QSettings sett;
