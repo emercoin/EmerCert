@@ -2,6 +2,8 @@
 #include "pch.h"
 #include "CheckDiplomaWidget.h"
 
+const QString CheckDiplomaWidget::s_checkUniversity = "https://trusted-diploma.com/?univ=%1";
+const QString CheckDiplomaWidget::s_checkStudent = s_checkUniversity + "&name=%2&admission=%3";
 CheckDiplomaWidget::CheckDiplomaWidget() {
 	setWindowTitle(tr("Check diploma"));
 
@@ -45,9 +47,6 @@ void CheckDiplomaWidget::onSearch() {
 		showMsg(_university);
 		return;
 	}
-	QString url = QString("https://trusted-diploma.com/?univ=%1&name=%2&admission=%3")
-		.arg(univ)
-		.arg(name)
-		.arg(_year->value());
+	QString url = s_checkStudent.arg(univ).arg(name).arg(_year->value());
 	QDesktopServices::openUrl(url);
 }

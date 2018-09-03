@@ -3,6 +3,8 @@
 #include "RegisterUniversityWidget.h"
 #include "EmailLineEdit.h"
 #include "PhoneNumberLineEdit.h"
+#include "CheckDiplomaWidget.h"
+#include "SelectableLineEdit.h"
 
 RegisterUniversityWidget::RegisterUniversityWidget() {
 	setWindowTitle(tr("Register university"));
@@ -17,9 +19,9 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 
 	auto form = new QFormLayout;
 	lay->addLayout(form);
-    _editName = addLineEdit(form, QString(), tr("University abbreviation for blockchain"),
-		tr("If this name is already registered, you can modify it or add random characters, like 'orig' or ':1'"));
-    addLineEdit(form, "brand", tr("Full university name (brand)"), tr("There will be no conflicts within blockchain"));
+    _editName = addLineEdit(form, QString(), tr("University abbreviation for blockchain (?)"),
+		tr("Use short name preferably. If this abbreviation is already registered, you can modify it (for example, add city name) to prevent conflicts"));
+    addLineEdit(form, "brand", tr("Full university name (?)"), tr("Or brand name. There will be no conflicts within blockchain, insert any text here"));
     addLineEdit(form, "url", tr("Web-site address"), tr("Your university website address"));
 	{
 		auto lay = new QVBoxLayout;
@@ -43,21 +45,29 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 		_edits << tel;
 		form->addRow(tr("Telephone"), tel);
 	}
-	form->addRow(new QLabel("Any other data in format: key=value (for example, type=private), each value on a new line:"));
+	form->addRow(new QLabel("Any other data:"));
 	_editOther = new QPlainTextEdit;
+	_editOther->setPlaceholderText("Format: key=value (like 'country=UK'), each 'name=value' pair on a new line");
 	connect(_editOther, &QPlainTextEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
 	form->addRow(_editOther);
-
+	{
+		_hrefForSite = addLineEdit(form, {}, tr("Hyperlink for your site (?)"), 
+			tr("You can place this hyperlink to your site, so visitors can check verified diplomas by it."), true);
+		_hrefForSite->setPlaceholderText(tr("This field will contains web address to check your university"));
+	}
 	lay->addWidget(_NVPair);
     lay->addStretch();
 	setWidget(w);
 }
 void RegisterUniversityWidget::recalcValue() {
-	const QString dns = _editName->text().trimmed();
-    if(dns.isEmpty())
+	const QString name = _editName->text().trimmed();
+    if(name.isEmpty()) {
         _NVPair->setName(QString());//to display placeholderText
-    else
-        _NVPair->setName("dpo:" + dns);
+		_hrefForSite->setText({});
+	} else {
+        _NVPair->setName("dpo:" + name);
+		_hrefForSite->setText(CheckDiplomaWidget::s_checkUniversity.arg(name));
+	}
 
 	QStringList parts;
     for(auto e: _edits) {
@@ -73,9 +83,15 @@ void RegisterUniversityWidget::recalcValue() {
 	_NVPair->setValue(parts.join('\n'));
 }
 QLineEdit* RegisterUniversityWidget::addLineEdit(QFormLayout*form, const QString& name,
-	const QString& text, const QString& tooltip)
+	const QString& text, const QString& tooltip, bool readOnly)
 {
-    auto edit = new QLineEdit;
+	QLineEdit* edit = 0;
+	if(readOnly) {
+		edit = new SelectableLineEdit;
+		edit->setReadOnly(true);
+	} else {
+		edit = new QLineEdit;
+	}
     edit->setObjectName(name);
     edit->setClearButtonEnabled(true);
     connect(edit, &QLineEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);

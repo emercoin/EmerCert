@@ -63,7 +63,11 @@ QLineEdit* ManageDnsPage::addLineEdit(QFormLayout*form, const QString& name,
     edit->setObjectName(name);
     edit->setClearButtonEnabled(true);
     connect(edit, &QLineEdit::textChanged, this, &ManageDnsPage::recalcValue);
-	auto label = new QLabel(text);
+	QString t = text;
+	if(!tooltip.isEmpty() && !text.contains('?') && !t.endsWith(':')) {
+		t += " (?)";
+	}
+	auto label = new QLabel(t);
 	label->setToolTip(tooltip);
     edit->setToolTip(tooltip);
     form->addRow(label, edit);
