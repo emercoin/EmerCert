@@ -254,7 +254,7 @@
     <ClCompile Include="PhoneNumberLineEdit.cpp">
       <Filter>Enumer</Filter>
     </ClCompile>
-    <ClCompile Include="NameValueTextEdit.cpp">
+    <ClCompile Include="NameEqValueTextEdit.cpp">
       <Filter>TrustedDiploma</Filter>
     </ClCompile>
   </ItemGroup>
@@ -439,7 +439,7 @@
     <ClInclude Include="PhoneNumberLineEdit.h">
       <Filter>Enumer</Filter>
     </ClInclude>
-    <ClInclude Include="NameValueTextEdit.h">
+    <ClInclude Include="NameEqValueTextEdit.h">
       <Filter>TrustedDiploma</Filter>
     </ClInclude>
   </ItemGroup>

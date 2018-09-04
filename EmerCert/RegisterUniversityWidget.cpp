@@ -5,6 +5,7 @@
 #include "PhoneNumberLineEdit.h"
 #include "CheckDiplomaWidget.h"
 #include "SelectableLineEdit.h"
+#include "NameEqValueTextEdit.h"
 
 RegisterUniversityWidget::RegisterUniversityWidget() {
 	setWindowTitle(tr("Register university"));
@@ -46,14 +47,7 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 		form->addRow(tr("Telephone"), tel);
 	}
 	form->addRow(new QLabel("Any other data:"));
-	struct PlainTextEdit: public QPlainTextEdit {
-		virtual QSize sizeHint()const override {
-			auto s = QPlainTextEdit::sizeHint();
-			s.setHeight(30);
-			return s;
-		}
-	};
-	_editOther = new PlainTextEdit;
+	_editOther = new NameEqValueTextEdit;
 	_editOther->setPlaceholderText("Format: key=value (like 'country=UK'), each 'name=value' pair on a new line");
 	connect(_editOther, &QPlainTextEdit::textChanged, this, &RegisterUniversityWidget::recalcValue);
 	form->addRow(_editOther);
