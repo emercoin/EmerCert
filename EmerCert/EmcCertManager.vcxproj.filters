@@ -63,6 +63,9 @@
     <Filter Include="TrustedDiploma">
       <UniqueIdentifier>{0512ba2f-9bd8-4dfa-9daf-16c58fcfb47f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="DPO">
+      <UniqueIdentifier>{a6cbad3d-2326-403b-a3fe-64893f5c1bfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Settings.cpp">
@@ -257,6 +260,15 @@
     <ClCompile Include="NameEqValueTextEdit.cpp">
       <Filter>TrustedDiploma</Filter>
     </ClCompile>
+    <ClCompile Include="DpoWidget.cpp">
+      <Filter>DPO</Filter>
+    </ClCompile>
+    <ClCompile Include="DpoCreateRecordWidget.cpp">
+      <Filter>DPO</Filter>
+    </ClCompile>
+    <ClCompile Include="DpoCreateRootWidget.cpp">
+      <Filter>DPO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -441,6 +453,15 @@
     </ClInclude>
     <ClInclude Include="NameEqValueTextEdit.h">
       <Filter>TrustedDiploma</Filter>
+    </ClInclude>
+    <ClInclude Include="DpoWidget.h">
+      <Filter>DPO</Filter>
+    </ClInclude>
+    <ClInclude Include="DpoCreateRecordWidget.h">
+      <Filter>DPO</Filter>
+    </ClInclude>
+    <ClInclude Include="DpoCreateRootWidget.h">
+      <Filter>DPO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

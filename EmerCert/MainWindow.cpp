@@ -5,12 +5,14 @@
 #include "ManageDnsPage.h"
 #include "EnumerDialog.h"
 #include "DiplomaWidget.h"
+#include "DpoWidget.h"
 
 MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	setWindowTitle(tr("EmerCert Manager ") + QCoreApplication::applicationVersion());
 	add(new ManageSslPage);
 	add(new InfoCardsWidget);
 	add(new ManageDnsPage);
+	add(new DpoWidget);
 	add(new DiplomaWidget);
 #ifdef _DEBUG
 	add(new EnumerDialog);
