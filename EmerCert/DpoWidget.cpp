@@ -3,6 +3,7 @@
 #include "DpoWidget.h"
 #include "DpoCreateRootWidget.h"
 #include "DpoCreateRecordWidget.h"
+#include "DpoSignRecordWidget.h"
 
 DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("DPO"));
@@ -18,8 +19,9 @@ DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 	_tab = new QTabWidget;
 	lay->addWidget(_tab);
 	auto addTab = [this](QWidget*w) { _tab->addTab(w, w->windowTitle()); };
-	addTab(new DpoCreateRootWidget());
-	addTab(new DpoCreateRecordWidget());
+	addTab(_createRoot = new DpoCreateRootWidget());
+	addTab(_createRecord = new DpoCreateRecordWidget());
+	addTab(_signRecord = new DpoSignRecordWidget());
 
 	QSettings sett;
 	int index = sett.value("DpoWidget.tabIndex", 0).toInt();
@@ -29,4 +31,6 @@ DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 DpoWidget::~DpoWidget() {
 	QSettings sett;
 	sett.setValue("DpoWidget.tabIndex", _tab->currentIndex());
+	_createRoot->updateSettings(true);
+	_createRecord->updateSettings(true);
 }

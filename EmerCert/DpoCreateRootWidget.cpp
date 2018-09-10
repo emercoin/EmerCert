@@ -7,7 +7,7 @@
 #include "NameEqValueTextEdit.h"
 
 DpoCreateRootWidget::DpoCreateRootWidget() {
-	setWindowTitle(tr("Register organization"));
+	setWindowTitle(tr("1) Register organization"));
 	auto w = new QWidget;
 	auto lay = new QVBoxLayout(w);
 	_NVPair = new NameValueEditWidget;
@@ -53,6 +53,15 @@ DpoCreateRootWidget::DpoCreateRootWidget() {
 	lay->addWidget(_NVPair);
     lay->addStretch();
 	setWidget(w);
+	updateSettings(false);
+}
+void DpoCreateRootWidget::updateSettings(bool save) {
+	QSettings sett;
+	sett.beginGroup("DpoCreateRecordWidget");
+	if(save)
+		sett.setValue("name", _editName->text());
+	else
+		_editName->setText(sett.value("name").toString());
 }
 void DpoCreateRootWidget::recalcValue() {
 	const QString name = _editName->text().trimmed();

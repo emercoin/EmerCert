@@ -7,27 +7,36 @@
 #include "NameEqValueTextEdit.h"
 
 DpoCreateRecordWidget::DpoCreateRecordWidget() {
-	setWindowTitle(tr("Register ownership record"));
+	setWindowTitle(tr("2) Participate in organization"));
 	auto w = new QWidget;
 	auto lay = new QVBoxLayout(w);
 	_NVPair = new NameValueEditWidget;
 	_NVPair->setValueMultiline(true);
 
-	auto description = new QLabel(tr("Create record - serial number for some goods, or person name owning some rights etc"));
+	auto description = new QLabel(tr("Create record with your name/nickname etc, for which organization will prove you are working with them"));
 	lay->addWidget(description);
 
 	auto form = new QFormLayout;
 	lay->addLayout(form);
 	_editName = addLineEdit(form, {}, tr("Organisation abbreviation (?) dpo:"),
 		tr("This must be already registered DPO root record, like dpo:NDI"));
-	_editSN = addLineEdit(form, {}, tr("Serial number or person name (?)"),
-		tr("If this name or SN is already registered, add any number after it (like ':1234'), and conflict will be solved after you sign that record"));
+	_editSN = addLineEdit(form, {}, tr("Your name or nickname (?)"),
+		tr("If this name or SN is already registered, add any number after it (like ':1234')"));
 	
 	lay->addWidget(_NVPair);
 	lay->addWidget(new QLabel(tr("This record must be created by person who's rights are recorded.\n"
-		"If you are organization thet trnsfers tights, you can use NAME_UPDATE to send this record ownership to that person.")));
+		"After you create this name record, emeil this name to organization so they can sign it.")));
     lay->addStretch();
 	setWidget(w);
+	updateSettings(false);
+}
+void DpoCreateRecordWidget::updateSettings(bool save) {
+	QSettings sett;
+	sett.beginGroup("DpoCreateRecordWidget");
+	if(save)
+		sett.setValue("name", _editName->text());
+	else
+		_editName->setText(sett.value("name").toString());
 }
 void DpoCreateRecordWidget::recalcValue() {
 	const QString name = _editName->text().trimmed();
@@ -35,7 +44,10 @@ void DpoCreateRecordWidget::recalcValue() {
     if(name.isEmpty() || serial.isEmpty()) {
 		_NVPair->setName({});//to display placeholderText
 	} else {
-        _NVPair->setName("dpo:" + name + ':' + serial);
+		QString s = name + ':' + serial;
+		if(!s.startsWith("dpo:"))
+			s.prepend("dpo:");
+        _NVPair->setName(s);
 	}
 
 	QStringList parts;
@@ -48,7 +60,10 @@ void DpoCreateRecordWidget::recalcValue() {
     }
 	for(auto & s: parts)
 		s = s.trimmed();
-	_NVPair->setValue(parts.join('\n'));
+	QString v = parts.join('\n');
+	if(v.isEmpty())
+		v += "Signature=";
+	_NVPair->setValue(v);
 }
 QLineEdit* DpoCreateRecordWidget::addLineEdit(QFormLayout*form, const QString& name,
 	const QString& text, const QString& tooltip, bool readOnly)

@@ -35,8 +35,7 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 void MainWindow::add(QWidget *w) {
 	addTab(w, w->windowIcon(), w->windowTitle());
 }
-void MainWindow::closeEvent(QCloseEvent *e) {
+MainWindow::~MainWindow() {
 	QSettings sett;
 	sett.setValue("MainWindow.tabIndex", currentIndex());
-	QTabWidget::closeEvent(e);
 }

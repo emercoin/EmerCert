@@ -5,6 +5,7 @@
 class DpoCreateRootWidget: public QScrollArea {
 	public:
 		DpoCreateRootWidget();
+		void updateSettings(bool save);
 		NameValueEditWidget* _NVPair = 0;
     protected:
 		QLineEdit* _editName = 0;
