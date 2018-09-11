@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	add(new EnumerDialog);
 #endif
 
+	//setIconSize({32, 32});
 	auto qt = new QPushButton(QIcon(":/qt-project.org/qmessagebox/images/qtlogo-64.png"), tr("About Qt"));
 	connect(qt, &QPushButton::clicked, qApp, &QApplication::aboutQt);
 	setCornerWidget(qt);

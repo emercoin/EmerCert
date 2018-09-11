@@ -5,6 +5,7 @@
 
 EnumerDialog::EnumerDialog() {
 	setWindowTitle(tr("ENUMER"));
+	setWindowIcon(QIcon(":/icons/Enumer-16.png"));
 	
 	auto lay = new QFormLayout(this);
 	_NVEdit = new NameValueEditWidget;

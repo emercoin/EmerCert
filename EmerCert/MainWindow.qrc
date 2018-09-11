@@ -1,9 +1,18 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/48.jpg</file>
-        <file>icons/DNS-128.png</file>
-        <file>icons/SSL.png</file>
-        <file>icons/SSL-64.png</file>
+        <file>icons/Emercoin-48.jpg</file>
+        <file>icons/EmerDNS-128.png</file>
+        <file>icons/EmerDNS-16.png</file>
+        <file>icons/EmerDNS-32.png</file>
+        <file>icons/EmerSSL-64.png</file>
+        <file>icons/EmerSSL-16.png</file>
+        <file>icons/EmerSSL-32.png</file>
+        <file>icons/Enumer-16.png</file>
+        <file>icons/Enumer-32.png</file>
+        <file>icons/InfoCard-16.png</file>
+        <file>icons/InfoCard-32.png</file>
         <file>icons/TrustedDiploma-16.png</file>
+        <file>icons/TrustedDiploma-32.png</file>
+        <file>icons/Trusted-diploma-16-monochrome.png</file>
     </qresource>
 </RCC>
