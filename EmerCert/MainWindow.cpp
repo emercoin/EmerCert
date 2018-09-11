@@ -13,13 +13,14 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	add(new ManageSslPage);
 	add(new InfoCardsWidget);
 	add(new ManageDnsPage);
-	add(new DpoWidget);
 	add(new DiplomaWidget);
 #ifdef _DEBUG
+	add(new DpoWidget);
 	add(new EnumerDialog);
 #endif
 	add(new AboutWidget);
 	
+	setIconSize({32, 32});
 	auto quit = new QAction(tr("Quit"));
 	quit->setShortcut(QKeySequence("Ctrl+Q"));
 	connect(quit, &QAction::triggered, qApp, &QCoreApplication::quit);

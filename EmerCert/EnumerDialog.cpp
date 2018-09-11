@@ -5,10 +5,10 @@
 
 EnumerDialog::EnumerDialog() {
 	setWindowTitle(tr("ENUMER"));
-	setWindowIcon(QIcon(":/icons/Enumer-16.png"));
+	setWindowIcon(QIcon(":/icons/Enumer-32.png"));
 	
 	auto lay = new QFormLayout(this);
-	_NVEdit = new NameValueEditWidget;
+	_NVEdit = new NameValueLineEdits;
 	_NVEdit->setValueMultiline(true);
 	_NVEdit->setValueReadOnly(false);
 	_phone = new PhoneNumberLineEdit;

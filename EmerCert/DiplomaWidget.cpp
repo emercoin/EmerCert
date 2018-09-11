@@ -8,7 +8,7 @@
 
 DiplomaWidget::DiplomaWidget(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("Trusted diploma"));
-	setWindowIcon(QIcon(":/icons/TrustedDiploma-16.png"));
+	setWindowIcon(QIcon(":/icons/TrustedDiploma-32.png"));
 
 	auto lay = new QVBoxLayout(this);
     auto description = new QLabel(tr(	

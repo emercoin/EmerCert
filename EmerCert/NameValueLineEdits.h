@@ -1,12 +1,12 @@
-﻿//NameValueEditWidget.h by Emercoin developers
+﻿//NameValueLineEdits.h by Emercoin developers
 #pragma once
 #include "SelectableLineEdit.h"
 class SelectableTextEdit;
 
 //Displays NVS (Name-value storage) name and value in line edits, allows to copy them easily.
-class NameValueEditWidget: public QWidget {
+class NameValueLineEdits: public QWidget {
 	public:
-		NameValueEditWidget();
+		NameValueLineEdits();
 		void setName(const QString & s);
 		void setValue(const QString & s);
 		void setValuePlaceholder(const QString & s);

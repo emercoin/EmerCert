@@ -11,7 +11,7 @@ RegisterUniversityWidget::RegisterUniversityWidget() {
 	setWindowTitle(tr("Register university"));
 	auto w = new QWidget;
 	auto lay = new QVBoxLayout(w);
-	_NVPair = new NameValueEditWidget;
+	_NVPair = new NameValueLineEdits;
 	_NVPair->setValueMultiline(true);
 
 	auto description = new QLabel(tr("You must first create root record (register university) to sign diplomas"));

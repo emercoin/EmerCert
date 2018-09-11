@@ -1,12 +1,12 @@
 ﻿//RegisterUniversityWidget.h by Emercoin developers
 #pragma once
-#include "NameValueEditWidget.h"
+#include "NameValueLineEdits.h"
 
 class RegisterUniversityWidget: public QScrollArea {
 	public:
 		RegisterUniversityWidget();
 
-		NameValueEditWidget* _NVPair = 0;
+		NameValueLineEdits* _NVPair = 0;
     protected:
 		QLineEdit* _editName = 0;
 		QPlainTextEdit* _editOther = 0;

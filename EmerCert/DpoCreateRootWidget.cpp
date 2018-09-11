@@ -10,7 +10,7 @@ DpoCreateRootWidget::DpoCreateRootWidget() {
 	setWindowTitle(tr("1) Register organization"));
 	auto w = new QWidget;
 	auto lay = new QVBoxLayout(w);
-	_NVPair = new NameValueEditWidget;
+	_NVPair = new NameValueLineEdits;
 	_NVPair->setValueMultiline(true);
 
 	auto description = new QLabel(tr("Create organization root record to sign Digital Proof of Ownership records etc"));

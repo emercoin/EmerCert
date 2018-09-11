@@ -13,9 +13,9 @@
 
 ManageDnsPage::ManageDnsPage(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("DNS names"));
-	setWindowIcon(QIcon(":/icons/EmerDNS-16.png"));
+	setWindowIcon(QIcon(":/icons/EmerDNS-32.png"));
 	auto lay = new QVBoxLayout(this);
-	_NVPair = new NameValueEditWidget;
+	_NVPair = new NameValueLineEdits;
 
     auto description = new QLabel(tr(
       "<a href=\"https://wiki.emercoin.com/en/EMCDNS\">EmerDNS</a> "

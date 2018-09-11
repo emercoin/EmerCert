@@ -10,7 +10,7 @@ DpoCreateRecordWidget::DpoCreateRecordWidget() {
 	setWindowTitle(tr("2) Participate in organization"));
 	auto w = new QWidget;
 	auto lay = new QVBoxLayout(w);
-	_NVPair = new NameValueEditWidget;
+	_NVPair = new NameValueLineEdits;
 	_NVPair->setValueMultiline(true);
 
 	auto description = new QLabel(tr("Create record with your name/nickname etc, for which organization will prove you are working with them"));

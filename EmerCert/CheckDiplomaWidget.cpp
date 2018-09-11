@@ -3,7 +3,7 @@
 #include "CheckDiplomaWidget.h"
 
 const QString CheckDiplomaWidget::s_checkUniversity = "https://trusted-diploma.com/?univ=%1";
-const QString CheckDiplomaWidget::s_checkStudent = s_checkUniversity + "&name=%2&admission=%3";
+const QString CheckDiplomaWidget::s_checkStudent = s_checkUniversity + "&name=%2&year=%3";
 CheckDiplomaWidget::CheckDiplomaWidget() {
 	setWindowTitle(tr("Check diploma"));
 

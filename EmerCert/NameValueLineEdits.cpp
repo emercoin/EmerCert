@@ -1,6 +1,6 @@
-﻿//NameValueEditWidget.cpp by Emercoin developers
+﻿//NameValueLineEdits.cpp by Emercoin developers
 #include "pch.h"
-#include "NameValueEditWidget.h"
+#include "NameValueLineEdits.h"
 
 class SelectableTextEdit: public QPlainTextEdit {
 	public:
@@ -24,7 +24,7 @@ class SelectableTextEdit: public QPlainTextEdit {
 			QToolTip::showText(wNear->mapToGlobal(pt), tr("Copied"));
 		}
 };
-NameValueEditWidget::NameValueEditWidget() {
+NameValueLineEdits::NameValueLineEdits() {
 	_resultingName = new SelectableLineEdit;
     _resultingValue = new SelectableLineEdit;
 	_resultingMultiline = new SelectableTextEdit;
@@ -97,32 +97,32 @@ NameValueEditWidget::NameValueEditWidget() {
 	else
 		_wMultiLine->hide();
 }
-void NameValueEditWidget::setName(const QString & s) {
+void NameValueLineEdits::setName(const QString & s) {
 	_resultingName->setText(s);
 }
-void NameValueEditWidget::setValuePlaceholder(const QString & s) {
+void NameValueLineEdits::setValuePlaceholder(const QString & s) {
 	_resultingValue->setPlaceholderText(s);
 	_resultingMultiline->setPlaceholderText(s);
 }
-void NameValueEditWidget::copyValue() {
+void NameValueLineEdits::copyValue() {
 	if(_multiline) {
 		_resultingMultiline->copyAndShowTooltip(_resultingName);
 		return;
 	}
 	_resultingValue->copyAndShowTooltip(_resultingName);
 }
-void NameValueEditWidget::setValue(const QString & s) {
+void NameValueLineEdits::setValue(const QString & s) {
 	_resultingValue->setText(s);
 	_resultingMultiline->setPlainText(s);
 }
-void NameValueEditWidget::setValueMultiline(bool multi) {
+void NameValueLineEdits::setValueMultiline(bool multi) {
 	if(_multiline==multi)
 		return;
 	_multiline = multi;
 	_wMultiLine->setVisible(_multiline);
 	_w1Line->setVisible(!_multiline);
 }
-void NameValueEditWidget::setValueReadOnly(bool b) {
+void NameValueLineEdits::setValueReadOnly(bool b) {
 	_resultingValue->setReadOnly(b);
 	_resultingMultiline->setReadOnly(b);
 }

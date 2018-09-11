@@ -12,7 +12,7 @@
 
 ManageSslPage::ManageSslPage(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("EmerSSL certificates"));
-	setWindowIcon(QIcon(":/icons/EmerSSL-16.png"));
+	setWindowIcon(QIcon(":/icons/EmerSSL-32.png"));
 	_logger = new CertLogger();
 	auto lay = new QVBoxLayout(this);
 	//https://cryptor.net/tutorial/sozdaem-ssl-sertifikat-emcssl-dlya-avtorizacii-na-saytah

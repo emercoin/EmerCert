@@ -13,7 +13,7 @@
 
 InfoCardsWidget::InfoCardsWidget(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("InfoCard"));
-	setWindowIcon(QIcon(":/icons/InfoCard-16.png"));
+	setWindowIcon(QIcon(":/icons/InfoCard-32.png"));
 	_logger = new CertLogger();
 	auto lay = new QVBoxLayout(this);
 	//https://cryptor.net/tutorial/sozdaem-ssl-sertifikat-emcssl-dlya-avtorizacii-na-saytah

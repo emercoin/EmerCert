@@ -1,11 +1,11 @@
 ﻿//DpoCreateRecordWidget.h by Emercoin developers
 #pragma once
-#include "NameValueEditWidget.h"
+#include "NameValueLineEdits.h"
 
 class DpoCreateRecordWidget: public QScrollArea {
 	public:
 		DpoCreateRecordWidget();
-		NameValueEditWidget* _NVPair = 0;
+		NameValueLineEdits* _NVPair = 0;
 		void updateSettings(bool save);
     protected:
 		QLineEdit* _editName = 0;

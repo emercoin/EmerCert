@@ -1,6 +1,6 @@
 ﻿//EnumerDialog.h by Emercoin developers
 #pragma once
-#include "NameValueEditWidget.h"
+#include "NameValueLineEdits.h"
 class PhoneNumberLineEdit;
 
 class EnumerDialog: public QWidget {
@@ -10,6 +10,6 @@ class EnumerDialog: public QWidget {
 		PhoneNumberLineEdit* _phone = 0;
 		QSpinBox* _antiSquatter = new QSpinBox;
 		
-		NameValueEditWidget* _NVEdit = 0;
+		NameValueLineEdits* _NVEdit = 0;
 		void generateNVPair();
 };

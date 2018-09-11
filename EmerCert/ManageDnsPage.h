@@ -2,7 +2,7 @@
 #pragma once
 #include <QDialog>
 #include <QLineEdit>
-#include "NameValueEditWidget.h"
+#include "NameValueLineEdits.h"
 class QLineEdit;
 class QFormLayout;
 class QString;
@@ -11,7 +11,7 @@ class ManageDnsPage: public QWidget {
     public:
 	    ManageDnsPage(QWidget*parent=0);
     protected:
-		NameValueEditWidget* _NVPair = 0;
+		NameValueLineEdits* _NVPair = 0;
 		QLineEdit* _editName = 0;
 		QList<QLineEdit*> _edits;
 
