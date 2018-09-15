@@ -12,7 +12,8 @@ class NameValueLineEdits: public QWidget {
 		void setValuePlaceholder(const QString & s);
 		void setValueMultiline(bool b);
 		void setValueReadOnly(bool b);
-		
+		QString name()const;
+		QString value()const;
 	protected:
 		SelectableLineEdit* _resultingName = 0;
 		bool _multiline = false;

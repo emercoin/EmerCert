@@ -10,6 +10,8 @@ class QString;
 class ManageDnsPage: public QWidget {
     public:
 	    ManageDnsPage(QWidget*parent=0);
+		QString name()const;
+		QString value()const;
     protected:
 		NameValueLineEdits* _NVPair = 0;
 		QLineEdit* _editName = 0;

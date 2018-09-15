@@ -18,7 +18,9 @@ DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 
 	_tab = new QTabWidget;
 	lay->addWidget(_tab);
-	auto addTab = [this](QWidget*w) { _tab->addTab(w, w->windowTitle()); };
+	auto addTab = [this](QWidget*w) {
+		_tab->addTab(w, w->windowTitle());
+	};
 	addTab(_createRoot = new DpoCreateRootWidget());
 	addTab(_createRecord = new DpoCreateRecordWidget());
 	addTab(_signRecord = new DpoSignRecordWidget());

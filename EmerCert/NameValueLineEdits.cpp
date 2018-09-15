@@ -126,3 +126,11 @@ void NameValueLineEdits::setValueReadOnly(bool b) {
 	_resultingValue->setReadOnly(b);
 	_resultingMultiline->setReadOnly(b);
 }
+QString NameValueLineEdits::name()const {
+	return _resultingName->text();
+}
+QString NameValueLineEdits::value()const {
+	if(_multiline)
+		return _resultingMultiline->toPlainText();
+	return _resultingValue->text();
+}

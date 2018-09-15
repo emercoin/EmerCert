@@ -89,9 +89,6 @@
     <ClCompile Include="SelectableLineEdit.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="NameValueEditWidget.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="InfoCardDialog.cpp">
       <Filter>InfoCard</Filter>
     </ClCompile>
@@ -275,6 +272,9 @@
     <ClCompile Include="AboutWidget.cpp">
       <Filter>main</Filter>
     </ClCompile>
+    <ClCompile Include="NameValueLineEdits.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -293,9 +293,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="SelectableLineEdit.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="NameValueEditWidget.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="InfoCardDialog.h">
@@ -474,6 +471,9 @@
     </ClInclude>
     <ClInclude Include="AboutWidget.h">
       <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="NameValueLineEdits.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

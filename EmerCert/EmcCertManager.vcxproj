@@ -324,7 +324,7 @@
     <ClCompile Include="IPv6LineEdit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
-    <ClCompile Include="NameValueEditWidget.cpp" />
+    <ClCompile Include="NameValueLineEdits.cpp" />
     <ClCompile Include="OpenSslConfigWriter.cpp" />
     <ClCompile Include="OpenSslExecutable.cpp" />
     <ClCompile Include="pch.cpp">
@@ -536,7 +536,7 @@
     <ClInclude Include="CertTableView.h" />
     <ClInclude Include="EmailLineEdit.h" />
     <ClInclude Include="IPv6LineEdit.h" />
-    <ClInclude Include="NameValueEditWidget.h" />
+    <ClInclude Include="NameValueLineEdits.h" />
     <ClInclude Include="OpenSslConfigWriter.h" />
     <ClInclude Include="OpenSslExecutable.h" />
     <ClInclude Include="quazip\ioapi.h" />

@@ -40,6 +40,12 @@ ManageDnsPage::ManageDnsPage(QWidget*parent): QWidget(parent) {
   
     lay->addStretch();
 }
+QString ManageDnsPage::name()const {
+	return _NVPair->name();
+}
+QString ManageDnsPage::value()const {
+	return _NVPair->value();
+}
 void ManageDnsPage::recalcValue() {
     const QString dns = _editName->text().trimmed();
     if(dns.isEmpty())
