@@ -287,6 +287,7 @@
     <ClCompile Include="AboutWidget.cpp" />
     <ClCompile Include="CheckDiplomaWidget.cpp" />
     <ClCompile Include="DpoCreateRecordWidget.cpp" />
+    <ClCompile Include="DpoRegisterDocWidget.cpp" />
     <ClCompile Include="DpoSignRecordWidget.cpp" />
     <ClCompile Include="DpoWidget.cpp" />
     <ClCompile Include="NameEqValueTextEdit.cpp" />
@@ -513,6 +514,7 @@
     <ClInclude Include="AboutWidget.h" />
     <ClInclude Include="CheckDiplomaWidget.h" />
     <ClInclude Include="DpoCreateRecordWidget.h" />
+    <ClInclude Include="DpoRegisterDocWidget.h" />
     <ClInclude Include="DpoSignRecordWidget.h" />
     <ClInclude Include="DpoWidget.h" />
     <ClInclude Include="NameEqValueTextEdit.h" />

@@ -7,7 +7,7 @@
 
 DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 	setWindowTitle(tr("DPO"));
-	//setWindowIcon(QIcon(":/icons/TrustedDiploma-32.png"));
+	setWindowIcon(QIcon(":/icons/DPO-32.png"));
 
 	auto lay = new QVBoxLayout(this);
     auto description = new QLabel(tr(	
