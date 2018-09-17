@@ -14,8 +14,8 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	add(new InfoCardsWidget);
 	add(new ManageDnsPage);
 	add(new DiplomaWidget);
-#ifdef _DEBUG
 	add(new DpoWidget);
+#ifdef _DEBUG
 	add(new EnumerDialog);
 #endif
 	add(new AboutWidget);
