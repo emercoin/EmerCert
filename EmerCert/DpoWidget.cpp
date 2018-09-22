@@ -3,7 +3,6 @@
 #include "DpoWidget.h"
 #include "DpoCreateRootWidget.h"
 #include "DpoCreateRecordWidget.h"
-#include "DpoSignRecordWidget.h"
 #include "DpoRegisterDocWidget.h"
 
 DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
@@ -24,8 +23,7 @@ DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 	};
 	addTab(_createRoot = new DpoCreateRootWidget());
 	addTab(_createRecord = new DpoCreateRecordWidget());
-	addTab(_signRecord = new DpoSignRecordWidget());
-	addTab(new DpoRegisterDocWidget());
+	addTab(_registerDoc = new DpoRegisterDocWidget());
 
 	QSettings sett;
 	int index = sett.value("DpoWidget.tabIndex", 0).toInt();
@@ -37,4 +35,24 @@ DpoWidget::~DpoWidget() {
 	sett.setValue("DpoWidget.tabIndex", _tab->currentIndex());
 	_createRoot->updateSettings(true);
 	_createRecord->updateSettings(true);
+}
+QString DpoWidget::name()const {
+	auto w = _tab->currentWidget();
+	if(w==_createRoot)
+		return _createRoot->_NVPair->name();
+	if(w==_createRecord)
+		return _createRecord->_NVPair->name();
+	if(w==_registerDoc)
+		return _registerDoc->_NVPair->name();
+	return {};
+}
+QString DpoWidget::value()const {
+	auto w = _tab->currentWidget();
+	if(w==_createRoot)
+		return _createRoot->_NVPair->value();
+	if(w==_createRecord)
+		return _createRecord->_NVPair->value();
+	if(w==_registerDoc)
+		return _registerDoc->_NVPair->value();
+	return {};
 }

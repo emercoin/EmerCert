@@ -266,9 +266,6 @@
     <ClCompile Include="DpoCreateRootWidget.cpp">
       <Filter>DPO</Filter>
     </ClCompile>
-    <ClCompile Include="DpoSignRecordWidget.cpp">
-      <Filter>DPO</Filter>
-    </ClCompile>
     <ClCompile Include="AboutWidget.cpp">
       <Filter>main</Filter>
     </ClCompile>
@@ -467,9 +464,6 @@
       <Filter>DPO</Filter>
     </ClInclude>
     <ClInclude Include="DpoCreateRootWidget.h">
-      <Filter>DPO</Filter>
-    </ClInclude>
-    <ClInclude Include="DpoSignRecordWidget.h">
       <Filter>DPO</Filter>
     </ClInclude>
     <ClInclude Include="AboutWidget.h">

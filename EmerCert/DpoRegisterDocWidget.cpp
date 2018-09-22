@@ -1,6 +1,12 @@
 ﻿//DpoRegisterDocWidget.cpp by Emercoin developers
-#include "pch.h"
 #include "DpoRegisterDocWidget.h"
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QLabel>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QApplication>
+#include <QCryptographicHash>
 
 DpoRegisterDocWidget::DpoRegisterDocWidget() {
 	setWindowTitle(tr("Register document"));

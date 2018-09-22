@@ -287,8 +287,12 @@
     <ClCompile Include="AboutWidget.cpp" />
     <ClCompile Include="CheckDiplomaWidget.cpp" />
     <ClCompile Include="DpoCreateRecordWidget.cpp" />
-    <ClCompile Include="DpoRegisterDocWidget.cpp" />
-    <ClCompile Include="DpoSignRecordWidget.cpp" />
+    <ClCompile Include="DpoRegisterDocWidget.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="DpoWidget.cpp" />
     <ClCompile Include="NameEqValueTextEdit.cpp" />
     <ClCompile Include="PhoneNumberLineEdit.cpp" />
@@ -515,7 +519,6 @@
     <ClInclude Include="CheckDiplomaWidget.h" />
     <ClInclude Include="DpoCreateRecordWidget.h" />
     <ClInclude Include="DpoRegisterDocWidget.h" />
-    <ClInclude Include="DpoSignRecordWidget.h" />
     <ClInclude Include="DpoWidget.h" />
     <ClInclude Include="NameEqValueTextEdit.h" />
     <ClInclude Include="PhoneNumberLineEdit.h" />

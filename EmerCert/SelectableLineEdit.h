@@ -1,6 +1,7 @@
 ﻿//SelectableLineEdit.h by Emercoin developers
 #pragma once
 #include <QPointer>
+#include <QLineEdit>
 
 class SelectableLineEdit: public QLineEdit {
 	public:
