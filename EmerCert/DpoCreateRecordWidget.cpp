@@ -7,15 +7,14 @@
 #include "NameEqValueTextEdit.h"
 
 DpoCreateRecordWidget::DpoCreateRecordWidget() {
-	setWindowTitle(tr("2) Participate in organization"));
+	setWindowTitle(tr("2) Register in organization "));
 	auto w = new QWidget;
 	auto lay = new QVBoxLayout(w);
 	_NVPair = new NameValueLineEdits;
 	_NVPair->setValueMultiline(true);
 
-	auto description = new QLabel();
 	lay->addWidget(newLabel(
-		tr("Create record with your name/nickname etc, for which organization will prove you are working with them")));
+		tr("Create a record with your name/nickname that is recognized in the organization you work for")));
 
 	auto form = new QFormLayout;
 	lay->addLayout(form);
@@ -24,8 +23,7 @@ DpoCreateRecordWidget::DpoCreateRecordWidget() {
 	_editSN = addLineEdit(form, {}, tr("Your name or nickname (?)"),
 		tr("If this name or SN is already registered, add any number after it (like ':1234')"));
 
-	form->addRow(newLabel(
-			tr("Email or IM next text to organisation (get their contacts somehow, as you know what are you dealing with):")));
+	form->addRow(newLabel(tr("Send the following text to your organization:")));
 
 	_askSignature = new SelectableLineEdit;
 	_askSignature->setReadOnly(true);

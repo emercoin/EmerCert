@@ -9,18 +9,19 @@
 #include <QCryptographicHash>
 
 DpoRegisterDocWidget::DpoRegisterDocWidget() {
-	setWindowTitle(tr("Register document"));
+	setWindowTitle(tr("3) Document registration"));
 	auto lay = new QVBoxLayout(this);
 
-	lay->addWidget(new QLabel(tr("Choose file to register in blockchain:")));
+	lay->addWidget(new QLabel(tr("Choose a file to add to blockchain:")));
 	
 	auto open = new QPushButton(tr("Open file..."));
 	open->setIcon(QIcon(":/qt-project.org/styles/commonstyle/images/standardbutton-open-32.png"));
 	connect(open, &QPushButton::clicked, this, &DpoRegisterDocWidget::openFileDialog);
 	lay->addWidget(open);
 
-	lay->addWidget(new QLabel("It's hash is:"));
+	lay->addWidget(new QLabel("Hash of the document:"));
 	_editHash = new QLineEdit;
+	_editHash->setEnabled(false);
 	connect(_editHash, &QLineEdit::textChanged, this, &DpoRegisterDocWidget::recalcValue);
 	lay->addWidget(_editHash);
 
@@ -35,13 +36,11 @@ DpoRegisterDocWidget::DpoRegisterDocWidget() {
 	lay->addWidget(_editSignature);
 	connect(_editSignature, &QLineEdit::textChanged, this, &DpoRegisterDocWidget::recalcValue);
 
-	lay->addWidget(new QLabel(tr("Write your name from previous tab:")));
+	lay->addWidget(new QLabel(tr("Enter your name from the previous tab:")));
 	_editName = new QLineEdit;
 	_editName->setPlaceholderText(tr("Like dpo:NDI:someName"));
 	connect(_editName, &QLineEdit::textChanged, this, &DpoRegisterDocWidget::recalcValue);
 	lay->addWidget(_editName);
-
-	lay->addWidget(new QLabel("Add this signature to value instead of 'signature'"));
 
 	_NVPair = new NameValueLineEdits;
 	lay->addWidget(_NVPair);
