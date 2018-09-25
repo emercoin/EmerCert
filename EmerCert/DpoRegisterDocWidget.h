@@ -10,7 +10,7 @@ class DpoRegisterDocWidget: public QWidget {
 		void openFileDialog();
 		void recalcValue();
 
-		//QLineEdit* _editFile = 0;
+		QLineEdit* _editFile = 0;
 		QLineEdit* _editHash = 0;
 		QLineEdit* _editSignature = 0;
 		QLineEdit* _editName = 0;
