@@ -16,5 +16,6 @@
         <file>icons/Trusted-diploma-16-monochrome.png</file>
         <file>icons/DPO-16.png</file>
         <file>icons/DPO-32.png</file>
+        <file>icons/DPO use case 2.png</file>
     </qresource>
 </RCC>

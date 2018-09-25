@@ -21,6 +21,12 @@ DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 	auto addTab = [this](QWidget*w) {
 		_tab->addTab(w, w->windowTitle());
 	};
+	{
+		auto image = new QLabel;
+		image->setWindowTitle(tr("Scheme"));
+		image->setPixmap(QPixmap(":/icons/DPO use case 2.png"));
+		addTab(image);
+	}
 	addTab(_createRoot = new DpoCreateRootWidget());
 	addTab(_createRecord = new DpoCreateRecordWidget());
 	addTab(_registerDoc = new DpoRegisterDocWidget());
