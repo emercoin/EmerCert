@@ -275,6 +275,9 @@
     <ClCompile Include="DpoRegisterDocWidget.cpp">
       <Filter>DPO</Filter>
     </ClCompile>
+    <ClCompile Include="SelectableTextEdit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -474,6 +477,9 @@
     </ClInclude>
     <ClInclude Include="DpoRegisterDocWidget.h">
       <Filter>DPO</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectableTextEdit.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

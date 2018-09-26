@@ -30,6 +30,10 @@ DpoWidget::DpoWidget(QWidget*parent): QWidget(parent) {
 	addTab(_createRoot = new DpoCreateRootWidget());
 	addTab(_createRecord = new DpoCreateRecordWidget());
 	addTab(_registerDoc = new DpoRegisterDocWidget());
+	connect(_createRecord->_NVPair->nameEdit(), &QLineEdit::textChanged, this, [=](const QString&s) {
+		_registerDoc->_editName->setText(s);
+	});
+	_registerDoc->_editName->setText(_createRecord->_NVPair->name());
 
 	QSettings sett;
 	int index = sett.value("DpoWidget.tabIndex", 0).toInt();

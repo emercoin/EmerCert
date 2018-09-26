@@ -3,7 +3,7 @@
 #include "DpoCreateRootWidget.h"
 #include "EmailLineEdit.h"
 #include "PhoneNumberLineEdit.h"
-#include "SelectableLineEdit.h"
+#include "SelectableTextEdit.h"
 #include "NameEqValueTextEdit.h"
 
 DpoCreateRootWidget::DpoCreateRootWidget() {

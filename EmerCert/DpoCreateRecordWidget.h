@@ -10,7 +10,7 @@ class DpoCreateRecordWidget: public QScrollArea {
     protected:
 		QLineEdit* _editName = 0;
 		QLineEdit* _editSN = 0;
-		QLineEdit* _askSignature = 0;
+		QPlainTextEdit* _askSignature = 0;
 		QLineEdit* _signature = 0;
 		QList<QLineEdit*> _edits;
 		void recalcValue();

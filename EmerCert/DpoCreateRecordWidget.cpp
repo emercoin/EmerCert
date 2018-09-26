@@ -3,7 +3,7 @@
 #include "DpoCreateRecordWidget.h"
 #include "EmailLineEdit.h"
 #include "PhoneNumberLineEdit.h"
-#include "SelectableLineEdit.h"
+#include "SelectableTextEdit.h"
 #include "NameEqValueTextEdit.h"
 
 DpoCreateRecordWidget::DpoCreateRecordWidget() {
@@ -21,11 +21,11 @@ DpoCreateRecordWidget::DpoCreateRecordWidget() {
 	_editName = addLineEdit(form, {}, tr("Organisation abbreviation (?) dpo:"),
 		tr("This must be already registered DPO root record, like dpo:NDI"));
 	_editSN = addLineEdit(form, {}, tr("Your name or nickname (?)"),
-		tr("If this name or SN is already registered, add any number after it (like ':1234')"));
+		tr("If this name is already registered, add any number after it (like ':1234')"));
 
 	form->addRow(newLabel(tr("Send the following text to your organization:")));
 
-	_askSignature = new SelectableLineEdit;
+	_askSignature = new SelectableTextEdit;
 	_askSignature->setReadOnly(true);
 	_askSignature->setPlaceholderText(tr("Text above is not filled"));
 	form->addRow(_askSignature);
@@ -69,13 +69,14 @@ void DpoCreateRecordWidget::recalcValue() {
 	const QString serial = _editSN->text().trimmed();
     if(name.isEmpty() || serial.isEmpty()) {
 		_NVPair->setName({});//to display placeholderText
-		_askSignature->setText({});
+		_askSignature->setPlainText({});
 	} else {
 		QString s = name + ':' + serial;
 		if(!s.startsWith("dpo:"))
 			s.prepend("dpo:");
         _NVPair->setName(s);
-		_askSignature->setText(tr("Hi! I want to participate in your program, please sign my name: %1").arg(s));
+		_askSignature->setPlainText(tr("Hi! I want to participate in your program, please sign my name:\n%1\n"
+			"and then send signature back to me. Thanks.").arg(s));
 	}
 
 	QStringList parts;
@@ -86,6 +87,7 @@ void DpoCreateRecordWidget::recalcValue() {
         if(!value.isEmpty())
             parts << e->objectName() + "=" + value;
     }
+	parts << QString("name=") + serial;
 	for(auto & s: parts)
 		s = s.trimmed();
 	QString v = parts.join('\n');

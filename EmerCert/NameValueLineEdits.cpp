@@ -1,33 +1,12 @@
 ﻿//NameValueLineEdits.cpp by Emercoin developers
 #include "pch.h"
 #include "NameValueLineEdits.h"
+#include "SelectableTextEdit.h"
 
-class SelectableTextEdit: public QPlainTextEdit {
-	public:
-		SelectableTextEdit() {}
-
-		QPointer<QWidget> _buddyToShowToolip;//use this window if not set
-		virtual void mousePressEvent(QMouseEvent *e)override {
-			QPlainTextEdit::mousePressEvent(e);
-			if(isReadOnly())
-				selectAll();
-		}
-		void copyAndShowTooltip(QLineEdit*toDeselect = 0) {
-			if(toDeselect)
-				toDeselect->deselect();
-			selectAll();
-			QApplication::clipboard()->setText(toPlainText());
-			QWidget* wNear = _buddyToShowToolip;
-			if(!wNear)
-				wNear = this;
-			auto pt = wNear->rect().bottomLeft();
-			QToolTip::showText(wNear->mapToGlobal(pt), tr("Copied"));
-		}
-};
 NameValueLineEdits::NameValueLineEdits() {
-	_resultingName = new SelectableLineEdit;
-    _resultingValue = new SelectableLineEdit;
-	_resultingMultiline = new SelectableTextEdit;
+	_name = new SelectableLineEdit;
+    _value = new SelectableLineEdit;
+	_valueMuti = new SelectableTextEdit;
 
 	auto form = new QFormLayout(this);
 	form->setMargin(0);//usually this widget is embedded to other so no need
@@ -42,16 +21,16 @@ NameValueLineEdits::NameValueLineEdits() {
 		lay->setMargin(0);
 		
 		QString namePlaceholder = tr("This field will contain name to insert to 'Manage names' panel");
-        _resultingName->setPlaceholderText(namePlaceholder);
-		_resultingName->setToolTip(tr("Read-only") + ". " +  namePlaceholder);
-		_resultingName->setReadOnly(true);
-		lay->addWidget(_resultingName);
+        _name->setPlaceholderText(namePlaceholder);
+		_name->setToolTip(tr("Read-only") + ". " +  namePlaceholder);
+		_name->setReadOnly(true);
+		lay->addWidget(_name);
 		
 		auto copy = new QToolButton;
 		copy->setText(tr("Copy to clipboard"));
-		_resultingName->_buddyToShowToolip = copy;
+		_name->_buddyToShowToolip = copy;
 		connect(copy, &QAbstractButton::clicked, this, [=] () {
-			_resultingName->copyAndShowTooltip(_resultingValue);
+			_name->copyAndShowTooltip(_value);
 		});
 		lay->addWidget(copy);
 		form->addRow(tr("Name:"), w);
@@ -63,14 +42,14 @@ NameValueLineEdits::NameValueLineEdits() {
 		lay->setSpacing(0);
 		lay->setMargin(0);
 
-		_resultingValue->setReadOnly(true);
-        _resultingValue->setPlaceholderText(tr("This field will contain value to insert to 'Manage names' panel"));
-		lay->addWidget(_resultingValue);
+		_value->setReadOnly(true);
+        _value->setPlaceholderText(tr("This field will contain value to insert to 'Manage names' panel"));
+		lay->addWidget(_value);
 
 		auto copy = new QToolButton;
 		copy->setText(tr("Copy to clipboard"));
 		connect(copy, &QAbstractButton::clicked, this, [=]() {
-			_resultingValue->copyAndShowTooltip(_resultingName);
+			_value->copyAndShowTooltip(_name);
 		});
 		lay->addWidget(copy);
 		layValue->addWidget(_w1Line);
@@ -81,15 +60,15 @@ NameValueLineEdits::NameValueLineEdits() {
 		lay->setSpacing(0);
 		lay->setMargin(0);
 
-		_resultingMultiline->setReadOnly(true);
-        _resultingMultiline->setPlaceholderText(tr("This field will contain value to insert to 'Manage names' panel"));
-		lay->addWidget(_resultingMultiline);
+		_valueMuti->setReadOnly(true);
+        _valueMuti->setPlaceholderText(tr("This field will contain value to insert to 'Manage names' panel"));
+		lay->addWidget(_valueMuti);
 
 		auto copy = new QToolButton;
 		copy->setText(tr("Copy to clipboard"));
-		_resultingMultiline->_buddyToShowToolip = copy;
+		_valueMuti->_buddyToShowToolip = copy;
 		connect(copy, &QAbstractButton::clicked, this, [=]() {
-			_resultingMultiline->copyAndShowTooltip(_resultingName);
+			_valueMuti->copyAndShowTooltip(_name);
 		});
 		lay->addWidget(copy);
 		layValue->addWidget(_wMultiLine);
@@ -101,22 +80,22 @@ NameValueLineEdits::NameValueLineEdits() {
 		_wMultiLine->hide();
 }
 void NameValueLineEdits::setName(const QString & s) {
-	_resultingName->setText(s);
+	_name->setText(s);
 }
 void NameValueLineEdits::setValuePlaceholder(const QString & s) {
-	_resultingValue->setPlaceholderText(s);
-	_resultingMultiline->setPlaceholderText(s);
+	_value->setPlaceholderText(s);
+	_valueMuti->setPlaceholderText(s);
 }
 void NameValueLineEdits::copyValue() {
 	if(_multiline) {
-		_resultingMultiline->copyAndShowTooltip(_resultingName);
+		_valueMuti->copyAndShowTooltip(_name);
 		return;
 	}
-	_resultingValue->copyAndShowTooltip(_resultingName);
+	_value->copyAndShowTooltip(_name);
 }
 void NameValueLineEdits::setValue(const QString & s) {
-	_resultingValue->setText(s);
-	_resultingMultiline->setPlainText(s);
+	_value->setText(s);
+	_valueMuti->setPlainText(s);
 }
 void NameValueLineEdits::setValueMultiline(bool multi) {
 	if(_multiline==multi)
@@ -126,14 +105,14 @@ void NameValueLineEdits::setValueMultiline(bool multi) {
 	_w1Line->setVisible(!_multiline);
 }
 void NameValueLineEdits::setValueReadOnly(bool b) {
-	_resultingValue->setReadOnly(b);
-	_resultingMultiline->setReadOnly(b);
+	_value->setReadOnly(b);
+	_valueMuti->setReadOnly(b);
 }
 QString NameValueLineEdits::name()const {
-	return _resultingName->text();
+	return _name->text();
 }
 QString NameValueLineEdits::value()const {
 	if(_multiline)
-		return _resultingMultiline->toPlainText();
-	return _resultingValue->text();
+		return _valueMuti->toPlainText();
+	return _value->text();
 }

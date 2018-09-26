@@ -35,6 +35,10 @@ DpoRegisterDocWidget::DpoRegisterDocWidget() {
 	connect(_editHash, &QLineEdit::textChanged, this, &DpoRegisterDocWidget::recalcValue);
 	lay->addWidget(_editHash);
 
+	lay->addWidget(new QLabel("You can change default document name:"));
+	_editDocName = new QLineEdit;
+	lay->addWidget(_editDocName);
+
 	lay->addWidget(new QLabel("Sign next message:"));
 	
 	_signLabel = new QLineEdit;
@@ -48,10 +52,12 @@ DpoRegisterDocWidget::DpoRegisterDocWidget() {
 	lay->addWidget(new QLabel(tr("Enter your name from the previous tab:")));
 	_editName = new QLineEdit;
 	_editName->setPlaceholderText(tr("Like dpo:NDI:someName"));
+	_editName->setToolTip(_editName->placeholderText());
 	connect(_editName, &QLineEdit::textChanged, this, &DpoRegisterDocWidget::recalcValue);
 	lay->addWidget(_editName);
 
 	_NVPair = new NameValueLineEdits;
+	_NVPair->setValueMultiline(true);
 	lay->addWidget(_NVPair);
 	lay->addStretch();
 }
@@ -61,6 +67,7 @@ void DpoRegisterDocWidget::openFileDialog() {
 	if(path.isEmpty())
 		return;
 	_editFile->setText(path);
+	_editDocName->setText(QFileInfo(path).completeBaseName());
 
 	QFile file(path);
 	if(!file.open(QFile::ReadOnly)) {
@@ -89,6 +96,13 @@ void DpoRegisterDocWidget::recalcValue() {
 	if(name.isEmpty() || sig.isEmpty()) {
 		_NVPair->setValue({});//to display placeholderText
 	} else {
-        _NVPair->setValue(QString("SIG=%1|%2").arg(name, sig));
+		QString v = QString("SIG=%1|%2\n").arg(name, sig);
+		QString name = _editDocName->text().trimmed();
+		if(name.isEmpty())
+			name = QFileInfo(_editFile->text()).completeBaseName();
+		if(name.isEmpty())
+			name = QFileInfo(_editFile->text()).fileName();
+		v += "name=" + name;
+        _NVPair->setValue(v);
 	}
 }

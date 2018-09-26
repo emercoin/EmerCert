@@ -14,13 +14,14 @@ class NameValueLineEdits: public QWidget {
 		void setValueReadOnly(bool b);
 		QString name()const;
 		QString value()const;
+		SelectableLineEdit* nameEdit()const { return _name; }
 	protected:
-		SelectableLineEdit* _resultingName = 0;
+		SelectableLineEdit* _name = 0;
 		bool _multiline = false;
 		QWidget* _w1Line = 0;
 		QWidget* _wMultiLine = 0;
-        SelectableLineEdit* _resultingValue = 0;
-		SelectableTextEdit* _resultingMultiline = 0;
+        SelectableLineEdit* _value = 0;
+		SelectableTextEdit* _valueMuti = 0;
 
 		void copyValue();
 };
