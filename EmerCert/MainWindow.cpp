@@ -13,8 +13,8 @@ MainWindow::MainWindow(QWidget *parent): QTabWidget(parent) {
 	add(new ManageSslPage);
 	add(new InfoCardsWidget);
 	add(new ManageDnsPage);
-	add(new DiplomaWidget);
 	add(new DpoWidget);
+	add(new DiplomaWidget);
 #ifdef _DEBUG
 	add(new EnumerDialog);
 #endif
