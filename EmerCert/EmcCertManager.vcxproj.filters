@@ -278,6 +278,9 @@
     <ClCompile Include="SelectableTextEdit.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="DpoUseCaseScheme.cpp">
+      <Filter>DPO</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Settings.h">
@@ -480,6 +483,9 @@
     </ClInclude>
     <ClInclude Include="SelectableTextEdit.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="DpoUseCaseScheme.h">
+      <Filter>DPO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

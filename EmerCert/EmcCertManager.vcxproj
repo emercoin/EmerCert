@@ -293,6 +293,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="DpoUseCaseScheme.cpp" />
     <ClCompile Include="DpoWidget.cpp" />
     <ClCompile Include="NameEqValueTextEdit.cpp" />
     <ClCompile Include="PhoneNumberLineEdit.cpp" />
@@ -520,6 +521,7 @@
     <ClInclude Include="CheckDiplomaWidget.h" />
     <ClInclude Include="DpoCreateRecordWidget.h" />
     <ClInclude Include="DpoRegisterDocWidget.h" />
+    <ClInclude Include="DpoUseCaseScheme.h" />
     <ClInclude Include="DpoWidget.h" />
     <ClInclude Include="NameEqValueTextEdit.h" />
     <ClInclude Include="PhoneNumberLineEdit.h" />
