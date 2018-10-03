@@ -19,7 +19,10 @@ NameValueLineEdits::NameValueLineEdits() {
 		auto lay = new QHBoxLayout(w);
 		lay->setSpacing(0);
 		lay->setMargin(0);
-		
+
+		_availability = new QLabel;
+		lay->addWidget(_availability);
+
 		QString namePlaceholder = tr("This field will contain name to insert to 'Manage names' panel");
         _name->setPlaceholderText(namePlaceholder);
 		_name->setToolTip(tr("Read-only") + ". " +  namePlaceholder);
@@ -79,8 +82,28 @@ NameValueLineEdits::NameValueLineEdits() {
 	else
 		_wMultiLine->hide();
 }
-void NameValueLineEdits::setName(const QString & s) {
-	_name->setText(s);
+void NameValueLineEdits::setName(const QString & name) {
+	_name->setText(name);
+	return;
+	if(name.isEmpty()) {
+		_availability->hide();
+		_availability->setToolTip({});
+		QToolTip::hideText();
+		return;
+	}
+	_availability->show();
+	QString tooltip;
+	if(canBuyOrEdit(name)) {
+		tooltip = tr("This name is already registered in blockchain");
+		_availability->setPixmap(QPixmap(":/qt-project.org/styles/commonstyle/images/standardbutton-cancel-16.png"));
+	} else {
+		tooltip = tr("This name is free or you own it");
+		_availability->setPixmap(QPixmap(":/qt-project.org/styles/commonstyle/images/standardbutton-apply-16.png"));
+	}
+	if(tooltip!=_availability->toolTip()) {
+		_availability->setToolTip(tooltip);
+		QToolTip::showText(_availability->mapToGlobal(_availability->rect().topLeft()), tooltip);
+	}
 }
 void NameValueLineEdits::setValuePlaceholder(const QString & s) {
 	_value->setPlaceholderText(s);
@@ -115,4 +138,7 @@ QString NameValueLineEdits::value()const {
 	if(_multiline)
 		return _valueMuti->toPlainText();
 	return _value->text();
+}
+bool NameValueLineEdits::canBuyOrEdit(const QString & name)const {
+	return qrand() %2;
 }
